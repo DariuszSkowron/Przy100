@@ -1,5 +1,9 @@
 package com.skowrondariusz.przy100.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import java.util.Date;
 import java.util.List;
 
@@ -8,7 +12,11 @@ public class Quiz {
     private Date startTime;
     private Date endTime;
     private double score;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "partsOrder", cascade = CascadeType.ALL)
     private List<Question> questionList;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "partsOrder", cascade = CascadeType.ALL)
     private List<Answer> userAnswers;
 
     public Quiz() {

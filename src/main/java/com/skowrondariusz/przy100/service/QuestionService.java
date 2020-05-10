@@ -20,7 +20,7 @@ public class QuestionService {
         this.questionRepository = questionRepository;
     }
 
-    public List<Question> collectQuestionsForQuiz(int quizSize){
+    List<Question> collectQuestionsForQuiz(int quizSize){
         List<Question> questionList = new ArrayList<>();
         List<Integer> drawedQuestionsNumbers = drawQuestions(quizSize);
         for (int i = 0; i < quizSize; i++) {
@@ -34,4 +34,10 @@ public class QuestionService {
                 .limit(quizSize)
                 .collect(Collectors.toList());
     }
+
+    public void saveQuestion (Question question){
+        questionRepository.save(question);
+    }
+
+
 }
