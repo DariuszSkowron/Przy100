@@ -3,6 +3,7 @@ package com.skowrondariusz.przy100.service;
 import com.skowrondariusz.przy100.model.Question;
 import com.skowrondariusz.przy100.repository.QuestionRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +36,13 @@ public class QuestionService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public void saveQuestion (Question question){
         questionRepository.save(question);
+    }
+
+    public Question getQuestionById(int id){
+       return questionRepository.getQuestionById(id);
     }
 
 

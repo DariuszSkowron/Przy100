@@ -10,13 +10,17 @@ public class Question {
     private long id;
     private String description;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "question", cascade = CascadeType.MERGE)
+    @OneToOne(mappedBy = "question", cascade = CascadeType.ALL)
     private Answer correctAnswer;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "question", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<Answer> wrongAnswers;
 
     public Question() {
+    }
+
+    public Question(String description) {
+        this.description = description;
     }
 
     public Question(String description, Answer correctAnswer, List<Answer> wrongAnswers) {

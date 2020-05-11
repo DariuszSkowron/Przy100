@@ -39,8 +39,12 @@ public class DatabaseInitializer implements CommandLineRunner {
         List<Answer> list1 = Arrays.asList(answerRepository.getById(3), answerRepository.getById(4), answerRepository.getById(5));
         List<Answer> list2 = Arrays.asList(answerRepository.getById(6), answerRepository.getById(7), answerRepository.getById(8));
 
-        var question1 = new Question("question 1 test", correctAnswer1,list1);
-        var question2 = new Question("question 2 test", correctAnswer2,list2);
+        var question1 = new Question("question 1 test");
+        question1.setCorrectAnswer(answerRepository.getById(1));
+        question1.setWrongAnswers(list1);
+        var question2 = new Question("question 2 test");
+        question1.setCorrectAnswer(answerRepository.getById(2));
+        question1.setWrongAnswers(list2);
         questionService.saveQuestion(question1);
         questionService.saveQuestion(question2);
         System.out.println("DATABASE INITIALISED");

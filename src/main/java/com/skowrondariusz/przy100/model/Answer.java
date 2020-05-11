@@ -12,7 +12,8 @@ public class Answer {
     String text;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name = "question_id")
     private Question question;
 
     public Answer() {

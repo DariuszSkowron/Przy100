@@ -9,4 +9,5 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 
     Question getQuestionById (long id);
     long count();
+
 }
