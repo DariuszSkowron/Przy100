@@ -10,10 +10,10 @@ public class Question {
     private long id;
     private String description;
 
-    @OneToOne(mappedBy = "question", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "question", cascade = CascadeType.MERGE)
     private Answer correctAnswer;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE)
     private List<Answer> wrongAnswers;
 
     public Question() {

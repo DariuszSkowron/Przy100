@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("quiz")
+@RequestMapping("/quiz")
 public class QuizController {
 
 
-    QuizService quizService;
+    private QuizService quizService;
 
     public QuizController(QuizService quizService) {
         this.quizService = quizService;
