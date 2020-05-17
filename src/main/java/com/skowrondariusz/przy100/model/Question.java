@@ -1,4 +1,6 @@
 package com.skowrondariusz.przy100.model;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,10 +12,11 @@ public class Question {
     private long id;
     private String description;
 
-    @OneToOne(mappedBy = "question", cascade = CascadeType.MERGE)
-    private Answer correctAnswer;
+//    @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE)
+    private String correctAnswer;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE)
+    @JsonManagedReference
     private List<Answer> wrongAnswers;
 
     public Question() {
@@ -23,7 +26,7 @@ public class Question {
         this.description = description;
     }
 
-    public Question(String description, Answer correctAnswer, List<Answer> wrongAnswers) {
+    public Question(String description, String correctAnswer, List<Answer> wrongAnswers) {
         this.description = description;
         this.correctAnswer = correctAnswer;
         this.wrongAnswers = wrongAnswers;
@@ -37,12 +40,20 @@ public class Question {
         this.id = id;
     }
 
-    public Answer getCorrectAnswer() {
+    public String getCorrectAnswer() {
         return correctAnswer;
     }
 
-    public void setCorrectAnswer(Answer correctAnswer) {
+    public void setCorrectAnswer(String correctAnswer) {
         this.correctAnswer = correctAnswer;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<Answer> getWrongAnswers() {
@@ -52,4 +63,17 @@ public class Question {
     public void setWrongAnswers(List<Answer> wrongAnswers) {
         this.wrongAnswers = wrongAnswers;
     }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", correctAnswer=" + correctAnswer +
+                ", wrongAnswers=" + wrongAnswers +
+                '}';
+    }
 }
+
+
+

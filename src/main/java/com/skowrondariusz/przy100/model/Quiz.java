@@ -1,5 +1,7 @@
 package com.skowrondariusz.przy100.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -75,5 +77,16 @@ public class Quiz {
 
     public void setUserAnswers(List<Answer> userAnswers) {
         this.userAnswers = userAnswers;
+    }
+
+    @Override
+    public String toString() {
+        return "Quiz{" +
+                "startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", score=" + score +
+                ", questionList=" + questionList +
+                ", userAnswers=" + userAnswers +
+                '}';
     }
 }

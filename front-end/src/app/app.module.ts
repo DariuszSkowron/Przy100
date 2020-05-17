@@ -7,12 +7,13 @@ import {CoreModule} from "./core/core.module";
 import { QuizComponent } from './quiz/quiz/quiz.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import {QuizService} from "./shared/quiz.service";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    QuizComponent
+    QuizComponent,
   ],
   imports: [
     BrowserModule,
@@ -21,7 +22,7 @@ import {HttpClientModule} from "@angular/common/http";
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [QuizService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

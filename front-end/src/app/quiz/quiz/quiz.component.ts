@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {QuizService} from "../quiz.service";
+import {QuizService} from "../../shared/quiz.service";
 import {Observable} from "rxjs";
 import {Quiz} from "../quiz";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'quiz',
@@ -11,18 +12,31 @@ import {Quiz} from "../quiz";
 export class QuizComponent implements OnInit{
 
   quiz: Quiz;
-  constructor(private quizService: QuizService) {
+  questions: any[];
+  timer;
+  quizProgress: number;
+  seconds: number;
+  constructor(private router: Router, private quizService: QuizService) {
 
   }
 
   ngOnInit() {
+    this.seconds = 0;
+    this.quizProgress = 0;
     this.getQuiz();
   }
 
   getQuiz() {
     this.quizService.getQuiz().subscribe(res => {
       this.quiz = res;
+      this.startTimer();
     })
+  }
+
+  startTimer() {
+    this.timer = setInterval(() => {
+      this.seconds++;
+    }, 1000);
   }
 
 }
