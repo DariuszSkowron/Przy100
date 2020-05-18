@@ -39,4 +39,12 @@ export class QuizComponent implements OnInit{
     }, 1000);
   }
 
+  displayTimeElapsed() {
+    return Math.floor(this.seconds / 3600) + ':' + Math.floor(this.seconds / 60) + ':' + Math.floor(this.seconds % 60);
+  }
+
+  Answer(questionId, selectedAnswer){
+    // this.questions(this.quizProgress).answer = selectedAnswer;
+  }
+
 }

@@ -25,17 +25,18 @@ public class QuestionService {
 
     List<Question> collectQuestionsForQuiz(int quizSize){
         List<Question> questionList = new ArrayList<>();
-        List<Integer> drawedQuestionsNumbers = drawQuestions(quizSize);
+        int[] drawedQuestionsNumbers = drawQuestions(quizSize);
         for (int i = 0; i < quizSize; i++) {
-            questionList.add(questionRepository.getQuestionById(drawedQuestionsNumbers.get(i)));
+            questionList.add(questionRepository.getQuestionById(drawedQuestionsNumbers[i]));
         }
         return questionList;
     }
 
-    private List<Integer> drawQuestions(int quizSize){
-        return Stream.generate(() -> (new Random()).nextInt(Math.toIntExact(questionRepository.count())))
+    public int[] drawQuestions(int quizSize){
+        return new Random().ints(1,Math.toIntExact(questionRepository.count()) +1)
+                .distinct()
                 .limit(quizSize)
-                .collect(Collectors.toList());
+                .toArray();
     }
 
     @Transactional
@@ -51,5 +52,10 @@ public class QuestionService {
     public void saveWrongQuestion (Question question, Answer answer){
         questionRepository.getQuestionById(question.getId()).setWrongAnswers(Collections.singletonList(answer));
     }
+
+    public long count(){
+        return questionRepository.count();
+    }
+
 
 }

@@ -1,30 +1,24 @@
-<!--<button type="button" (click)="getQuiz()"-->
-<!--        class="list-group-item list-group-item-action list-group-item-success text-center">-->
-<!--</button>-->
-<div>
-  <label><b>Name:</b> </label> {{quiz.startTime}}
-</div>
-<div>
-  <label><b>Id:</b></label> {{quiz.questionList}}
-</div>
-<div>
-  <label><b>deskrypszyn</b></label> {{quiz.questionList[1].description}}
-</div>
-<div class="row" *ngIf="quiz">
+<div class="row" *ngIf="quiz && this.quizProgress != 10">
   <div class="col s8 offset-s2">
-
+    <span>Time Elapsed : {{displayTimeElapsed()}}</span>
+    <div class="progress">
+      <div class="determinate" [style.width.%]="(quizProgress+1)*10"></div>
+    </div>
     <div class="card blue-grey darken-1">
       <div class="card-content white-text">
         <span class="card-title">{{quizProgress+1}}</span>
         <p>{{quiz.questionList[quizProgress].description}}</p>
       </div>
       <div class="card-action">
+        <ul class="collection answer">
         <ng-container *ngFor="let answer of quiz.questionList[quizProgress].wrongAnswers; let i = index">
-          <li *ngIf="answer != null" class="collection-item">
+          <li *ngIf="answer != null" class="collection-item" (click)="Answer(answer, answer)">
             {{answer.text}}
           </li>
         </ng-container>
+        </ul>
       </div>
     </div>
   </div>
 </div>
+<script type="text/javascript" src="js/materialize.min.js"></script>
