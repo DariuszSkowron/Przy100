@@ -39,6 +39,11 @@ public class QuizController {
     public int[] counter2(){
         return questionService.drawQuestions(2);
     }
+//
+//    @GetMapping("test")
+//    public void test(){
+//        questionService.setCorrectAnswer(1);
+//    }
 
 
 }

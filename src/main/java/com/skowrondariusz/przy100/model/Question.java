@@ -11,13 +11,12 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String description;
-
-//    @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE)
-    private String correctAnswer;
+//    @OneToOne(mappedBy = "question", cascade = CascadeType.MERGE)
+    private long correctAnswerId;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE)
     @JsonManagedReference
-    private List<Answer> wrongAnswers;
+    private List<Answer> listOfAnswers;
 
     public Question() {
     }
@@ -26,10 +25,14 @@ public class Question {
         this.description = description;
     }
 
-    public Question(String description, String correctAnswer, List<Answer> wrongAnswers) {
+    public Question(String description, long correctAnswerId, List<Answer> listOfAnswers) {
         this.description = description;
-        this.correctAnswer = correctAnswer;
-        this.wrongAnswers = wrongAnswers;
+        this.correctAnswerId = correctAnswerId;
+        this.listOfAnswers = listOfAnswers;
+    }
+
+    public Question(long correctAnswerId) {
+        this.correctAnswerId = correctAnswerId;
     }
 
     public long getId() {
@@ -40,12 +43,12 @@ public class Question {
         this.id = id;
     }
 
-    public String getCorrectAnswer() {
-        return correctAnswer;
+    public long getCorrectAnswerId() {
+        return correctAnswerId;
     }
 
-    public void setCorrectAnswer(String correctAnswer) {
-        this.correctAnswer = correctAnswer;
+    public void setCorrectAnswerId(long correctAnswerId) {
+        this.correctAnswerId = correctAnswerId;
     }
 
     public String getDescription() {
@@ -56,12 +59,12 @@ public class Question {
         this.description = description;
     }
 
-    public List<Answer> getWrongAnswers() {
-        return wrongAnswers;
+    public List<Answer> getListOfAnswers() {
+        return listOfAnswers;
     }
 
-    public void setWrongAnswers(List<Answer> wrongAnswers) {
-        this.wrongAnswers = wrongAnswers;
+    public void setListOfAnswers(List<Answer> listOfAnswers) {
+        this.listOfAnswers = listOfAnswers;
     }
 
     @Override
@@ -69,8 +72,8 @@ public class Question {
         return "Question{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
-                ", correctAnswer=" + correctAnswer +
-                ", wrongAnswers=" + wrongAnswers +
+                ", correctAnswerId=" + correctAnswerId +
+                ", listOfAnswers=" + listOfAnswers +
                 '}';
     }
 }

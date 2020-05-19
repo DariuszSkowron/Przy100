@@ -9,13 +9,12 @@ public class Answer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @OneToOne
     private long id;
-
     String text;
 
 
     @ManyToOne
-//    @JoinColumn(name = "question_id")
     @JsonBackReference
     private Question question;
 

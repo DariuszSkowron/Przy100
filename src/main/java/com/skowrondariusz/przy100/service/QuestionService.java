@@ -4,14 +4,13 @@ import com.skowrondariusz.przy100.model.Answer;
 import com.skowrondariusz.przy100.model.Question;
 import com.skowrondariusz.przy100.repository.QuestionRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class QuestionService {
@@ -39,7 +38,7 @@ public class QuestionService {
                 .toArray();
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public void saveQuestion (Question question){
         questionRepository.save(question);
     }
@@ -50,7 +49,13 @@ public class QuestionService {
 
 
     public void saveWrongQuestion (Question question, Answer answer){
-        questionRepository.getQuestionById(question.getId()).setWrongAnswers(Collections.singletonList(answer));
+        questionRepository.getQuestionById(question.getId()).setListOfAnswers(Collections.singletonList(answer));
+    }
+
+    @Transactional
+    public void setCorrectAnswer (long questionId, Answer answer){
+        questionRepository.getQuestionById(questionId).setCorrectAnswerId(answer.getId());
+
     }
 
     public long count(){

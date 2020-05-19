@@ -36,6 +36,8 @@ public class DatabaseInitializer implements CommandLineRunner {
         var correctAnswer2 = new Answer("Correct 1", question2);
         answerRepository.save(correctAnswer1);
         answerRepository.save(correctAnswer2);
+        questionService.setCorrectAnswer(1, correctAnswer1);
+        questionService.setCorrectAnswer(2, correctAnswer2);
 
         for (int i = 0; i < 3; i++) {
             var name = new Answer("Wrong" + i, question1);
@@ -52,12 +54,12 @@ public class DatabaseInitializer implements CommandLineRunner {
 //        List<Answer> list2 = Arrays.asList(answerRepository.getById(6), answerRepository.getById(7), answerRepository.getById(8));
 
 
-//        question1.setCorrectAnswer(answerRepository.getById(1));
-//        question1.setWrongAnswers(list1);
+//        question1.setCorrectAnswerId(answerRepository.getById(1));
+//        question1.setListOfAnswers(list1);
 //        questionService.saveQuestion(question1);
 //
-//        question1.setCorrectAnswer(answerRepository.getById(2));
-//        question1.setWrongAnswers(list2);
+//        question1.setCorrectAnswerId(answerRepository.getById(2));
+//        question1.setListOfAnswers(list2);
 //        questionService.saveQuestion(question2);
 
         System.out.println("DATABASE INITIALISED");
