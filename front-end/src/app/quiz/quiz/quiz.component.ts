@@ -12,39 +12,54 @@ import {Router} from "@angular/router";
 export class QuizComponent implements OnInit{
 
   quiz: Quiz;
-  questions: any[];
-  timer;
-  quizProgress: number;
-  seconds: number;
-  constructor(private router: Router, private quizService: QuizService) {
+  constructor(private router: Router, public quizService: QuizService) {
 
   }
 
   ngOnInit() {
-    this.seconds = 0;
-    this.quizProgress = 0;
-    this.getQuiz();
+    if (parseInt(localStorage.getItem('seconds')) > 0){
+      this.quizService.seconds = parseInt(localStorage.getItem('seconds'));
+      this.quizService.quizProgress = parseInt(localStorage.getItem('quizProgress'));
+      this.quiz = JSON.parse(localStorage.getItem('quiz'));
+      if (this.quizService.quizProgress == 2)
+        this.router.navigate(['/result']);
+      else
+        this.startTimer();
+    }
+    else {
+      this.quizService.seconds = 0;
+      this.quizService.quizProgress = 0;
+      this.getQuiz();
+    }
   }
 
   getQuiz() {
     this.quizService.getQuiz().subscribe(res => {
       this.quiz = res;
+      this.quizService.questionList = this.quiz.questionList;
+      localStorage.setItem('questionList', JSON.stringify(this.quizService.questionList));
       this.startTimer();
     })
   }
 
   startTimer() {
-    this.timer = setInterval(() => {
-      this.seconds++;
+    this.quizService.timer = setInterval(() => {
+      this.quizService.seconds++;
+      localStorage.setItem('seconds', this.quizService.seconds.toString());
     }, 1000);
   }
 
-  displayTimeElapsed() {
-    return Math.floor(this.seconds / 3600) + ':' + Math.floor(this.seconds / 60) + ':' + Math.floor(this.seconds % 60);
-  }
-
   Answer(questionId, selectedAnswer){
-    // this.questions(this.quizProgress).answer = selectedAnswer;
+    this.quiz.questionList[this.quizService.quizProgress].userAnswer = selectedAnswer;
+    localStorage.setItem('quiz', JSON.stringify(this.quiz));
+    localStorage.setItem('questionList', JSON.stringify(this.quizService.questionList));
+    this.quizService.quizProgress++;
+    localStorage.setItem('quizProgress', this.quizService.quizProgress.toString());
+    if (this.quizService.quizProgress == 2){
+      clearTimeout(this.quizService.timer);
+      this.router.navigate(['/result']);
+    }
+
   }
 
 }

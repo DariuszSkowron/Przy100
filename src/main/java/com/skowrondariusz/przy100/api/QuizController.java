@@ -3,12 +3,11 @@ package com.skowrondariusz.przy100.api;
 import com.skowrondariusz.przy100.model.Quiz;
 import com.skowrondariusz.przy100.service.QuestionService;
 import com.skowrondariusz.przy100.service.QuizService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -29,6 +28,19 @@ public class QuizController {
         Quiz newQuiz = quizService.startNewQuiz();
         return newQuiz;
     }
+
+    @PostMapping("/correctAnswers")
+    public int[] result(@RequestBody int[] answerIdList) {
+        int[] result = new int[answerIdList.length];
+        for (int i = 0; i < answerIdList.length; i++) {
+            result[i] = questionService.getCorrectAnswerId(answerIdList[i]);
+            System.out.println("test");
+        }
+        System.out.println(Arrays.toString(result));
+        return result;
+
+    }
+
 
     @GetMapping("/count")
     public long counter(){

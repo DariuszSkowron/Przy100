@@ -1,8 +1,9 @@
 import {Answer} from "./answer";
 
 export class Question {
-  Id: string;
+  id: string;
   description : string;
-  correctAnswer: string;
-  wrongAnswers: Answer[];
+  correctAnswerId: string;
+  userAnswer: number;
+  listOfAnswers: Answer[];
 }

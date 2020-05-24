@@ -58,6 +58,10 @@ public class QuestionService {
 
     }
 
+    public int getCorrectAnswerId(long questionId){
+        return Math.toIntExact(questionRepository.getQuestionById(questionId).getCorrectAnswerId());
+    }
+
     public long count(){
         return questionRepository.count();
     }
