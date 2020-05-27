@@ -1,5 +1,5 @@
 <div class="row" *ngIf="quiz && this.quizService.quizProgress != 2">
-  <div class="col s8 offset-s2">
+  <div class="container">
     <span>Time Elapsed : {{this.quizService.displayTimeElapsed()}}</span>
     <div class="progress">
       <div class="determinate" [style.width.%]="(this.quizService.quizProgress+1)*50"></div>
