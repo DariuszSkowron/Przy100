@@ -11,7 +11,6 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String description;
-//    @OneToOne(mappedBy = "question", cascade = CascadeType.MERGE)
     private long correctAnswerId;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE)

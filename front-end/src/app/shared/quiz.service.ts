@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Quiz} from "../quiz/quiz";
 import {Answer} from "../quiz/answer";
 import {Question} from "../quiz/question";
+import {Result} from "../result/result";
 
 @Injectable()
 export class QuizService {
@@ -11,6 +12,7 @@ export class QuizService {
   seconds: number;
   quizProgress: number;
   questionList: Question[];
+  startTime: Date;
 
   private BASE_URL = `http://localhost:8080`;
   private QUIZ_URL = `${this.BASE_URL}/quiz`;
@@ -26,11 +28,13 @@ export class QuizService {
       return this.http.get<Quiz>(`${this.QUIZ_URL}` + `/start`);
     }
 
-    submitScore(score: Object) {
-    return this.http.post(`${this.QUIZ_URL}` + `/kk`, score);
+    submitScore(score: Result): Observable<any> {
+    return this.http.post(`${this.QUIZ_URL}` + `/result`, score);
     }
 
     getCorrectAnswers(answerIdList: string[]): Observable<any> {
     return this.http.post(`${this.QUIZ_URL}` + '/correctAnswers', answerIdList);
     }
+
+
 }

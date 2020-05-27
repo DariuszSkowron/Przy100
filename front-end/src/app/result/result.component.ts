@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {QuizService} from "../shared/quiz.service";
 import {Router} from "@angular/router";
 import {QuizComponent} from "../quiz/quiz/quiz.component";
+import {Result} from "./result";
 
 @Component({
   selector: 'result',
@@ -19,6 +20,7 @@ export class ResultComponent implements OnInit {
       this.quizService.seconds = parseInt(localStorage.getItem('seconds'));
       this.quizService.quizProgress = parseInt(localStorage.getItem('quizProgress'));
       this.quizService.questionList = JSON.parse(localStorage.getItem('questionList'));
+      this.quizService.startTime = JSON.parse(localStorage.getItem('startTime'));
 
 
 
@@ -34,7 +36,12 @@ export class ResultComponent implements OnInit {
   }
 
   onSubmit(){
-    this.quizService.submitScore(this.correctAnswerCount).subscribe(() => {
+    const newResult: Result = {
+      id: null,
+      timeSpent: this.quizService.startTime,
+      numberOfCorrectAnswers: this.correctAnswerCount
+    };
+    this.quizService.submitScore(newResult).subscribe(() => {
       this.restart();
     });
   }

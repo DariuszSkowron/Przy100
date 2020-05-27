@@ -37,8 +37,11 @@ export class QuizComponent implements OnInit{
     this.quizService.getQuiz().subscribe(res => {
       this.quiz = res;
       this.quizService.questionList = this.quiz.questionList;
+      this.quizService.startTime = this.quiz.startTime;
       localStorage.setItem('questionList', JSON.stringify(this.quizService.questionList));
+      localStorage.setItem('startTime', JSON.stringify(this.quizService.startTime));
       this.startTimer();
+
     })
   }
 
