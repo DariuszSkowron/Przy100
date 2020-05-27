@@ -35,11 +35,12 @@ export class ResultComponent implements OnInit {
     }
   }
 
-  onSubmit(){
+  onSubmit(nickname: string){
     const newResult: Result = {
       id: null,
       timeSpent: this.quizService.startTime,
-      numberOfCorrectAnswers: this.correctAnswerCount
+      numberOfCorrectAnswers: this.correctAnswerCount,
+      nickname: nickname
     };
     this.quizService.submitScore(newResult).subscribe(() => {
       this.restart();

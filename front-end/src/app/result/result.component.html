@@ -4,16 +4,28 @@
     <h2 class="header">Completed!</h2>
     <div class="card horizontal">
       <div class="card-image">
-        <img src="../../assets/img/trophy.png" style="width: 250px;height : 250px;">
+        <img src="../../assets/img/Sentino%20meme.png" style="width: 250px;height : 250px;">
       </div>
       <div class="card-stacked">
         <div class="card-content">
           <h3>{{this.correctAnswerCount}}/2</h3>
           <span>Time Elapsed : {{this.quizService.displayTimeElapsed()}}</span>
-          <span>User answers: {{this.quizService.questionList[0].userAnswer}}</span>
         </div>
-        <div class="card-action">
-          <button class="btn" (click)="onSubmit()">Submit</button>
+        <div class="card-content">
+          <form #registerForm="ngForm" (ngSubmit)="onSubmit(Name.value)">
+            <div class="row">
+              <div class="input-field col s12">
+                <i class="material-icons prefix">account_circle</i>
+                <input type="text" name="Name" #Name ngModel required>
+                <label>Name</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <button class="btn" [disabled]="!registerForm.valid">Start</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
       <a class="btn-floating halfway-fab waves-effect waves-light red" (click)="restart()">

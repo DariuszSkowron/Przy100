@@ -15,14 +15,24 @@ public class Result {
 
     private Date timeSpent;
     private int numberOfCorrectAnswers;
+    private String nickname;
 
 
     public Result() {
     }
 
-    public Result(Date timeSpent, int numberOfCorrectAnswers) {
+    public Result(Date timeSpent, int numberOfCorrectAnswers, String nickname) {
         this.timeSpent = timeSpent;
         this.numberOfCorrectAnswers = numberOfCorrectAnswers;
+        this.nickname = nickname;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public long getId() {
