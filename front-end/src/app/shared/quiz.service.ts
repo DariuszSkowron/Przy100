@@ -13,6 +13,7 @@ export class QuizService {
   quizProgress: number;
   questionList: Question[];
   startTime: Date;
+  totalTime: number;
 
   private BASE_URL = `http://localhost:8080`;
   private QUIZ_URL = `${this.BASE_URL}/quiz`;

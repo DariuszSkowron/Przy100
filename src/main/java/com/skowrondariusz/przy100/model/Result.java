@@ -13,7 +13,7 @@ public class Result {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private Date timeSpent;
+    private double timeSpent;
     private int numberOfCorrectAnswers;
     private String nickname;
 
@@ -21,7 +21,7 @@ public class Result {
     public Result() {
     }
 
-    public Result(Date timeSpent, int numberOfCorrectAnswers, String nickname) {
+    public Result(double timeSpent, int numberOfCorrectAnswers, String nickname) {
         this.timeSpent = timeSpent;
         this.numberOfCorrectAnswers = numberOfCorrectAnswers;
         this.nickname = nickname;
@@ -43,11 +43,11 @@ public class Result {
         this.id = id;
     }
 
-    public Date getTimeSpent() {
+    public double getTimeSpent() {
         return timeSpent;
     }
 
-    public void setTimeSpent(Date timeSpent) {
+    public void setTimeSpent(double timeSpent) {
         this.timeSpent = timeSpent;
     }
 

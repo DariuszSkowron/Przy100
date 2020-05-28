@@ -1,7 +1,7 @@
 export class Result {
 
   id : number;
-  timeSpent: Date;
+  timeSpent: number;
   numberOfCorrectAnswers : number;
   nickname : string;
 

@@ -21,7 +21,7 @@ export class ResultComponent implements OnInit {
       this.quizService.quizProgress = parseInt(localStorage.getItem('quizProgress'));
       this.quizService.questionList = JSON.parse(localStorage.getItem('questionList'));
       this.quizService.startTime = JSON.parse(localStorage.getItem('startTime'));
-
+      this.quizService.totalTime = JSON.parse(localStorage.getItem('totalTime'));
 
 
       this.listOfQuestionId = this.quizService.questionList.map(question => question.id);
@@ -38,7 +38,7 @@ export class ResultComponent implements OnInit {
   onSubmit(nickname: string){
     const newResult: Result = {
       id: null,
-      timeSpent: this.quizService.startTime,
+      timeSpent: this.quizService.totalTime,
       numberOfCorrectAnswers: this.correctAnswerCount,
       nickname: nickname
     };

@@ -60,6 +60,8 @@ export class QuizComponent implements OnInit{
     localStorage.setItem('quizProgress', this.quizService.quizProgress.toString());
     if (this.quizService.quizProgress == 2){
       clearTimeout(this.quizService.timer);
+      this.quizService.totalTime = (new Date().getTime() - new Date(this.quizService.startTime).getTime()) / 1000;
+      localStorage.setItem('totalTime', this.quizService.totalTime.toString());
       this.router.navigate(['/result']);
     }
 

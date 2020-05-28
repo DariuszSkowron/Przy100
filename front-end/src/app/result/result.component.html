@@ -10,6 +10,7 @@
         <div class="card-content">
           <h3>{{this.correctAnswerCount}}/2</h3>
           <span>Time Elapsed : {{this.quizService.displayTimeElapsed()}}</span>
+          <span>Time test : {{this.quizService.totalTime}}</span>
         </div>
         <div class="card-content">
           <form #registerForm="ngForm" (ngSubmit)="onSubmit(Name.value)">
