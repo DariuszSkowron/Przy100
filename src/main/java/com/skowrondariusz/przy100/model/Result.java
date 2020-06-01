@@ -16,6 +16,7 @@ public class Result {
     private double timeSpent;
     private int numberOfCorrectAnswers;
     private String nickname;
+    private double totalScore;
 
 
     public Result() {
@@ -25,6 +26,14 @@ public class Result {
         this.timeSpent = timeSpent;
         this.numberOfCorrectAnswers = numberOfCorrectAnswers;
         this.nickname = nickname;
+    }
+
+    public double getTotalScore() {
+        return totalScore;
+    }
+
+    public void setTotalScore(double totalScore) {
+        this.totalScore = totalScore;
     }
 
     public String getNickname() {

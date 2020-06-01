@@ -8,6 +8,7 @@ import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {QuizService} from "./shared/quiz.service";
 import { ResultComponent } from './result/result.component';
+import { HighscoresComponent } from './result/highscores/highscores.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { ResultComponent } from './result/result.component';
     AppComponent,
     QuizComponent,
     ResultComponent,
+    HighscoresComponent,
   ],
   imports: [
     BrowserModule,

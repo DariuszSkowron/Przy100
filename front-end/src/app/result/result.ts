@@ -4,5 +4,6 @@ export class Result {
   timeSpent: number;
   numberOfCorrectAnswers : number;
   nickname : string;
+  totalScore : number;
 
 }

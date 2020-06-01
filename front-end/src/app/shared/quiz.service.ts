@@ -37,5 +37,9 @@ export class QuizService {
     return this.http.post(`${this.QUIZ_URL}` + '/correctAnswers', answerIdList);
     }
 
+    getHighScores(): Observable<Result[]>{
+    return this.http.get<Result[]>(`${this.QUIZ_URL}` + '/highscores');
+    }
+
 
 }

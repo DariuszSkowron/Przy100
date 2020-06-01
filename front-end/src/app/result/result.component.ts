@@ -40,7 +40,8 @@ export class ResultComponent implements OnInit {
       id: null,
       timeSpent: this.quizService.totalTime,
       numberOfCorrectAnswers: this.correctAnswerCount,
-      nickname: nickname
+      nickname: nickname,
+      totalScore: 0
     };
     this.quizService.submitScore(newResult).subscribe(() => {
       this.restart();
@@ -53,5 +54,4 @@ export class ResultComponent implements OnInit {
     localStorage.setItem('seconds', "0");
     this.router.navigate(['/quiz']);
   }
-
 }
