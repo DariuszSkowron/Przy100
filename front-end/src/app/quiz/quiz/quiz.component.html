@@ -19,5 +19,14 @@
         </ul>
       </div>
     </div>
+<!--    <video controls="" autoplay="" name="media">-->
+<!--      <source src="https://p.scdn.co/mp3-preview/104ad0ea32356b9f3b2e95a8610f504c90b0026b?cid=8897482848704f2a8f8d7c79726a70d4" type="audio/mpeg">-->
+<!--    </video>-->
+    <audio #player id="audio{{ songId }}" src="{{ songUrl }}" preload="auto">
+      <p>Sorry, your browser does not support the <code>audio</code> element.</p>
+    </audio>
+    <button #button (click)="playSong(player, button)" class="btn waves-effect waves-light" type="submit" name="action">
+    Play ({{countdown}} seconds)
+  </button>
   </div>
 </div>

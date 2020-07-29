@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {QuizService} from "../../shared/quiz.service";
-import {Observable} from "rxjs";
+import {interval, Observable} from "rxjs";
 import {Quiz} from "../quiz";
 import {Router} from "@angular/router";
+import {take, timeInterval} from "rxjs/operators";
 
 @Component({
   selector: 'quiz',
@@ -12,6 +13,11 @@ import {Router} from "@angular/router";
 export class QuizComponent implements OnInit{
 
   quiz: Quiz;
+  songUrl: string = "https://p.scdn.co/mp3-preview/272ade18568d8dbc23244870b74427cb92e02a4b?cid=774b29d4f13844c495f206cafdad9c86";
+  songId: number = 2;
+
+  private _player: HTMLAudioElement;
+  private _countdown = 10;
   constructor(private router: Router, public quizService: QuizService) {
 
   }
@@ -64,7 +70,35 @@ export class QuizComponent implements OnInit{
       localStorage.setItem('totalTime', this.quizService.totalTime.toString());
       this.router.navigate(['/result']);
     }
+  }
 
+
+  get countdown(): number {
+    return this._countdown;
+  }
+
+  public playSong(player: HTMLAudioElement, button: HTMLElement): void {
+
+
+    let countdown = this._countdown - 1;
+
+    interval(1000)
+      .pipe(
+        timeInterval(),
+        take(this._countdown)
+      )
+      .subscribe((next) => {
+        this._countdown = countdown - next.value;
+      }, (error) => {
+
+      }, () => {
+        this._countdown = 0;
+        player.pause();
+      });
+
+    player.play();
+    button.setAttribute('disabled', '');
+    button.classList.add('disabled');
   }
 
 }
