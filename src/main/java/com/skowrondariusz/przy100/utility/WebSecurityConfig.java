@@ -12,5 +12,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+        http.authorizeRequests().antMatchers("/hello").authenticated();
+        http.authorizeRequests().antMatchers("/album/{authorName}").authenticated();
+
     }
 }
