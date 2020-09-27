@@ -11,12 +11,12 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "external_urls",
-        "href",
-        "id",
-        "name",
-        "type",
-        "uri"
+    "external_urls",
+    "href",
+    "id",
+    "name",
+    "type",
+    "uri"
 })
 public class Artist {
 

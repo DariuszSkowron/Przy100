@@ -1,3 +1,4 @@
+
 package com.skowrondariusz.przy100.spotifyModel;
 
 import java.util.HashMap;
@@ -12,20 +13,20 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "href",
-        "items",
-        "limit",
-        "next",
-        "offset",
-        "previous",
-        "total"
+    "href",
+    "items",
+    "limit",
+    "next",
+    "offset",
+    "previous",
+    "total"
 })
-public class Tracks {
+public class AlbumTracks {
 
     @JsonProperty("href")
     private String href;
     @JsonProperty("items")
-    private List<Item> items = null;
+    private List<com.skowrondariusz.przy100.spotifyModel.AlbumItem> albumItems = null;
     @JsonProperty("limit")
     private Integer limit;
     @JsonProperty("next")
@@ -33,7 +34,7 @@ public class Tracks {
     @JsonProperty("offset")
     private Integer offset;
     @JsonProperty("previous")
-    private String previous;
+    private Object previous;
     @JsonProperty("total")
     private Integer total;
     @JsonIgnore
@@ -50,13 +51,13 @@ public class Tracks {
     }
 
     @JsonProperty("items")
-    public List<Item> getItems() {
-        return items;
+    public List<com.skowrondariusz.przy100.spotifyModel.AlbumItem> getAlbumItems() {
+        return albumItems;
     }
 
     @JsonProperty("items")
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void setAlbumItems(List<com.skowrondariusz.przy100.spotifyModel.AlbumItem> albumItems) {
+        this.albumItems = albumItems;
     }
 
     @JsonProperty("limit")
@@ -90,12 +91,12 @@ public class Tracks {
     }
 
     @JsonProperty("previous")
-    public String getPrevious() {
+    public Object getPrevious() {
         return previous;
     }
 
     @JsonProperty("previous")
-    public void setPrevious(String previous) {
+    public void setPrevious(Object previous) {
         this.previous = previous;
     }
 

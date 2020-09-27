@@ -14,6 +14,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests().antMatchers("/hello").authenticated();
         http.authorizeRequests().antMatchers("/album/{authorName}").authenticated();
+        http.authorizeRequests().antMatchers("/artists/{authorName}").authenticated();
+        http.authorizeRequests().antMatchers("/albums/{albumId}").authenticated();
 
     }
 }

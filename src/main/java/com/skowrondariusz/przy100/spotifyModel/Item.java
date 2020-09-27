@@ -12,56 +12,47 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "album",
-        "artists",
-        "disc_number",
-        "duration_ms",
-        "explicit",
-        "external_ids",
-        "external_urls",
-        "href",
-        "id",
-        "is_local",
-        "is_playable",
-        "name",
-        "popularity",
-        "preview_url",
-        "track_number",
-        "type",
-        "uri"
+    "album_group",
+    "album_type",
+    "artists",
+    "available_markets",
+    "external_urls",
+    "href",
+    "id",
+    "images",
+    "name",
+    "release_date",
+    "release_date_precision",
+    "total_tracks",
+    "type",
+    "uri"
 })
 public class Item {
 
-    @JsonProperty("album")
-    private Album album;
+    @JsonProperty("album_group")
+    private String albumGroup;
+    @JsonProperty("album_type")
+    private String albumType;
     @JsonProperty("artists")
-    private List<Artist_> artists = null;
-    @JsonProperty("disc_number")
-    private Integer discNumber;
-    @JsonProperty("duration_ms")
-    private Integer durationMs;
-    @JsonProperty("explicit")
-    private Boolean explicit;
-    @JsonProperty("external_ids")
-    private ExternalIds externalIds;
+    private List<Artist> artists = null;
+    @JsonProperty("available_markets")
+    private List<String> availableMarkets = null;
     @JsonProperty("external_urls")
-    private ExternalUrls___ externalUrls;
+    private ExternalUrls_ externalUrls;
     @JsonProperty("href")
     private String href;
     @JsonProperty("id")
     private String id;
-    @JsonProperty("is_local")
-    private Boolean isLocal;
-    @JsonProperty("is_playable")
-    private Boolean isPlayable;
+    @JsonProperty("images")
+    private List<Image> images = null;
     @JsonProperty("name")
     private String name;
-    @JsonProperty("popularity")
-    private Integer popularity;
-    @JsonProperty("preview_url")
-    private Object previewUrl;
-    @JsonProperty("track_number")
-    private Integer trackNumber;
+    @JsonProperty("release_date")
+    private String releaseDate;
+    @JsonProperty("release_date_precision")
+    private String releaseDatePrecision;
+    @JsonProperty("total_tracks")
+    private Integer totalTracks;
     @JsonProperty("type")
     private String type;
     @JsonProperty("uri")
@@ -69,73 +60,53 @@ public class Item {
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("album")
-    public Album getAlbum() {
-        return album;
+    @JsonProperty("album_group")
+    public String getAlbumGroup() {
+        return albumGroup;
     }
 
-    @JsonProperty("album")
-    public void setAlbum(Album album) {
-        this.album = album;
+    @JsonProperty("album_group")
+    public void setAlbumGroup(String albumGroup) {
+        this.albumGroup = albumGroup;
+    }
+
+    @JsonProperty("album_type")
+    public String getAlbumType() {
+        return albumType;
+    }
+
+    @JsonProperty("album_type")
+    public void setAlbumType(String albumType) {
+        this.albumType = albumType;
     }
 
     @JsonProperty("artists")
-    public List<Artist_> getArtists() {
+    public List<Artist> getArtists() {
         return artists;
     }
 
     @JsonProperty("artists")
-    public void setArtists(List<Artist_> artists) {
+    public void setArtists(List<Artist> artists) {
         this.artists = artists;
     }
 
-    @JsonProperty("disc_number")
-    public Integer getDiscNumber() {
-        return discNumber;
+    @JsonProperty("available_markets")
+    public List<String> getAvailableMarkets() {
+        return availableMarkets;
     }
 
-    @JsonProperty("disc_number")
-    public void setDiscNumber(Integer discNumber) {
-        this.discNumber = discNumber;
-    }
-
-    @JsonProperty("duration_ms")
-    public Integer getDurationMs() {
-        return durationMs;
-    }
-
-    @JsonProperty("duration_ms")
-    public void setDurationMs(Integer durationMs) {
-        this.durationMs = durationMs;
-    }
-
-    @JsonProperty("explicit")
-    public Boolean getExplicit() {
-        return explicit;
-    }
-
-    @JsonProperty("explicit")
-    public void setExplicit(Boolean explicit) {
-        this.explicit = explicit;
-    }
-
-    @JsonProperty("external_ids")
-    public ExternalIds getExternalIds() {
-        return externalIds;
-    }
-
-    @JsonProperty("external_ids")
-    public void setExternalIds(ExternalIds externalIds) {
-        this.externalIds = externalIds;
+    @JsonProperty("available_markets")
+    public void setAvailableMarkets(List<String> availableMarkets) {
+        this.availableMarkets = availableMarkets;
     }
 
     @JsonProperty("external_urls")
-    public ExternalUrls___ getExternalUrls() {
+    public ExternalUrls_ getExternalUrls() {
         return externalUrls;
     }
 
     @JsonProperty("external_urls")
-    public void setExternalUrls(ExternalUrls___ externalUrls) {
+    public void setExternalUrls(ExternalUrls_ externalUrls) {
         this.externalUrls = externalUrls;
     }
 
@@ -159,24 +130,14 @@ public class Item {
         this.id = id;
     }
 
-    @JsonProperty("is_local")
-    public Boolean getIsLocal() {
-        return isLocal;
+    @JsonProperty("images")
+    public List<Image> getImages() {
+        return images;
     }
 
-    @JsonProperty("is_local")
-    public void setIsLocal(Boolean isLocal) {
-        this.isLocal = isLocal;
-    }
-
-    @JsonProperty("is_playable")
-    public Boolean getIsPlayable() {
-        return isPlayable;
-    }
-
-    @JsonProperty("is_playable")
-    public void setIsPlayable(Boolean isPlayable) {
-        this.isPlayable = isPlayable;
+    @JsonProperty("images")
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 
     @JsonProperty("name")
@@ -189,34 +150,34 @@ public class Item {
         this.name = name;
     }
 
-    @JsonProperty("popularity")
-    public Integer getPopularity() {
-        return popularity;
+    @JsonProperty("release_date")
+    public String getReleaseDate() {
+        return releaseDate;
     }
 
-    @JsonProperty("popularity")
-    public void setPopularity(Integer popularity) {
-        this.popularity = popularity;
+    @JsonProperty("release_date")
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
-    @JsonProperty("preview_url")
-    public Object getPreviewUrl() {
-        return previewUrl;
+    @JsonProperty("release_date_precision")
+    public String getReleaseDatePrecision() {
+        return releaseDatePrecision;
     }
 
-    @JsonProperty("preview_url")
-    public void setPreviewUrl(Object previewUrl) {
-        this.previewUrl = previewUrl;
+    @JsonProperty("release_date_precision")
+    public void setReleaseDatePrecision(String releaseDatePrecision) {
+        this.releaseDatePrecision = releaseDatePrecision;
     }
 
-    @JsonProperty("track_number")
-    public Integer getTrackNumber() {
-        return trackNumber;
+    @JsonProperty("total_tracks")
+    public Integer getTotalTracks() {
+        return totalTracks;
     }
 
-    @JsonProperty("track_number")
-    public void setTrackNumber(Integer trackNumber) {
-        this.trackNumber = trackNumber;
+    @JsonProperty("total_tracks")
+    public void setTotalTracks(Integer totalTracks) {
+        this.totalTracks = totalTracks;
     }
 
     @JsonProperty("type")

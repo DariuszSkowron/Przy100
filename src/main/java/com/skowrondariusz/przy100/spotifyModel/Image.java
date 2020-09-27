@@ -11,9 +11,9 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "height",
-        "url",
-        "width"
+    "height",
+    "url",
+    "width"
 })
 public class Image {
 
