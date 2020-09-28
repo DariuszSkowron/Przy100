@@ -1,9 +1,11 @@
 package com.skowrondariusz.przy100.utility;
 
+import com.skowrondariusz.przy100.controller.SpotifyAlbumClient;
 import com.skowrondariusz.przy100.model.Answer;
 import com.skowrondariusz.przy100.model.Question;
 import com.skowrondariusz.przy100.repository.AnswerRepository;
 import com.skowrondariusz.przy100.service.QuestionService;
+import com.skowrondariusz.przy100.service.SpotifyService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
@@ -19,10 +21,20 @@ public class DatabaseInitializer implements CommandLineRunner {
 
     private AnswerRepository answerRepository;
     private QuestionService questionService;
+    private SpotifyAlbumClient spotifyAlbumClient;
+    private SpotifyService spotifyService;
 
-    public DatabaseInitializer(AnswerRepository answerRepository, QuestionService questionService) {
+//    public DatabaseInitializer(AnswerRepository answerRepository, QuestionService questionService) {
+//        this.answerRepository = answerRepository;
+//        this.questionService = questionService;
+//    }
+
+
+    public DatabaseInitializer(AnswerRepository answerRepository, QuestionService questionService, SpotifyAlbumClient spotifyAlbumClient, SpotifyService spotifyService) {
         this.answerRepository = answerRepository;
         this.questionService = questionService;
+        this.spotifyAlbumClient = spotifyAlbumClient;
+        this.spotifyService = spotifyService;
     }
 
     @Override
@@ -61,6 +73,10 @@ public class DatabaseInitializer implements CommandLineRunner {
 //        question1.setCorrectAnswerId(answerRepository.getById(2));
 //        question1.setListOfAnswers(list2);
 //        questionService.saveQuestion(question2);
+
+
+        System.out.println(spotifyService.getToken());
+
 
         System.out.println("DATABASE INITIALISED");
     }
