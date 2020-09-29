@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URL;
 import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -97,7 +98,7 @@ public class SpotifyAlbumClient {
 //        String jwt = ((OAuth2AuthenticationDetails)details.getDetails()).getTokenValue();
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Authorization", "Bearer " + SpotifyService.getToken());
+        httpHeaders.add("Authorization", "Bearer " + SpotifyService.getToken() + "-d grant_type=client_credentials");
         HttpEntity httpEntity = new HttpEntity(httpHeaders);
 
         ResponseEntity<AlbumTracks> exchange = restTemplate.exchange("https://api.spotify.com/v1/albums/" + albumId + "/tracks",
@@ -131,5 +132,42 @@ public class SpotifyAlbumClient {
         return spotifyService.getToken();
     }
 
+
+//    public void kupa(){
+//        //create url access point
+//        URL url = new URL(tokenURL);
+//
+//        //open http connection to url
+//        conn = (HttpURLConnection) url.openConnection();
+//        conn.setDoOutput(true);
+//        conn.setDoInput(true);
+//
+//        //setup post function and request headers
+//        conn.setRequestMethod("POST");
+//        conn.setRequestProperty("Authorization",String.format("Basic %s", clientCredEncode));
+//        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+//
+//        //set body for posting
+//        String body = "grant_type=client_credentials";
+//
+//        //calculate and set content length
+//        byte[] out = body.getBytes(StandardCharsets.UTF_8);
+//        int length = out.length;
+//        conn.setFixedLengthStreamingMode(length);
+//
+//        //connect to http
+//        conn.connect();
+//        //}
+//
+//        //send bytes to spotify
+//        try(OutputStream os = conn.getOutputStream()) {
+//            os.write(out);
+//        }
+//
+//        //receive access token
+//        InputStream result = conn.getInputStream();
+//        s = new String(result.readAllBytes());
+//        //System.out.println(s);
+//    }
 
 }

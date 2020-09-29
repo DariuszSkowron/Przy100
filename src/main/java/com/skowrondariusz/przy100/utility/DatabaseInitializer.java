@@ -78,6 +78,8 @@ public class DatabaseInitializer implements CommandLineRunner {
         System.out.println(spotifyService.getToken());
 
 
+
+
         System.out.println("DATABASE INITIALISED");
     }
 }
