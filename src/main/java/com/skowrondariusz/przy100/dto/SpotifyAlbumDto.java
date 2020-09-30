@@ -5,9 +5,8 @@ public class SpotifyAlbumDto {
     private String albumName;
     private String albumId;
 
-    public SpotifyAlbumDto(String name) {
 
-    }
+
 
     public String getAlbumName() {
         return albumName;
@@ -31,5 +30,13 @@ public class SpotifyAlbumDto {
     public SpotifyAlbumDto(String albumName, String albumId) {
         this.albumName = albumName;
         this.albumId = albumId;
+    }
+
+    @Override
+    public String toString() {
+        return "SpotifyAlbumDto{" +
+                "albumName='" + albumName + '\'' +
+                ", albumId='" + albumId + '\'' +
+                '}';
     }
 }

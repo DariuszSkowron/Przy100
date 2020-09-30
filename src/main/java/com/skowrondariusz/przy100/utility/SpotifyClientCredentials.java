@@ -8,6 +8,8 @@ import com.wrapper.spotify.model_objects.specification.Paging;
 import com.wrapper.spotify.requests.authorization.client_credentials.ClientCredentialsRequest;
 import com.wrapper.spotify.requests.data.artists.GetArtistsAlbumsRequest;
 import org.apache.hc.core5.http.ParseException;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.concurrent.CancellationException;
@@ -15,8 +17,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 
 import java.io.IOException;
-
-public class ClientCreditentials {
+public class SpotifyClientCredentials {
 
     private static final String clientId = "765ae1d3c8d44d9bbcd2a691a095cbc6";
     private static final String clientSecret = "1b5e3868efbe42b6941250954a0c7442";
@@ -28,7 +29,7 @@ public class ClientCreditentials {
     private static final ClientCredentialsRequest clientCredentialsRequest = spotifyApi.clientCredentials()
             .build();
 
-    public static void clientCredentials_Sync() {
+    private static void clientCredentials_Sync() {
         try {
             final ClientCredentials clientCredentials = clientCredentialsRequest.execute();
 
@@ -62,7 +63,11 @@ public class ClientCreditentials {
         }
     }
 
-
-
+    public static String getClientAccessToken(){
+        if (spotifyApi.getAccessToken() == null){
+            clientCredentials_Sync();
+        }
+        return spotifyApi.getAccessToken().toString();
+    }
 
 }

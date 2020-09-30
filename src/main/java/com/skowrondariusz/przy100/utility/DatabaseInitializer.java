@@ -6,6 +6,7 @@ import com.skowrondariusz.przy100.model.Question;
 import com.skowrondariusz.przy100.repository.AnswerRepository;
 import com.skowrondariusz.przy100.service.QuestionService;
 import com.skowrondariusz.przy100.service.SpotifyService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.skowrondariusz.przy100.service.SpotifyTest.*;
 
 @Component
 @ConditionalOnProperty(name = "database.startup", havingValue = "true")
@@ -76,6 +79,10 @@ public class DatabaseInitializer implements CommandLineRunner {
 
 
         System.out.println(spotifyService.getToken());
+//        getArtistsAlbums_Async();
+        getArtistsAlbums_Sync();
+        test();
+
 
 
 
