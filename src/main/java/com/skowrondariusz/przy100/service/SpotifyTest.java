@@ -1,6 +1,8 @@
 package com.skowrondariusz.przy100.service;
 
 import com.skowrondariusz.przy100.dto.SpotifyAlbumDto;
+import com.skowrondariusz.przy100.model.Song;
+import com.skowrondariusz.przy100.repository.SongRepository;
 import com.wrapper.spotify.SpotifyApi;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import com.wrapper.spotify.model_objects.specification.AlbumSimplified;
@@ -10,6 +12,7 @@ import com.wrapper.spotify.requests.authorization.client_credentials.ClientCrede
 import com.wrapper.spotify.requests.data.albums.GetAlbumsTracksRequest;
 import com.wrapper.spotify.requests.data.artists.GetArtistsAlbumsRequest;
 import org.apache.hc.core5.http.ParseException;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,12 +22,16 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 
 import static com.skowrondariusz.przy100.utility.SpotifyClientCredentials.getClientAccessToken;
-
+@Service
 public class SpotifyTest {
 
     private static final String id = "6DAQjwwMGZ9QgqHhIkU7H0";
 
+    public SongRepository songRepository;
 
+    public SpotifyTest(SongRepository songRepository) {
+        this.songRepository = songRepository;
+    }
 
     private static final SpotifyApi spotifysApi = new SpotifyApi.Builder()
             .setAccessToken(getClientAccessToken())
@@ -78,7 +85,7 @@ public class SpotifyTest {
 
 
 
-    public static void getAlbumsTracks_Sync(String id) {
+    public void getAlbumsTracks_Sync(String id) {
          GetAlbumsTracksRequest getAlbumsTracksRequest = spotifysApi.getAlbumsTracks(id)
 //          .limit(10)
 //          .offset(0)
@@ -91,6 +98,7 @@ public class SpotifyTest {
             System.out.println("Total: " + trackSimplifiedPaging.getTotal());
             for (TrackSimplified track : trackSimplifiedPaging.getItems()) {
                 System.out.println(track.getName() + " " + track.getPreviewUrl());
+                songRepository.save(new Song(track.getName(), track.getPreviewUrl()));
             }
 
 
@@ -99,9 +107,8 @@ public class SpotifyTest {
         }
     }
 
-    public static void test(){
+    public  void test(){
         List<SpotifyAlbumDto> albums = getArtistsAlbums_Sync();
-        System.out.println("kupa");
         for (SpotifyAlbumDto albumDto : albums) {
             System.out.println("kupa2");
             getAlbumsTracks_Sync(albumDto.getAlbumId());
