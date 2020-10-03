@@ -1,20 +1,13 @@
 package com.skowrondariusz.przy100.utility;
 
-import com.skowrondariusz.przy100.controller.SpotifyAlbumClient;
 import com.skowrondariusz.przy100.model.Answer;
 import com.skowrondariusz.przy100.model.Question;
 import com.skowrondariusz.przy100.repository.AnswerRepository;
 import com.skowrondariusz.przy100.service.QuestionService;
-import com.skowrondariusz.przy100.service.SpotifyService;
 import com.skowrondariusz.przy100.service.SpotifyTest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static com.skowrondariusz.przy100.service.SpotifyTest.*;
 
@@ -25,21 +18,11 @@ public class DatabaseInitializer implements CommandLineRunner {
 
     private AnswerRepository answerRepository;
     private QuestionService questionService;
-    private SpotifyAlbumClient spotifyAlbumClient;
-    private SpotifyService spotifyService;
     private SpotifyTest spotifyTest;
 
-//    public DatabaseInitializer(AnswerRepository answerRepository, QuestionService questionService) {
-//        this.answerRepository = answerRepository;
-//        this.questionService = questionService;
-//    }
-
-
-    public DatabaseInitializer(AnswerRepository answerRepository, QuestionService questionService, SpotifyAlbumClient spotifyAlbumClient, SpotifyService spotifyService, SpotifyTest spotifyTest) {
+    public DatabaseInitializer(AnswerRepository answerRepository, QuestionService questionService, SpotifyTest spotifyTest) {
         this.answerRepository = answerRepository;
         this.questionService = questionService;
-        this.spotifyAlbumClient = spotifyAlbumClient;
-        this.spotifyService = spotifyService;
         this.spotifyTest = spotifyTest;
     }
 
@@ -68,21 +51,8 @@ public class DatabaseInitializer implements CommandLineRunner {
             answerRepository.save(name);
             questionService.saveWrongQuestion(question2, name);
         }
-//        List<Answer> list1 = Arrays.asList(answerRepository.getById(3), answerRepository.getById(4), answerRepository.getById(5));
-//        List<Answer> list2 = Arrays.asList(answerRepository.getById(6), answerRepository.getById(7), answerRepository.getById(8));
 
 
-//        question1.setCorrectAnswerId(answerRepository.getById(1));
-//        question1.setListOfAnswers(list1);
-//        questionService.saveQuestion(question1);
-//
-//        question1.setCorrectAnswerId(answerRepository.getById(2));
-//        question1.setListOfAnswers(list2);
-//        questionService.saveQuestion(question2);
-
-
-        System.out.println(spotifyService.getToken());
-//        getArtistsAlbums_Async();
         getArtistsAlbums_Sync();
         spotifyTest.test();
 
