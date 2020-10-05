@@ -5,6 +5,7 @@ import com.skowrondariusz.przy100.model.Question;
 import com.skowrondariusz.przy100.model.SongQuestion;
 import com.skowrondariusz.przy100.repository.AnswerRepository;
 import com.skowrondariusz.przy100.service.QuestionService;
+import com.skowrondariusz.przy100.service.SongDrawingService;
 import com.skowrondariusz.przy100.service.SpotifyTest;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -20,11 +21,20 @@ public class DatabaseInitializer implements CommandLineRunner {
     private AnswerRepository answerRepository;
     private QuestionService questionService;
     private SpotifyTest spotifyTest;
+    private SongDrawingService songDrawingService;
 
-    public DatabaseInitializer(AnswerRepository answerRepository, QuestionService questionService, SpotifyTest spotifyTest) {
+//    public DatabaseInitializer(AnswerRepository answerRepository, QuestionService questionService, SpotifyTest spotifyTest) {
+//        this.answerRepository = answerRepository;
+//        this.questionService = questionService;
+//        this.spotifyTest = spotifyTest;
+//    }
+
+
+    public DatabaseInitializer(AnswerRepository answerRepository, QuestionService questionService, SpotifyTest spotifyTest, SongDrawingService songDrawingService) {
         this.answerRepository = answerRepository;
         this.questionService = questionService;
         this.spotifyTest = spotifyTest;
+        this.songDrawingService = songDrawingService;
     }
 
     @Override
@@ -68,6 +78,8 @@ public class DatabaseInitializer implements CommandLineRunner {
 
         getArtistsAlbums_Sync();
         spotifyTest.test();
+        songDrawingService.randomSongsNames("4");
+
 
 
 
