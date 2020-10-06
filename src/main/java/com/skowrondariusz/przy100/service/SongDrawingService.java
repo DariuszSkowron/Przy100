@@ -17,19 +17,23 @@ public class SongDrawingService {
 
 
    public SongRepository songRepository;
-   public QuestionRepository questionRepository;
+   public QuestionService questionService;
 
-    public SongDrawingService(SongRepository songRepository) {
+    public SongDrawingService(SongRepository songRepository, QuestionService questionService) {
         this.songRepository = songRepository;
+        this.questionService = questionService;
     }
 
     public void musicQuestionGenerate(){
         List<Song> songList = songRepository.findAll();
         for (Song song : songList) {
             var songQuestion = new SongQuestion("Guess the song title");
+//            questionRepository.save(songQuestion);
+            questionService.saveQuestion(songQuestion);
             songQuestion.setCorrectSongUrl(song.getPreviewUrl());
-//            songQuestion.setListOfAnswers(ran);
-
+//            songQuestion.setListOfAnswers(randomSongsNames(String.valueOf(song.getId())));
+            questionService.saveQuestion(songQuestion);
+            System.out.println("essa");
         }
     }
 
@@ -60,10 +64,10 @@ public class SongDrawingService {
 
 
 
-    public int[] drawQuestions(int quizSize){
-        return new Random().ints(1,Math.toIntExact(questionRepository.count()) +1)
-                .distinct()
-                .limit(quizSize)
-                .toArray();
-    }
+//    public int[] drawQuestions(int quizSize){
+//        return new Random().ints(1,Math.toIntExact(questionRepository.count()) +1)
+//                .distinct()
+//                .limit(quizSize)
+//                .toArray();
+//    }
 }

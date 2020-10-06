@@ -79,6 +79,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         getArtistsAlbums_Sync();
         spotifyTest.test();
         songDrawingService.randomSongsNames("4");
+        songDrawingService.musicQuestionGenerate();
 
 
 
