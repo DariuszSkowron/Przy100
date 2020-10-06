@@ -62,12 +62,12 @@ public class SongDrawingService {
 
     }
 
-
-
+//
+//
 //    public int[] drawQuestions(int quizSize){
-//        return new Random().ints(1,Math.toIntExact(questionRepository.count()) +1)
-//                .distinct()
-//                .limit(quizSize)
-//                .toArray();
-//    }
-}
+//////        return new Random().ints(1,Math.toIntExact(questionRepository.count()) +1)
+////                .distinct()
+////                .limit(quizSize)
+////                .toArray();
+////    }
+//}
