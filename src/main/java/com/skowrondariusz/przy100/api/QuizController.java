@@ -37,17 +37,17 @@ public class QuizController {
         return newQuiz;
     }
 
-    @PostMapping("/correctAnswers")
-    public int[] result(@RequestBody int[] answerIdList) {
-        int[] result = new int[answerIdList.length];
-        for (int i = 0; i < answerIdList.length; i++) {
-            result[i] = questionService.getCorrectAnswerId(answerIdList[i]);
-            System.out.println("test");
-        }
-        System.out.println(Arrays.toString(result));
-        return result;
-
-    }
+//    @PostMapping("/correctAnswers")
+//    public int[] result(@RequestBody int[] answerIdList) {
+//        int[] result = new int[answerIdList.length];
+//        for (int i = 0; i < answerIdList.length; i++) {
+//            result[i] = questionService.getCorrectAnswerId(answerIdList[i]);
+//            System.out.println("test");
+//        }
+//        System.out.println(Arrays.toString(result));
+//        return result;
+//
+//    }
 
     @PostMapping("/result")
     public Result postResult(@RequestBody Result result){

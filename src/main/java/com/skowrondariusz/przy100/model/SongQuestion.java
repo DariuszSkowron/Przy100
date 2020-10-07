@@ -11,8 +11,8 @@ public class SongQuestion extends Question {
     public SongQuestion() {
     }
 
-    public SongQuestion(String description) {
-        super(description);
+    public SongQuestion(String correctSongUrl) {
+        this.correctSongUrl = correctSongUrl;
     }
 
     public SongQuestion(String description, String correctSongUrl) {
@@ -20,12 +20,9 @@ public class SongQuestion extends Question {
         this.correctSongUrl = correctSongUrl;
     }
 
-    public SongQuestion(String description, long correctAnswerId, List<Answer> listOfAnswers) {
+    public SongQuestion(String description, String correctAnswerId, List<String> listOfAnswers, String correctSongUrl) {
         super(description, correctAnswerId, listOfAnswers);
-    }
-
-    public SongQuestion(long correctAnswerId) {
-        super(correctAnswerId);
+        this.correctSongUrl = correctSongUrl;
     }
 
     public String getCorrectSongUrl() {

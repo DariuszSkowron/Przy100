@@ -18,8 +18,8 @@ public class Quiz {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "partsOrder", cascade = CascadeType.ALL)
     private List<Question> questionList;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "partsOrder", cascade = CascadeType.ALL)
-    private List<Answer> userAnswers;
+//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "partsOrder", cascade = CascadeType.ALL)
+    private List<String> userAnswers;
 
     public Quiz() {
     }
@@ -29,7 +29,7 @@ public class Quiz {
         this.questionList = questionList;
     }
 
-    public Quiz(Date startTime, Date endTime, double score, List<Question> questionList, List<Answer> userAnswers) {
+    public Quiz(Date startTime, Date endTime, double score, List<Question> questionList, List<String> userAnswers) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.score = score;
@@ -71,11 +71,11 @@ public class Quiz {
         this.questionList = questionList;
     }
 
-    public List<Answer> getUserAnswers() {
+    public List<String> getUserAnswers() {
         return userAnswers;
     }
 
-    public void setUserAnswers(List<Answer> userAnswers) {
+    public void setUserAnswers(List<String> userAnswers) {
         this.userAnswers = userAnswers;
     }
 
