@@ -1,5 +1,6 @@
 package com.skowrondariusz.przy100.api;
 
+import com.skowrondariusz.przy100.model.Question;
 import com.skowrondariusz.przy100.model.Quiz;
 import com.skowrondariusz.przy100.model.Result;
 import com.skowrondariusz.przy100.repository.ResultRepository;
@@ -77,6 +78,12 @@ public class QuizController {
     @GetMapping("/count2")
     public int[] counter2(){
         return questionService.drawQuestions(2);
+    }
+
+
+    @GetMapping("/test2")
+    public Question test(){
+        return questionService.getQuestionById(1);
     }
 //
 //    @GetMapping("test")

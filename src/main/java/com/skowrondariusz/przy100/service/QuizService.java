@@ -25,7 +25,7 @@ public class QuizService {
 
     public Quiz startNewQuiz(){
         Quiz quiz = new Quiz();
-        quiz.setQuestionList(questionService.collectQuestionsForQuiz(2));
+        quiz.setQuestionList(questionService.collectQuestionsForQuiz(5));
         Date x = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
         Calendar c = Calendar.getInstance();
         x = c.getTime();

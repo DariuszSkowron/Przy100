@@ -1,9 +1,10 @@
-import {Answer} from "./answer";
+
 
 export class Question {
   id: string;
   description : string;
-  correctAnswerId: string;
+  correctAnswer: string;
+  listOfWrongAnswers: any[];
+  correctSongUrl: string;
   userAnswer: number;
-  listOfAnswers: Answer[];
 }

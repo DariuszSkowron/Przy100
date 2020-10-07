@@ -13,11 +13,11 @@ import {take, timeInterval} from "rxjs/operators";
 export class QuizComponent implements OnInit{
 
   quiz: Quiz;
-  songUrl: string = "https://p.scdn.co/mp3-preview/272ade18568d8dbc23244870b74427cb92e02a4b?cid=774b29d4f13844c495f206cafdad9c86";
-  songId: number = 2;
+  // songUrl: string = "https://p.scdn.co/mp3-preview/272ade18568d8dbc23244870b74427cb92e02a4b?cid=774b29d4f13844c495f206cafdad9c86";
+  // songId: number = 2;
 
   private _player: HTMLAudioElement;
-  private _countdown = 10;
+  private _countdown = 5;
   constructor(private router: Router, public quizService: QuizService) {
 
   }

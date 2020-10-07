@@ -14,7 +14,7 @@ public class Question {
     private String correctAnswer;
 
 //    @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE)
-//    @JsonManagedReference
+    @JsonManagedReference
     @ElementCollection
     private List<String> listOfWrongAnswers;
 
