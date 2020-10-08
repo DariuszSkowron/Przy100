@@ -7,6 +7,7 @@ import com.skowrondariusz.przy100.repository.ResultRepository;
 import com.skowrondariusz.przy100.service.QuestionService;
 import com.skowrondariusz.przy100.service.QuizService;
 import com.skowrondariusz.przy100.service.ResultService;
+import com.skowrondariusz.przy100.utility.Mapper;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -23,17 +24,29 @@ public class QuizController {
     private QuestionService questionService;
     private ResultRepository resultRepository;
     private ResultService resultService;
+    private Mapper mapper;
 
-    public QuizController(QuizService quizService, QuestionService questionService, ResultRepository resultRepository, ResultService resultService) {
+//    public QuizController(QuizService quizService, QuestionService questionService, ResultRepository resultRepository, ResultService resultService) {
+//        this.quizService = quizService;
+//        this.questionService = questionService;
+//        this.resultRepository = resultRepository;
+//        this.resultService = resultService;
+//    }
+
+    public QuizController(QuizService quizService, QuestionService questionService, ResultRepository resultRepository, ResultService resultService, Mapper mapper) {
         this.quizService = quizService;
         this.questionService = questionService;
         this.resultRepository = resultRepository;
         this.resultService = resultService;
+        this.mapper = mapper;
     }
 
     @GetMapping("/start")
     public Quiz startQuiz() {
         Quiz newQuiz = quizService.startNewQuiz();
+//
+//        newQuiz.getQuestionList().stream()
+//                .map(question -> this.mapper.convert)
         return newQuiz;
     }
 
