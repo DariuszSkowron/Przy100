@@ -18,6 +18,7 @@ public class Question {
     @ElementCollection
     private List<String> listOfWrongAnswers;
 
+
     public Question() {
     }
 
