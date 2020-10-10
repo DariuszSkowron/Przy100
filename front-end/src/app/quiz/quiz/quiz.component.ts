@@ -13,11 +13,8 @@ import {take, timeInterval} from "rxjs/operators";
 export class QuizComponent implements OnInit{
 
   quiz: Quiz;
-  songUrl: string = "https://p.scdn.co/mp3-preview/272ade18568d8dbc23244870b74427cb92e02a4b?cid=774b29d4f13844c495f206cafdad9c86";
-  songId: number = 2;
-
   private _player: HTMLAudioElement;
-  private _countdown = 10;
+  private _countdown = 5;
   constructor(private router: Router, public quizService: QuizService) {
 
   }
@@ -38,6 +35,8 @@ export class QuizComponent implements OnInit{
       this.getQuiz();
     }
   }
+
+
 
   getQuiz() {
     this.quizService.getQuiz().subscribe(res => {
@@ -63,6 +62,7 @@ export class QuizComponent implements OnInit{
     localStorage.setItem('quiz', JSON.stringify(this.quiz));
     localStorage.setItem('questionList', JSON.stringify(this.quizService.questionList));
     this.quizService.quizProgress++;
+    this._countdown = 5;
     localStorage.setItem('quizProgress', this.quizService.quizProgress.toString());
     if (this.quizService.quizProgress == 2){
       clearTimeout(this.quizService.timer);
@@ -70,6 +70,11 @@ export class QuizComponent implements OnInit{
       localStorage.setItem('totalTime', this.quizService.totalTime.toString());
       this.router.navigate(['/result']);
     }
+  }
+
+  resetButton(button:HTMLElement){
+    button.removeAttribute('disabled');
+    button.classList.remove('disabled');
   }
 
 

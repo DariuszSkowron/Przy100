@@ -16,28 +16,29 @@ import java.util.stream.Collectors;
 public class SongDrawingService {
 
 
-   public SongRepository songRepository;
-   public QuestionService questionService;
+    public SongRepository songRepository;
+    public QuestionService questionService;
 
     public SongDrawingService(SongRepository songRepository, QuestionService questionService) {
         this.songRepository = songRepository;
         this.questionService = questionService;
     }
 
-    public void musicQuestionGenerate(){
+    public void musicQuestionGenerate() {
         List<Song> songList = songRepository.findAll();
         for (Song song : songList) {
-            var songQuestion = new SongQuestion("Guess the song title");
-//            questionRepository.save(songQuestion);
-            questionService.saveQuestion(songQuestion);
+            var songQuestion = new SongQuestion();
+//            questionService.saveQuestion(songQuestion);
+            songQuestion.setDescription("Guess the song");
             songQuestion.setCorrectSongUrl(song.getPreviewUrl());
-//            songQuestion.setListOfAnswers(randomSongsNames(String.valueOf(song.getId())));
+            songQuestion.setCorrectAnswer(song.getName());
+            songQuestion.setListOfWrongAnswers(randomSongsNames(String.valueOf(song.getId())));
             questionService.saveQuestion(songQuestion);
             System.out.println("essa");
         }
     }
 
-    public List<String> randomSongsNames(String id){
+    public List<String> randomSongsNames(String id) {
         List<Song> songList = songRepository.findAll();
         int[] songIds = new Random().ints(1, Math.toIntExact(songList.size()))
                 .skip(Long.parseLong(id))
@@ -58,9 +59,10 @@ public class SongDrawingService {
 //        return songList.stream()
 //                .map(Objects::toString)
 //                .collect(Collectors.toList());
-
+//
 
     }
+}
 
 //
 //

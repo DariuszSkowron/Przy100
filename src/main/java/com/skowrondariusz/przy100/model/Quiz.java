@@ -1,11 +1,7 @@
 package com.skowrondariusz.przy100.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.skowrondariusz.przy100.dto.QuestionDto;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
 import java.util.Date;
 import java.util.List;
 
@@ -15,21 +11,19 @@ public class Quiz {
     private Date endTime;
     private double score;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "partsOrder", cascade = CascadeType.ALL)
-    private List<Question> questionList;
+    private List<QuestionDto> questionList;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "partsOrder", cascade = CascadeType.ALL)
-    private List<Answer> userAnswers;
+    private List<String> userAnswers;
 
     public Quiz() {
     }
 
-    public Quiz(Date startTime, List<Question> questionList) {
+    public Quiz(Date startTime, List<QuestionDto> questionList) {
         this.startTime = startTime;
         this.questionList = questionList;
     }
 
-    public Quiz(Date startTime, Date endTime, double score, List<Question> questionList, List<Answer> userAnswers) {
+    public Quiz(Date startTime, Date endTime, double score, List<QuestionDto> questionList, List<String> userAnswers) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.score = score;
@@ -63,19 +57,19 @@ public class Quiz {
         this.score = score;
     }
 
-    public List<Question> getQuestionList() {
+    public List<QuestionDto> getQuestionList() {
         return questionList;
     }
 
-    public void setQuestionList(List<Question> questionList) {
+    public void setQuestionList(List<QuestionDto> questionList) {
         this.questionList = questionList;
     }
 
-    public List<Answer> getUserAnswers() {
+    public List<String> getUserAnswers() {
         return userAnswers;
     }
 
-    public void setUserAnswers(List<Answer> userAnswers) {
+    public void setUserAnswers(List<String> userAnswers) {
         this.userAnswers = userAnswers;
     }
 

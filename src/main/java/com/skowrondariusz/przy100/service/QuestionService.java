@@ -1,6 +1,6 @@
 package com.skowrondariusz.przy100.service;
 
-import com.skowrondariusz.przy100.model.Answer;
+//import com.skowrondariusz.przy100.model.Answer;
 import com.skowrondariusz.przy100.model.Question;
 import com.skowrondariusz.przy100.repository.QuestionRepository;
 import org.springframework.stereotype.Service;
@@ -48,18 +48,14 @@ public class QuestionService {
     }
 
 
-    public void saveWrongQuestion (Question question, Answer answer){
-        questionRepository.getQuestionById(question.getId()).setListOfAnswers(Collections.singletonList(answer));
-    }
-
     @Transactional
-    public void setCorrectAnswer (long questionId, Answer answer){
-        questionRepository.getQuestionById(questionId).setCorrectAnswerId(answer.getId());
+    public void setCorrectAnswer (long questionId, String answer){
+        questionRepository.getQuestionById(questionId).setCorrectAnswer(answer);
 
     }
 
-    public int getCorrectAnswerId(long questionId){
-        return Math.toIntExact(questionRepository.getQuestionById(questionId).getCorrectAnswerId());
+    public String getCorrectAnswerForQuestion(long questionId){
+        return questionRepository.getQuestionById(questionId).getCorrectAnswer();
     }
 
     public long count(){

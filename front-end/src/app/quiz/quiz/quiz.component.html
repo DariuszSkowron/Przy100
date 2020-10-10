@@ -8,25 +8,25 @@
       <div class="card-content white-text">
         <span class="card-title">{{this.quizService.quizProgress+1}}</span>
         <p>{{quiz.questionList[this.quizService.quizProgress].description}}</p>
+
       </div>
       <div class="card-action">
         <ul class="collection answer">
-        <ng-container *ngFor="let answer of quiz.questionList[this.quizService.quizProgress].listOfAnswers">
-          <li *ngIf="answer != null" class="collection-item" (click)="Answer(quiz.questionList[this.quizService.quizProgress].id, answer.id)">
-            {{answer.text}}
+        <ng-container *ngFor="let answer of quiz.questionList[this.quizService.quizProgress].answersList">
+          <li *ngIf="answer != null" class="collection-item" (click)="Answer(quiz.questionList[this.quizService.quizProgress].id, answer)">
+            {{answer}}
           </li>
         </ng-container>
         </ul>
       </div>
     </div>
-<!--    <video controls="" autoplay="" name="media">-->
-<!--      <source src="https://p.scdn.co/mp3-preview/104ad0ea32356b9f3b2e95a8610f504c90b0026b?cid=8897482848704f2a8f8d7c79726a70d4" type="audio/mpeg">-->
-<!--    </video>-->
-    <audio #player id="audio{{ songId }}" src="{{ songUrl }}" preload="auto">
+    <div *ngIf="quiz.questionList[this.quizService.quizProgress].correctSongUrl != null">
+    <audio #player id="audio{{quiz.questionList[this.quizService.quizProgress].correctSongUrl}}" src="{{quiz.questionList[this.quizService.quizProgress].correctSongUrl}}" preload="auto">
       <p>Sorry, your browser does not support the <code>audio</code> element.</p>
     </audio>
     <button #button (click)="playSong(player, button)" class="btn waves-effect waves-light" type="submit" name="action">
     Play ({{countdown}} seconds)
   </button>
+    </div>
   </div>
 </div>

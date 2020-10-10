@@ -4,35 +4,35 @@
     <h2 class="header">Completed!</h2>
     <div class="card horizontal">
       <div class="card-image">
-        <img src="../../assets/img/Sentino%20meme.png" style="width: 250px;height : 250px;">
+        <img src="../../assets/img/Sentino%20meme.png" style="width: 250px;height : 250px;" alt="sentino">
       </div>
       <div class="card-stacked">
         <div class="card-content">
           <h3>{{this.correctAnswerCount}}/2</h3>
           <span>Time Elapsed : {{this.quizService.displayTimeElapsed()}}</span>
-          <span>Time test : {{this.quizService.totalTime}}</span>
+          <span>Congratulations, you have completed the quiz just in : {{this.quizService.totalTime}}</span>
         </div>
         <div class="card-content">
           <form #registerForm="ngForm" (ngSubmit)="onSubmit(Name.value)">
             <div class="row">
               <div class="input-field col s12">
-                <i class="material-icons prefix">account_circle</i>
-                <input type="text" name="Name" #Name ngModel required>
-                <label>Name</label>
+                <label for="name">Name</label>
+                <input id="name" type="text" name="Name" #Name ngModel required>
+
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
-                <button class="btn" [disabled]="!registerForm.valid">Submit score!</button>
+                <button onclick="M.toast({html: 'Score submitted'}); this.disabled=true" class="btn" [disabled]="!registerForm.valid">Submit score</button>
               </div>
             </div>
           </form>
         </div>
       </div>
-      <a class="btn-floating halfway-fab waves-effect waves-light red" (click)="restart()">
+      <a class="btn-floating halfway-fab waves-effect waves-light red" (click)="quizRepeat()">
         <i class="material-icons">replay</i>
       </a>
-      <a onclick="M.toast({html: 'I am a toast'})" class="btn">Toast!</a>
+
     </div>
   </div>
 </div>

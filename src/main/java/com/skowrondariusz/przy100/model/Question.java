@@ -11,11 +11,13 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String description;
-    private long correctAnswerId;
+    private String correctAnswer;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE)
+//    @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE)
     @JsonManagedReference
-    private List<Answer> listOfAnswers;
+    @ElementCollection
+    private List<String> listOfWrongAnswers;
+
 
     public Question() {
     }
@@ -24,14 +26,10 @@ public class Question {
         this.description = description;
     }
 
-    public Question(String description, long correctAnswerId, List<Answer> listOfAnswers) {
+    public Question(String description, String correctAnswerId, List<String> listOfAnswers) {
         this.description = description;
-        this.correctAnswerId = correctAnswerId;
-        this.listOfAnswers = listOfAnswers;
-    }
-
-    public Question(long correctAnswerId) {
-        this.correctAnswerId = correctAnswerId;
+        this.correctAnswer = correctAnswerId;
+        this.listOfWrongAnswers = listOfAnswers;
     }
 
     public long getId() {
@@ -42,14 +40,6 @@ public class Question {
         this.id = id;
     }
 
-    public long getCorrectAnswerId() {
-        return correctAnswerId;
-    }
-
-    public void setCorrectAnswerId(long correctAnswerId) {
-        this.correctAnswerId = correctAnswerId;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -58,12 +48,20 @@ public class Question {
         this.description = description;
     }
 
-    public List<Answer> getListOfAnswers() {
-        return listOfAnswers;
+    public String getCorrectAnswer() {
+        return correctAnswer;
     }
 
-    public void setListOfAnswers(List<Answer> listOfAnswers) {
-        this.listOfAnswers = listOfAnswers;
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
+
+    public List<String> getListOfWrongAnswers() {
+        return listOfWrongAnswers;
+    }
+
+    public void setListOfWrongAnswers(List<String> listOfWrongAnswers) {
+        this.listOfWrongAnswers = listOfWrongAnswers;
     }
 
     @Override
@@ -71,8 +69,8 @@ public class Question {
         return "Question{" +
                 "id=" + id +
                 ", description='" + description + '\'' +
-                ", correctAnswerId=" + correctAnswerId +
-                ", listOfAnswers=" + listOfAnswers +
+                ", correctAnswer='" + correctAnswer + '\'' +
+                ", listOfWrongAnswers=" + listOfWrongAnswers +
                 '}';
     }
 }

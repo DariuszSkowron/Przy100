@@ -1,7 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {QuizService} from "../shared/quiz.service";
 import {Router} from "@angular/router";
-import {QuizComponent} from "../quiz/quiz/quiz.component";
 import {Result} from "./result";
 
 @Component({
@@ -44,14 +43,19 @@ export class ResultComponent implements OnInit {
       totalScore: 0
     };
     this.quizService.submitScore(newResult).subscribe(() => {
-      this.restart();
+      ResultComponent.restart();
     });
   }
 
-  restart() {
+  static restart() {
     localStorage.setItem('quizProgress', "0");
     localStorage.setItem('questions', "");
     localStorage.setItem('seconds', "0");
+  }
+
+  quizRepeat(){
     this.router.navigate(['/quiz']);
   }
+
+
 }
