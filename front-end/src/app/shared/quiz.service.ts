@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Quiz} from "../quiz/quiz";
-import {Answer} from "../quiz/answer";
 import {Question} from "../quiz/question";
 import {Result} from "../result/result";
 
@@ -33,8 +32,8 @@ export class QuizService {
     return this.http.post(`${this.QUIZ_URL}` + `/result`, score);
     }
 
-    getCorrectAnswers(answerIdList: string[]): Observable<any> {
-    return this.http.post(`${this.QUIZ_URL}` + '/correctAnswers', answerIdList);
+    getCorrectAnswers(answersList: string[]): Observable<any> {
+    return this.http.post(`${this.QUIZ_URL}` + '/correctAnswers', answersList);
     }
 
     getHighScores(): Observable<Result[]>{

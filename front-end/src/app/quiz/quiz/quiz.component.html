@@ -13,7 +13,7 @@
       <div class="card-action">
         <ul class="collection answer">
         <ng-container *ngFor="let answer of quiz.questionList[this.quizService.quizProgress].answersList">
-          <li *ngIf="answer != null" class="collection-item" (click)="Answer(quiz.questionList[this.quizService.quizProgress].id, answer.toString())">
+          <li *ngIf="answer != null" class="collection-item" (click)="Answer(quiz.questionList[this.quizService.quizProgress].id, answer)">
             {{answer}}
           </li>
         </ng-container>

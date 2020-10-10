@@ -11,6 +11,7 @@ import com.skowrondariusz.przy100.utility.Mapper;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -26,12 +27,6 @@ public class QuizController {
     private ResultService resultService;
     private Mapper mapper;
 
-//    public QuizController(QuizService quizService, QuestionService questionService, ResultRepository resultRepository, ResultService resultService) {
-//        this.quizService = quizService;
-//        this.questionService = questionService;
-//        this.resultRepository = resultRepository;
-//        this.resultService = resultService;
-//    }
 
     public QuizController(QuizService quizService, QuestionService questionService, ResultRepository resultRepository, ResultService resultService, Mapper mapper) {
         this.quizService = quizService;
@@ -43,33 +38,25 @@ public class QuizController {
 
     @GetMapping("/start")
     public Quiz startQuiz() {
-        Quiz newQuiz = quizService.startNewQuiz();
-//
-//        newQuiz.getQuestionList().stream()
-//                .map(question -> this.mapper.convert)
-        return newQuiz;
+        return quizService.startNewQuiz();
     }
 
-//    @PostMapping("/correctAnswers")
-//    public int[] result(@RequestBody int[] answerIdList) {
-//        int[] result = new int[answerIdList.length];
-//        for (int i = 0; i < answerIdList.length; i++) {
-//            result[i] = questionService.getCorrectAnswerId(answerIdList[i]);
-//            System.out.println("test");
-//        }
-//        System.out.println(Arrays.toString(result));
-//        return result;
-//
-//    }
+    @PostMapping("/correctAnswers")
+    public String[] result(@RequestBody int[] answerIdList) {
+        var result = new String[answerIdList.length];
+        for (int i = 0; i < answerIdList.length; i++) {
+            result[i] = questionService.getCorrectAnswerForQuestion(answerIdList[i]);
+            System.out.println("pp");
+        }
+        System.out.println(Arrays.toString(result));
+        return result;
+    }
 
     @PostMapping("/result")
     public Result postResult(@RequestBody Result result){
-
-        var project = result;
-
-        project.setTotalScore(this.resultService.totalScore(project));
-        this.resultRepository.save(project);
-        return project;
+        result.setTotalScore(this.resultService.totalScore(result));
+        this.resultRepository.save(result);
+        return result;
 
     }
 

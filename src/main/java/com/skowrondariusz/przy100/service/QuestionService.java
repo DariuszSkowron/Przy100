@@ -48,17 +48,13 @@ public class QuestionService {
     }
 
 
-//    public void saveWrongQuestion (Question question, String answer){
-//        questionRepository.getQuestionById(question.getId()).setListOfAnswers(Collections.singletonList(answer));
-//    }
-
     @Transactional
     public void setCorrectAnswer (long questionId, String answer){
         questionRepository.getQuestionById(questionId).setCorrectAnswer(answer);
 
     }
 
-    public String getCorrectAnswerId(long questionId){
+    public String getCorrectAnswerForQuestion(long questionId){
         return questionRepository.getQuestionById(questionId).getCorrectAnswer();
     }
 
