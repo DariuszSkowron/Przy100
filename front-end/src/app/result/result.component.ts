@@ -43,17 +43,18 @@ export class ResultComponent implements OnInit {
       totalScore: 0
     };
     this.quizService.submitScore(newResult).subscribe(() => {
-      ResultComponent.restart();
+      this.restart();
     });
   }
 
-  static restart() {
+  restart() {
     localStorage.setItem('quizProgress', "0");
     localStorage.setItem('questions', "");
     localStorage.setItem('seconds', "0");
   }
 
   quizRepeat(){
+    this.restart();
     this.router.navigate(['/quiz']);
   }
 

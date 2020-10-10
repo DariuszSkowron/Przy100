@@ -13,8 +13,10 @@ import {take, timeInterval} from "rxjs/operators";
 export class QuizComponent implements OnInit{
 
   quiz: Quiz;
-  private _player: HTMLAudioElement;
   private _countdown = 5;
+  kupa = true;
+  timeLeft: number = 5;
+  interval;
   constructor(private router: Router, public quizService: QuizService) {
 
   }
@@ -63,6 +65,9 @@ export class QuizComponent implements OnInit{
     localStorage.setItem('questionList', JSON.stringify(this.quizService.questionList));
     this.quizService.quizProgress++;
     this._countdown = 5;
+    this.kupa = true;
+    this.pauseButtonTimer();
+    this.timeLeft = 5;
     localStorage.setItem('quizProgress', this.quizService.quizProgress.toString());
     if (this.quizService.quizProgress == 2){
       clearTimeout(this.quizService.timer);
@@ -72,38 +77,47 @@ export class QuizComponent implements OnInit{
     }
   }
 
-  resetButton(button:HTMLElement){
-    button.removeAttribute('disabled');
-    button.classList.remove('disabled');
-  }
-
-
   get countdown(): number {
     return this._countdown;
   }
 
-  public playSong(player: HTMLAudioElement, button: HTMLElement): void {
+  public playSong(player: HTMLAudioElement): void {
 
 
-    let countdown = this._countdown - 1;
-
-    interval(1000)
-      .pipe(
-        timeInterval(),
-        take(this._countdown)
-      )
-      .subscribe((next) => {
-        this._countdown = countdown - next.value;
-      }, (error) => {
-
-      }, () => {
-        this._countdown = 0;
-        player.pause();
-      });
-
+    // let countdown = this._countdown -1;
+    //
+    // interval(1000)
+    //   .pipe(
+    //     timeInterval(),
+    //     take(this._countdown)
+    //   )
+    //   .subscribe((next) => {
+    //     this._countdown = countdown - next.value;
+    //   }, (error) => {
+    //
+    //   }, () => {
+    //     this._countdown = 0;
+    //     player.pause();
+    //   });
+    this.startButtonTimer(player);
     player.play();
-    button.setAttribute('disabled', '');
-    button.classList.add('disabled');
+    this.kupa = false;
   }
+
+  startButtonTimer(player: HTMLAudioElement) {
+    this.interval = setInterval(() => {
+      if(this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        this.kupa=false;
+        player.pause();
+      }
+    },1000)
+  }
+
+  pauseButtonTimer() {
+    clearInterval(this.interval);
+  }
+
 
 }

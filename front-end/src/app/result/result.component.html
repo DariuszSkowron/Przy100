@@ -18,12 +18,12 @@
               <div class="input-field col s12">
                 <label for="name">Name</label>
                 <input id="name" type="text" name="Name" #Name ngModel required>
-
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
-                <button onclick="M.toast({html: 'Score submitted'}); this.disabled=true" class="btn" [disabled]="!registerForm.valid">Submit score</button>
+                <button class="btn" [disabled]="!registerForm.valid">Submit score!</button>
+                <button class="btn" onclick="M.toast({html: 'Score submitted'}); this.disabled=true" [disabled]="!registerForm.valid">Submit score</button>
               </div>
             </div>
           </form>
