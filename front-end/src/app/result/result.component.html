@@ -21,7 +21,7 @@
             </div>
             <div class="row">
               <div class="input-field col s12">
-                <button type="submit" class="btn" onclick="M.toast({html: 'Form submitted'})" [disabled]="!registerForm.valid || this.isDisabled">Submit score</button>
+                <button type="submit" class="btn" onclick="M.toast({html: 'Score sent'})" [disabled]="!registerForm.valid || this.isDisabled">Submit score</button>
               </div>
             </div>
           </form>
@@ -33,3 +33,9 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  var displayCustomHTMLToast = function () {
+    var toastHTML = '<span>I am toast content</span><button class="btn-flat toast-action">Undo</button>';
+    M.toast({html: toastHTML});
+  }
+</script>
