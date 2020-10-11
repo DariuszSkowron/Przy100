@@ -9,7 +9,6 @@
       <div class="card-stacked">
         <div class="card-content">
           <h3>{{this.correctAnswerCount}}/2</h3>
-          <span>Time Elapsed : {{this.quizService.displayTimeElapsed()}}</span>
           <span>Congratulations, you have completed the quiz just in : {{this.quizService.totalTime}}</span>
         </div>
         <div class="card-content">
@@ -23,7 +22,7 @@
             <div class="row">
               <div class="input-field col s12">
                 <button class="btn" [disabled]="!registerForm.valid">Submit score!</button>
-                <button class="btn" onclick="M.toast({html: 'Score submitted'}); this.disabled=true" [disabled]="!registerForm.valid">Submit score</button>
+                <button type="submit" class="btn" onclick="M.toast({html: 'Form submitted'})" [disabled]="!registerForm.valid || this.isDisabled">Submit score</button>
               </div>
             </div>
           </form>
