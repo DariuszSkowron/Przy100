@@ -10,19 +10,19 @@ import {Result} from "../result";
 })
 export class HighscoresComponent implements OnInit {
 
-  highscores: Result[];
+  highScores: Result[];
 
   constructor(private router: Router, public quizService: QuizService) { }
 
   ngOnInit(){
-    this.getHighscores();
+    this.getHighScores();
   }
 
-  getHighscores(){
+  getHighScores(){
     this.quizService.getHighScores().subscribe(
       res => {
-        this.highscores = res;
-        this.highscores.sort((a,b) => a.totalScore < b.totalScore ? -1:1);
+        this.highScores = res;
+        this.highScores.sort((a,b) => a.totalScore > b.totalScore ? -1:1);
       }
     )
   }

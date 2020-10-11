@@ -21,7 +21,6 @@
             </div>
             <div class="row">
               <div class="input-field col s12">
-                <button class="btn" [disabled]="!registerForm.valid">Submit score!</button>
                 <button type="submit" class="btn" onclick="M.toast({html: 'Form submitted'})" [disabled]="!registerForm.valid || this.isDisabled">Submit score</button>
               </div>
             </div>
@@ -31,7 +30,6 @@
       <a class="btn-floating halfway-fab waves-effect waves-light red" (click)="quizRepeat()">
         <i class="material-icons">replay</i>
       </a>
-
     </div>
   </div>
 </div>
