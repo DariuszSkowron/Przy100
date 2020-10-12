@@ -2,7 +2,6 @@ package com.skowrondariusz.przy100.utility;
 
 import com.skowrondariusz.przy100.model.Question;
 import com.skowrondariusz.przy100.model.SongQuestion;
-//import com.skowrondariusz.przy100.repository.AnswerRepository;
 import com.skowrondariusz.przy100.service.QuestionService;
 import com.skowrondariusz.przy100.service.SongDrawingService;
 import com.skowrondariusz.przy100.service.SpotifyTest;
@@ -11,7 +10,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static com.skowrondariusz.przy100.service.SpotifyTest.*;
 
