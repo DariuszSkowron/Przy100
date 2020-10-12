@@ -85,4 +85,9 @@ public class QuizController {
         return questionService.getQuestionById(1);
     }
 
+    @GetMapping("/test3")
+    public void test2(){
+        System.out.println("TEST");
+    }
+
 }
