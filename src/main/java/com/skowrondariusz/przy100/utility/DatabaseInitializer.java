@@ -1,6 +1,5 @@
 package com.skowrondariusz.przy100.utility;
 
-//import com.skowrondariusz.przy100.model.Answer;
 import com.skowrondariusz.przy100.model.Question;
 import com.skowrondariusz.przy100.model.SongQuestion;
 //import com.skowrondariusz.przy100.repository.AnswerRepository;
