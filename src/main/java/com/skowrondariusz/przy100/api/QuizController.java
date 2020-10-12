@@ -84,11 +84,5 @@ public class QuizController {
     public Question test(){
         return questionService.getQuestionById(1);
     }
-//
-//    @GetMapping("test")
-//    public void test(){
-//        questionService.setCorrectAnswer(1);
-//    }
-
 
 }

@@ -3,6 +3,7 @@ import {QuizService} from "../shared/quiz.service";
 import {Router} from "@angular/router";
 import {Result} from "./result";
 
+
 @Component({
   selector: 'result',
   templateUrl: './result.component.html',
@@ -12,6 +13,7 @@ export class ResultComponent implements OnInit {
 
   correctAnswerCount = 0;
   listOfQuestionId;
+  isDisabled = false;
   constructor(public quizService: QuizService, private router: Router) { }
 
   ngOnInit(){
@@ -34,6 +36,15 @@ export class ResultComponent implements OnInit {
     }
   }
 
+  disableButton() {
+    this.isDisabled = true;
+  }
+
+  actionMethod($event: MouseEvent) {
+    ($event.target as HTMLButtonElement).disabled = true;
+  }
+
+
   onSubmit(nickname: string){
     const newResult: Result = {
       id: null,
@@ -42,18 +53,20 @@ export class ResultComponent implements OnInit {
       nickname: nickname,
       totalScore: 0
     };
+    this.disableButton();
     this.quizService.submitScore(newResult).subscribe(() => {
-      ResultComponent.restart();
+      this.restart();
     });
   }
 
-  static restart() {
+  restart() {
     localStorage.setItem('quizProgress', "0");
     localStorage.setItem('questions', "");
     localStorage.setItem('seconds', "0");
   }
 
   quizRepeat(){
+    this.restart();
     this.router.navigate(['/quiz']);
   }
 
