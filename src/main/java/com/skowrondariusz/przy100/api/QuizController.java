@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/quiz")
 public class QuizController {
@@ -83,6 +83,11 @@ public class QuizController {
     @GetMapping("/test2")
     public Question test(){
         return questionService.getQuestionById(1);
+    }
+
+    @GetMapping("/test3")
+    public void test2(){
+        System.out.println("TEST");
     }
 
 }

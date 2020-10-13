@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Quiz} from "../quiz/quiz";
 import {Question} from "../quiz/question";
 import {Result} from "../result/result";
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class QuizService {
@@ -14,7 +15,8 @@ export class QuizService {
   startTime: Date;
   totalTime: number;
 
-  private BASE_URL = `http://localhost:8080`;
+  // private BASE_URL = `http://localhost:8080`;
+  private BASE_URL = environment.baseUrl;
   private QUIZ_URL = `${this.BASE_URL}/quiz`;
 
 
