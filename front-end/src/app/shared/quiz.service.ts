@@ -23,7 +23,23 @@ export class QuizService {
   constructor(private http: HttpClient) {
   }
   displayTimeElapsed() {
-    return Math.floor(this.seconds / 60) + ':' + Math.floor(this.seconds % 60);
+    // return Math.floor(this.seconds / 60) + ':' + Math.floor(this.seconds % 60);
+    const minutes: number = Math.floor(this.seconds / 60);
+    const seconds: number = Math.floor(this.seconds % 60);
+
+    if (minutes < 10 && seconds < 10) {
+      return '0' + minutes + ' : 0' + (seconds);
+    }
+    if (minutes > 10 && seconds > 10) {
+      return '0' + minutes + ' : ' + (seconds);
+    }
+    if (minutes > 10 && seconds < 10) {
+      return minutes + ' : 0' + (seconds);
+    }
+    if (seconds >= 10) {
+      return '0' + minutes + ' : ' + (seconds);
+    }
+
   }
     getQuiz(): Observable<Quiz> {
       return this.http.get<Quiz>(`${this.QUIZ_URL}` + `/start`);
