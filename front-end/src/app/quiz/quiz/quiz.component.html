@@ -6,7 +6,7 @@
     </div>
     <div class="card blue-grey darken-1">
       <div class="card-content white-text">
-        <span class="card-title">{{this.quizService.quizProgress+1}}</span>
+        <span class="card-title">Question {{this.quizService.quizProgress+1}} / 20</span>
         <p>{{quiz.questionList[this.quizService.quizProgress].description}}</p>
 
       </div>
@@ -25,7 +25,6 @@
       <p>Sorry, your browser does not support the <code>audio</code> element.</p>
     </audio>
     <button #button (click)="playSong(player)" [disabled]="!kupa" class="btn waves-effect waves-light" type="submit" name="action">
-<!--    Play ({{countdown}} seconds)-->
     Play ({{timeLeft}} seconds)
   </button>
     </div>
