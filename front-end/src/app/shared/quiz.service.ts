@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {Quiz} from "../quiz/quiz";
-import {Question} from "../quiz/question";
-import {Result} from "../result/result";
-import {environment} from "../../environments/environment";
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {Quiz} from '../quiz/quiz';
+import {Question} from '../quiz/question';
+import {Result} from '../result/result';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class QuizService {
@@ -18,7 +18,6 @@ export class QuizService {
   // private BASE_URL = `http://localhost:8080`;
   private BASE_URL = environment.baseUrl;
   private QUIZ_URL = `${this.BASE_URL}/quiz`;
-
 
 
   constructor(private http: HttpClient) {
@@ -38,7 +37,7 @@ export class QuizService {
     return this.http.post(`${this.QUIZ_URL}` + '/correctAnswers', answersList);
     }
 
-    getHighScores(): Observable<Result[]>{
+    getHighScores(): Observable<Result[]> {
     return this.http.get<Result[]>(`${this.QUIZ_URL}` + '/highscores');
     }
 
