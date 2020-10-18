@@ -59,6 +59,12 @@ export class QuizComponent implements OnInit{
     }, 1000);
   }
 
+  test(){
+    this.quizService.getUserResult(this.quiz).subscribe(res => {
+      this.quizService.userResult = res;
+    });
+  }
+
   Answer(questionId, selectedAnswer){
     this.quiz.questionList[this.quizService.quizProgress].userAnswer = selectedAnswer;
     localStorage.setItem('quiz', JSON.stringify(this.quiz));
@@ -73,6 +79,8 @@ export class QuizComponent implements OnInit{
       clearTimeout(this.quizService.timer);
       this.quizService.totalTime = (new Date().getTime() - new Date(this.quizService.startTime).getTime()) / 1000;
       localStorage.setItem('totalTime', this.quizService.totalTime.toString());
+      this.test();
+
       this.router.navigate(['/result']);
     }
   }

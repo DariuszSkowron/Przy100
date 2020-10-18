@@ -11,6 +11,9 @@
           <h3>{{this.correctAnswerCount}}/2</h3>
           <span>Congratulations, you have completed the quiz just in : {{this.quizService.totalTime}}</span>
           <span>Congratulations, you have completed the quiz just in : {{this.quizService.totalTime}}</span>
+          <span>Congratulations, you have completed the quiz just in : {{this.quizService.userResult.numberOfCorrectAnswers}}</span>
+          <span>Congratulations, you have completed the quiz just in : {{this.quizService.userResult.timeSpent}}</span>
+          <span>Congratulations, you have completed the quiz just in : {{this.quizService.userResult.totalScore}}</span>
         </div>
         <div class="card-content">
           <form #registerForm="ngForm" (ngSubmit)="onSubmit(Name.value)">
@@ -23,6 +26,7 @@
             <div class="row">
               <div class="input-field col s12">
                 <button type="submit" class="btn" onclick="M.toast({html: 'Score sent'})" [disabled]="!registerForm.valid || this.isDisabled">Submit score</button>
+                <button #button (click)="test()"  class="btn waves-effect waves-light" type="submit" name="action"></button>
               </div>
             </div>
           </form>

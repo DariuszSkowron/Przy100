@@ -1,5 +1,6 @@
 package com.skowrondariusz.przy100.service;
 
+import com.skowrondariusz.przy100.dto.QuestionDto;
 import com.skowrondariusz.przy100.model.Question;
 import com.skowrondariusz.przy100.model.Quiz;
 import com.skowrondariusz.przy100.repository.QuestionRepository;
@@ -41,6 +42,20 @@ public class QuizService {
         x = c.getTime();
         quiz.setStartTime(x);
         return quiz;
+    }
+
+    public int correctAnswersCount(Quiz userQuiz){
+        var result = 0;
+        var questionList = userQuiz.getQuestionList().stream()
+                .map(questionDto -> this.mapper.convertToQuestionEntity(questionDto))
+                .collect(Collectors.toList());
+
+        for (int i = 0; i < userQuiz.getUserAnswers().size(); i++){
+            if (userQuiz.getUserAnswers().get(i).equals (questionService.getCorrectAnswerForQuestion(questionList.get(i).getId()))){
+                result++;
+            }
+        }
+        return result;
     }
 
 }

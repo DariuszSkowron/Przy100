@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {QuizService} from '../shared/quiz.service';
 import {Router} from '@angular/router';
 import {Result} from './result';
+import {Quiz} from '../quiz/quiz';
 
 
 @Component({
@@ -14,6 +15,10 @@ export class ResultComponent implements OnInit {
   correctAnswerCount = 0;
   listOfQuestionId;
   isDisabled = false;
+  finishedQuiz: Quiz;
+  userResult: Result;
+  userAnswers: string[];
+
   constructor(public quizService: QuizService, private router: Router) { }
 
   ngOnInit() {
@@ -24,17 +29,32 @@ export class ResultComponent implements OnInit {
       this.quizService.startTime = JSON.parse(localStorage.getItem('startTime'));
       this.quizService.totalTime = JSON.parse(localStorage.getItem('totalTime'));
 
+      this.finishedQuiz = JSON.parse(localStorage.getItem('quiz'));
 
-      this.listOfQuestionId = this.quizService.questionList.map(question => question.id);
-      this.quizService.getCorrectAnswers(this.listOfQuestionId).subscribe((data: any) => {
-        this.quizService.questionList.forEach((e, i) => {
-          if (e.userAnswer === data[i]) {
-            this.correctAnswerCount++;
-          }
-        });
-      }
-      );
+      this.quizService.questionList.forEach((e,i) => {
+        e.userAnswer = this.userAnswers[i];
+      });
+      this.finishedQuiz.userAnswers = this.userAnswers;
+
+      this.test();
+
+      // this.listOfQuestionId = this.quizService.questionList.map(question => question.id);
+      // this.quizService.getCorrectAnswers(this.listOfQuestionId).subscribe((data: any) => {
+      //   this.quizService.questionList.forEach((e, i) => {
+      //     if (e.userAnswer === data[i]) {
+      //       this.correctAnswerCount++;
+      //     }
+      //   });
+      // }
+      // );
     }
+  }
+
+  test(){
+    this.quizService.getUserResult(this.finishedQuiz).subscribe(res => {
+      this.userResult = res;
+      this.correctAnswerCount = this.userResult.numberOfCorrectAnswers;
+    });
   }
 
   disableButton() {

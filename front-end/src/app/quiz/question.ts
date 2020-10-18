@@ -7,6 +7,6 @@ export class Question {
   // listOfWrongAnswers: any[];
   correctSongUrl: string;
   allAnswers: string[];
-  userAnswer: number;
+  userAnswer: string;
   answersList: any[];
 }
