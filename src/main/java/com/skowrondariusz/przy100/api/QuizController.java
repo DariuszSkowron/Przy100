@@ -64,9 +64,7 @@ public class QuizController {
 
     @PostMapping("/userResult")
     public Result userResult(@RequestBody Quiz userQuiz){
-        var kupa = resultService.getUserResult(userQuiz);
-        kupa.setTotalScore(1020);
-        return kupa;
+        return resultService.getUserResult(userQuiz);
     }
 
     @PostMapping("/result")

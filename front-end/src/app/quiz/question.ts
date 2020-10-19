@@ -2,11 +2,8 @@
 
 export class Question {
   id: string;
-  description : string;
-  correctAnswer: string;
-  // listOfWrongAnswers: any[];
+  description: string;
   correctSongUrl: string;
-  allAnswers: string[];
   userAnswer: string;
   answersList: any[];
 }

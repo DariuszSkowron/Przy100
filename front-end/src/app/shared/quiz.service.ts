@@ -14,7 +14,7 @@ export class QuizService {
   questionList: Question[];
   startTime: Date;
   totalTime: number;
-  userResult: Result;
+  userQuiz: Quiz;
 
   // private BASE_URL = `http://localhost:8080`;
   private BASE_URL = environment.baseUrl;

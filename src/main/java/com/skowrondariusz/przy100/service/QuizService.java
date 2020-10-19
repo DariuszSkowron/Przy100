@@ -51,8 +51,15 @@ public class QuizService {
                 .collect(Collectors.toList());
 
         for (int i = 0; i < userQuiz.getUserAnswers().size(); i++){
-            if (userQuiz.getUserAnswers().get(i).equals (questionService.getCorrectAnswerForQuestion(questionList.get(i).getId()))){
-                result++;
+            try {
+                if (userQuiz.getUserAnswers().get(i).equals(questionService.getCorrectAnswerForQuestion(questionList.get(i).getId()))) {
+                    result++;
+                }
+            }
+            catch (NullPointerException e){
+                {
+                    System.out.print("Caught NullPointerException");
+                }
             }
         }
         return result;

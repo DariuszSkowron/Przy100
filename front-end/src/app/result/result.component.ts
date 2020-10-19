@@ -12,12 +12,11 @@ import {Quiz} from '../quiz/quiz';
 })
 export class ResultComponent implements OnInit {
 
-  correctAnswerCount = 0;
-  listOfQuestionId;
+  correctAnswerCount: number;
   isDisabled = false;
   finishedQuiz: Quiz;
   userResult: Result;
-  userAnswers: string[];
+  userAnswers: string[] = [];
 
   constructor(public quizService: QuizService, private router: Router) { }
 
@@ -28,15 +27,32 @@ export class ResultComponent implements OnInit {
       this.quizService.questionList = JSON.parse(localStorage.getItem('questionList'));
       this.quizService.startTime = JSON.parse(localStorage.getItem('startTime'));
       this.quizService.totalTime = JSON.parse(localStorage.getItem('totalTime'));
+      // this.quizService.userQuiz = JSON.parse(localStorage.getItem('quiz'));
 
       this.finishedQuiz = JSON.parse(localStorage.getItem('quiz'));
+      // this.quizService.userTest.questionList = JSON.parse(localStorage.getItem('questionList'));
+
+      // this.userAnswers = this.quizService.questionList[1].userAnswer;
+
+      this.quizService.questionList.forEach((question, i) => {
+        this.userAnswers[i] = question.userAnswer;
+      });
+
 
       this.quizService.questionList.forEach((e,i) => {
-        e.userAnswer = this.userAnswers[i];
+        this.userAnswers[i] = e.userAnswer;
       });
+
       this.finishedQuiz.userAnswers = this.userAnswers;
 
-      this.test();
+      // this.finishedQuiz.userAnswers = this.userAnswers;
+
+      // this.test();
+      this.quizService.getUserResult(this.finishedQuiz).subscribe(res => {
+        this.userResult = res;
+      });
+
+      this.correctAnswerCount = this.userResult.numberOfCorrectAnswers;
 
       // this.listOfQuestionId = this.quizService.questionList.map(question => question.id);
       // this.quizService.getCorrectAnswers(this.listOfQuestionId).subscribe((data: any) => {
@@ -48,14 +64,15 @@ export class ResultComponent implements OnInit {
       // }
       // );
     }
+
   }
 
-  test(){
-    this.quizService.getUserResult(this.finishedQuiz).subscribe(res => {
-      this.userResult = res;
-      this.correctAnswerCount = this.userResult.numberOfCorrectAnswers;
-    });
-  }
+  // test(){
+  //   this.quizService.getUserResult(this.finishedQuiz).subscribe(res => {
+  //     this.userResult = res;
+  //     this.correctAnswerCount = this.userResult.numberOfCorrectAnswers;
+  //   });
+  // }
 
   disableButton() {
     this.isDisabled = true;
