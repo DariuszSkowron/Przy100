@@ -5,6 +5,8 @@ import com.skowrondariusz.przy100.model.Result;
 import com.skowrondariusz.przy100.repository.ResultRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class ResultService {
 
@@ -29,8 +31,9 @@ public class ResultService {
     public Result getUserResult(Quiz userQuiz){
         var userResult = new Result();
         userResult.setNumberOfCorrectAnswers(quizService.correctAnswersCount(userQuiz));
-        userResult.setTimeSpent(5);
-        userResult.setTotalScore(1444);
+        var currentDate = new Date();
+        userResult.setTimeSpent((currentDate.getTime() - userQuiz.getStartTime().getTime())/1000);
+        userResult.setTotalScore(totalScore(userResult));
         return userResult;
     }
 
