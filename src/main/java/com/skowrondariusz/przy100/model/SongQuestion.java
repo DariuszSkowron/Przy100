@@ -6,7 +6,7 @@ import java.util.List;
 @Entity
 public class SongQuestion extends Question {
 
-    String correctSongUrl;
+    private String correctSongUrl;
 
     public SongQuestion() {
     }
