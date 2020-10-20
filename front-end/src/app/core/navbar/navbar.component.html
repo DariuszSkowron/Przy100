@@ -19,10 +19,11 @@
 
 <nav>
   <div class="nav-wrapper">
-    <a href="#!" class="brand-logo center">PRZY100</a>
+    <a href="#!" class="brand-logo left">PRZY100</a>
     <ul class="right hide-on-med-and-down">
-      <li><a href="quiz"><i class="material-icons left">play_circle_filled</i>Start Quiz</a></li>
-      <li><a href="highscores"><i class="material-icons right">view_module</i>Highscores</a></li>
+      <li><a [routerLink]="'quiz'"><i class="material-icons left">play_circle_filled</i>Start Quiz</a></li>
+      <li><a [routerLink]="'highscores'"><i class="material-icons right">view_module</i>Highscores</a></li>
+      <li><a href="highscores"><i class="fas fa-clipboard-check"></i>Highscores</a></li>
     </ul>
   </div>
 </nav>

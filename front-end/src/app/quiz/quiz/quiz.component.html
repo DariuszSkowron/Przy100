@@ -4,10 +4,21 @@
     <div class="progress">
       <div class="determinate" [style.width.%]="(this.quizService.quizProgress+1)*50"></div>
     </div>
-    <div class="card blue-grey darken-1">
+    <div class="card grey darken-1">
+      <div class="progress">
+        <div class="determinate" [style.width.%]="(this.quizService.quizProgress+1)*50"></div>
+      </div>
       <div class="card-content white-text">
-        <span class="card-title">{{this.quizService.quizProgress+1}}</span>
+        <span class="card-title">Question {{this.quizService.quizProgress+1}} / 20</span>
         <p>{{quiz.questionList[this.quizService.quizProgress].description}}</p>
+        <div *ngIf="quiz.questionList[this.quizService.quizProgress].correctSongUrl != null">
+          <audio #player id="audio{{quiz.questionList[this.quizService.quizProgress].correctSongUrl}}" src="{{quiz.questionList[this.quizService.quizProgress].correctSongUrl}}" preload="auto">
+            <p>Sorry, your browser does not support the <code>audio</code> element.</p>
+          </audio>
+          <button #button (click)="playSong(player)" [disabled]="!kupa" class="btn waves-effect waves-light" type="submit" name="action">
+            Play ({{timeLeft}} seconds)
+          </button>
+        </div>
 
       </div>
       <div class="card-action">
@@ -18,6 +29,14 @@
           </li>
         </ng-container>
         </ul>
+        <div *ngIf="quiz.questionList[this.quizService.quizProgress].correctSongUrl != null">
+          <audio #player id="audio{{quiz.questionList[this.quizService.quizProgress].correctSongUrl}}" src="{{quiz.questionList[this.quizService.quizProgress].correctSongUrl}}" preload="auto">
+            <p>Sorry, your browser does not support the <code>audio</code> element.</p>
+          </audio>
+          <button #button (click)="playSong(player)" [disabled]="!kupa" class="btn waves-effect waves-light" type="submit" name="action">
+            Play ({{timeLeft}} seconds)
+          </button>
+        </div>
       </div>
     </div>
     <div *ngIf="quiz.questionList[this.quizService.quizProgress].correctSongUrl != null">
@@ -25,7 +44,6 @@
       <p>Sorry, your browser does not support the <code>audio</code> element.</p>
     </audio>
     <button #button (click)="playSong(player)" [disabled]="!kupa" class="btn waves-effect waves-light" type="submit" name="action">
-<!--    Play ({{countdown}} seconds)-->
     Play ({{timeLeft}} seconds)
   </button>
     </div>
