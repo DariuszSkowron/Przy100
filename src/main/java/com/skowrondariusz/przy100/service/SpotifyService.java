@@ -23,13 +23,13 @@ import java.util.concurrent.CompletionException;
 
 import static com.skowrondariusz.przy100.utility.SpotifyClientCredentials.getClientAccessToken;
 @Service
-public class SpotifyTest {
+public class SpotifyService {
 
     private static final String id = "6DAQjwwMGZ9QgqHhIkU7H0";
 
     public SongRepository songRepository;
 
-    public SpotifyTest(SongRepository songRepository) {
+    public SpotifyService(SongRepository songRepository) {
         this.songRepository = songRepository;
     }
 

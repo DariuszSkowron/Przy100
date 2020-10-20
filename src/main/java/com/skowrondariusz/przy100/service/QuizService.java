@@ -30,10 +30,6 @@ public class QuizService {
 
     public Quiz startNewQuiz(){
         Quiz quiz = new Quiz();
-//        questionService.collectQuestionsForQuiz(5).stream()
-//                .map(question -> this.mapper.convertToQuestionDto(question))
-//                .collect(Collectors.toList());
-//        quiz.setQuestionList(questionService.collectQuestionsForQuiz(5));
         quiz.setQuestionList(        questionService.collectQuestionsForQuiz(5).stream()
                 .map(question -> this.mapper.convertToQuestionDto(question))
                 .collect(Collectors.toList()));

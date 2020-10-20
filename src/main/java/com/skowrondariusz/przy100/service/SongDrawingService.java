@@ -1,16 +1,12 @@
 package com.skowrondariusz.przy100.service;
 
 
-import com.skowrondariusz.przy100.model.Question;
 import com.skowrondariusz.przy100.model.Song;
 import com.skowrondariusz.przy100.model.SongQuestion;
-import com.skowrondariusz.przy100.repository.QuestionRepository;
 import com.skowrondariusz.przy100.repository.SongRepository;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.Size;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class SongDrawingService {
@@ -56,20 +52,6 @@ public class SongDrawingService {
         System.out.println(drawedSongsNames.toString());
         return drawedSongsNames;
 
-//        return songList.stream()
-//                .map(Objects::toString)
-//                .collect(Collectors.toList());
-//
 
     }
 }
-
-//
-//
-//    public int[] drawQuestions(int quizSize){
-//////        return new Random().ints(1,Math.toIntExact(questionRepository.count()) +1)
-////                .distinct()
-////                .limit(quizSize)
-////                .toArray();
-////    }
-//}
