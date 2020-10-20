@@ -9,7 +9,6 @@ import com.skowrondariusz.przy100.service.ResultService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -41,7 +40,6 @@ public class QuizController {
         var result = new String[answerIdList.length];
         for (int i = 0; i < answerIdList.length; i++) {
             result[i] = questionService.getCorrectAnswerForQuestion(answerIdList[i]);
-            System.out.println("pp");
         }
         return result;
     }
@@ -58,7 +56,6 @@ public class QuizController {
         return result;
 
     }
-
 
     @GetMapping("/highscores")
     public List<Result> highscores() {

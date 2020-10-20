@@ -10,9 +10,7 @@ public class Quiz {
     private Date startTime;
     private Date endTime;
     private double score;
-
     private List<QuestionDto> questionList;
-
     private List<String> userAnswers;
 
     public Quiz() {

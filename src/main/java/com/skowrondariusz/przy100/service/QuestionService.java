@@ -1,6 +1,5 @@
 package com.skowrondariusz.przy100.service;
 
-//import com.skowrondariusz.przy100.model.Answer;
 import com.skowrondariusz.przy100.model.Question;
 import com.skowrondariusz.przy100.repository.QuestionRepository;
 import org.springframework.stereotype.Service;
@@ -8,7 +7,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -57,8 +55,6 @@ public class QuestionService {
     public String getCorrectAnswerForQuestion(long questionId){
         return questionRepository.getQuestionById(questionId).getCorrectAnswer();
     }
-
-
 
     public long count(){
         return questionRepository.count();
