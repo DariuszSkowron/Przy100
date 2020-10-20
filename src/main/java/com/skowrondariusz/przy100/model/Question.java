@@ -13,7 +13,6 @@ public class Question {
     private String description;
     private String correctAnswer;
 
-//    @OneToMany(mappedBy = "question", cascade = CascadeType.MERGE)
     @JsonManagedReference
     @ElementCollection
     private List<String> listOfWrongAnswers;

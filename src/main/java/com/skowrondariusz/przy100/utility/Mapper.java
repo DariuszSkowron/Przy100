@@ -24,6 +24,9 @@ public class Mapper {
         answerList.add(entity.getCorrectAnswer());
         viewModel.setAnswersList(answerList);
         return viewModel;
+    }
 
+    public Question convertToQuestionEntity(QuestionDto viewModel){
+        return modelMapper.map(viewModel, Question.class);
     }
 }

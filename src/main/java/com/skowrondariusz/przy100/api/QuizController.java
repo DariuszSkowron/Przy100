@@ -41,6 +41,16 @@ public class QuizController {
         return quizService.startNewQuiz();
     }
 
+//    @PostMapping("/correctAnswers")
+//    public String[] result(@RequestBody int[] answerIdList) {
+//        var result = new String[answerIdList.length];
+//        for (int i = 0; i < answerIdList.length; i++) {
+//            result[i] = questionService.getCorrectAnswerForQuestion(answerIdList[i]);
+//            System.out.println("pp");
+//        }
+//        System.out.println(Arrays.toString(result));
+//        return result;
+//    }
     @PostMapping("/correctAnswers")
     public String[] result(@RequestBody int[] answerIdList) {
         var result = new String[answerIdList.length];
@@ -50,6 +60,11 @@ public class QuizController {
         }
         System.out.println(Arrays.toString(result));
         return result;
+    }
+
+    @PostMapping("/userResult")
+    public Result userResult(@RequestBody Quiz userQuiz){
+        return resultService.getUserResult(userQuiz);
     }
 
     @PostMapping("/result")
