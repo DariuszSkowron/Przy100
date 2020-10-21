@@ -1,5 +1,6 @@
 package com.skowrondariusz.przy100.service;
 
+import com.neovisionaries.i18n.CountryCode;
 import com.skowrondariusz.przy100.dto.SpotifyAlbumDto;
 import com.skowrondariusz.przy100.model.Song;
 import com.skowrondariusz.przy100.repository.SongRepository;
@@ -8,7 +9,6 @@ import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import com.wrapper.spotify.model_objects.specification.AlbumSimplified;
 import com.wrapper.spotify.model_objects.specification.Paging;
 import com.wrapper.spotify.model_objects.specification.TrackSimplified;
-import com.wrapper.spotify.requests.authorization.client_credentials.ClientCredentialsRequest;
 import com.wrapper.spotify.requests.data.albums.GetAlbumsTracksRequest;
 import com.wrapper.spotify.requests.data.artists.GetArtistsAlbumsRequest;
 import org.apache.hc.core5.http.ParseException;
@@ -42,7 +42,7 @@ public class SpotifyService {
 //          .album_type("album")
 //          .limit(10)
 //          .offset(0)
-//          .market(CountryCode.SE)
+          .market(CountryCode.PL)
             .build();
 
     public static List<SpotifyAlbumDto> getArtistsAlbums_Sync() {
@@ -65,7 +65,6 @@ public class SpotifyService {
         try {
             final CompletableFuture<Paging<AlbumSimplified>> pagingFuture = getArtistsAlbumsRequest.executeAsync();
 
-            // Thread free to do other tasks...
 
             // Example Only. Never block in production code.
             final Paging<AlbumSimplified> albumSimplifiedPaging = pagingFuture.join();
@@ -89,7 +88,7 @@ public class SpotifyService {
          GetAlbumsTracksRequest getAlbumsTracksRequest = spotifysApi.getAlbumsTracks(id)
 //          .limit(10)
 //          .offset(0)
-//          .market(CountryCode.SE)
+          .market(CountryCode.PL)
                 .build();
 
         try {
