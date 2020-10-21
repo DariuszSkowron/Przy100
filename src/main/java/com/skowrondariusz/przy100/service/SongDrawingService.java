@@ -24,13 +24,13 @@ public class SongDrawingService {
         List<Song> songList = songRepository.findAll();
         for (Song song : songList) {
             var songQuestion = new SongQuestion();
-//            questionService.saveQuestion(songQuestion);
-            songQuestion.setDescription("Guess the song");
-            songQuestion.setCorrectSongUrl(song.getPreviewUrl());
-            songQuestion.setCorrectAnswer(song.getName());
-            songQuestion.setListOfWrongAnswers(randomSongsNames(String.valueOf(song.getId())));
-            questionService.saveQuestion(songQuestion);
-            System.out.println("essa");
+            if (song.getPreviewUrl() != null) {
+                songQuestion.setDescription("Guess the song");
+                songQuestion.setCorrectSongUrl(song.getPreviewUrl());
+                songQuestion.setCorrectAnswer(song.getName());
+                songQuestion.setListOfWrongAnswers(randomSongsNames(String.valueOf(song.getId())));
+                questionService.saveQuestion(songQuestion);
+            }
         }
     }
 

@@ -22,11 +22,8 @@ public class ResultService {
 
     public double totalScore(Result result){
 
-       double totalScore = result.getNumberOfCorrectAnswers() * 50 / result.getTimeSpent();
-
-       return totalScore;
+        return result.getNumberOfCorrectAnswers() * 50 / result.getTimeSpent();
     }
-
 
     public Result getUserResult(Quiz userQuiz){
         var userResult = new Result();
@@ -37,6 +34,11 @@ public class ResultService {
         return userResult;
     }
 
+//    public boolean ableToSubmitScore{}
 
+
+    public int checkLastSubmittedScore(){
+        return resultRepository.lowestScore();
+    }
 
 }
