@@ -30,7 +30,7 @@ public class QuizService {
 
     public Quiz startNewQuiz(){
         Quiz quiz = new Quiz();
-        quiz.setQuestionList(        questionService.collectQuestionsForQuiz(5).stream()
+        quiz.setQuestionList(        questionService.collectQuestionsForQuiz(2).stream()
                 .map(question -> this.mapper.convertToQuestionDto(question))
                 .collect(Collectors.toList()));
         Date x = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());

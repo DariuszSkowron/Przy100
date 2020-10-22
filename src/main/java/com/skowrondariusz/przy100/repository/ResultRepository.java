@@ -15,5 +15,13 @@ public interface ResultRepository extends JpaRepository<Result, Long> {
     @Query(value = "SELECT min(totalScore) FROM Result")
     int lowestScore();
 
+//    @Query(value = "SELECT r.id FROM Result AS r  ORDER BY r.totalScore DESC")
+//    long userId();
 
+    Result findFirstByOrderByTotalScoreAsc();
+
+    long count();
+
+
+//    WHERE r.totalScore
 }

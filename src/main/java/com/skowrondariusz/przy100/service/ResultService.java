@@ -34,11 +34,24 @@ public class ResultService {
         return userResult;
     }
 
-//    public boolean ableToSubmitScore{}
-
+    public boolean checkIfAbleToSubmitScore(Result userResult){
+        return resultRepository.count() < 2 || checkLastSubmittedScore() < userResult.getTotalScore();
+    }
 
     public int checkLastSubmittedScore(){
         return resultRepository.lowestScore();
+    }
+
+    public void submitResult(Result result){
+        if (checkIfAbleToSubmitScore(result) && resultRepository.count() > 2){
+//            resultRepository.deleteById(resultRepository.weakestResult());
+            resultRepository.save(result);
+        }else if (resultRepository.count() < 2){
+            resultRepository.save(result);
+        }
+        else{
+            System.out.println("Something went wrong, score submitted cant be saved in the list");
+        }
     }
 
 }

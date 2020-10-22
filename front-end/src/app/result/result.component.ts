@@ -84,15 +84,16 @@ export class ResultComponent implements OnInit {
 
 
   onSubmit(nickname: string) {
-    const newResult: Result = {
-      id: null,
-      timeSpent: this.quizService.totalTime,
-      numberOfCorrectAnswers: this.correctAnswerCount,
-      nickname,
-      totalScore: 0
-    };
+    // const newResult: Result = {
+    //   id: null,
+    //   timeSpent: this.quizService.totalTime,
+    //   numberOfCorrectAnswers: this.correctAnswerCount,
+    //   nickname,
+    //   totalScore: 0
+    // };
+    this.userResult.nickname = nickname;
     this.disableButton();
-    this.quizService.submitScore(newResult).subscribe(() => {
+    this.quizService.submitScore(this.userResult).subscribe(() => {
       this.restart();
     });
   }
@@ -101,6 +102,7 @@ export class ResultComponent implements OnInit {
     localStorage.setItem('quizProgress', '0');
     localStorage.setItem('questions', '');
     localStorage.setItem('seconds', '0');
+    // localStorage.setItem('quiz', '');
   }
 
   quizRepeat() {
