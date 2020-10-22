@@ -102,6 +102,7 @@ export class ResultComponent implements OnInit {
     localStorage.setItem('quizProgress', '0');
     localStorage.setItem('questions', '');
     localStorage.setItem('seconds', '0');
+    // localStorage.setItem('quiz', '');
   }
 
   quizRepeat() {

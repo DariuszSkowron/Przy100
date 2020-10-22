@@ -52,7 +52,8 @@ public class QuizController {
     @PostMapping("/result")
     public Result postResult(@RequestBody Result result) {
         result.setTotalScore(this.resultService.totalScore(result));
-        this.resultRepository.save(result);
+//        this.resultRepository.save(result);
+        this.resultService.submitResult(result);
         return result;
 
     }
@@ -66,6 +67,12 @@ public class QuizController {
     @GetMapping("/isHighScore")
     public int scoreAbleToSubmit(){
         return resultService.checkLastSubmittedScore();
+    }
+
+
+    @GetMapping("/test")
+    public String test(){
+        return String.valueOf(this.resultRepository.findFirstByOrderByTotalScoreAsc().getTotalScore());
     }
 
 }

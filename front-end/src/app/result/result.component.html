@@ -10,11 +10,8 @@
         <div class="card-content">
           <h3>{{this.userResult.numberOfCorrectAnswers}}/2</h3>
           <span>Congratulations, you have completed the quiz just in : {{this.quizService.totalTime}}</span>
-          <span>Congratulations, you have completed the quiz just in : {{this.userAnswers[1]}}</span>
-          <span>Congratulations, you have completed the quiz just in : {{this.finishedQuiz.userAnswers[1]}}</span>
-          <span>Congratulations, you have completed the quiz just in : {{this.userResult.totalScore}}</span>
-          <span>Congratulations, you have completed the quiz just in : {{this.userResult.numberOfCorrectAnswers}}</span>
-          <span>Congratulations, you have completed the quiz just in : {{this.userResult.timeSpent}}</span>
+          <span>TOTAL SCORE : {{this.userResult.totalScore}}</span>
+
         </div>
         <div class="card-content">
           <form #registerForm="ngForm" (ngSubmit)="onSubmit(Name.value)">
