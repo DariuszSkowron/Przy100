@@ -22,7 +22,7 @@ public class ResultService {
 
     public double totalScore(Result result){
 
-        return result.getNumberOfCorrectAnswers() * 50 / result.getTimeSpent();
+        return (result.getNumberOfCorrectAnswers() * 500) / result.getTimeSpent();
     }
 
     public Result getUserResult(Quiz userQuiz){
@@ -35,7 +35,11 @@ public class ResultService {
     }
 
     public boolean checkIfAbleToSubmitScore(Result userResult){
-        return resultRepository.count() < 2 || checkLastSubmittedScore() < userResult.getTotalScore();
+        return (resultRepository.count() > 2 && checkLastSubmittedScore() < userResult.getTotalScore()) || resultRepository.count() <= 2;
+    }
+
+    public void deleteResult(long id){
+        this.resultRepository.deleteById(id);
     }
 
     public int checkLastSubmittedScore(){
@@ -43,10 +47,10 @@ public class ResultService {
     }
 
     public void submitResult(Result result){
-        if (checkIfAbleToSubmitScore(result) && resultRepository.count() > 2){
-//            resultRepository.deleteById(resultRepository.weakestResult());
-            resultRepository.save(result);
-        }else if (resultRepository.count() < 2){
+        if (checkIfAbleToSubmitScore(result)){
+            if (resultRepository.count() >= 2) {
+                resultRepository.deleteById(resultRepository.findFirstByOrderByTotalScoreAsc().getId());
+            }
             resultRepository.save(result);
         }
         else{

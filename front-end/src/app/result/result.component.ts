@@ -16,7 +16,9 @@ export class ResultComponent implements OnInit {
   isDisabled = false;
   finishedQuiz: Quiz;
   userResult: Result;
+  lastScoreSubmitted: number;
   userAnswers: string[] = [];
+  
 
   constructor(public quizService: QuizService, private router: Router) { }
 
@@ -27,7 +29,9 @@ export class ResultComponent implements OnInit {
       this.quizService.questionList = JSON.parse(localStorage.getItem('questionList'));
       this.quizService.startTime = JSON.parse(localStorage.getItem('startTime'));
       this.quizService.totalTime = JSON.parse(localStorage.getItem('totalTime'));
-      // this.quizService.userQuiz = JSON.parse(localStorage.getItem('quiz'));
+      this.getLastSubmittedResult();
+
+      
 
       this.finishedQuiz = JSON.parse(localStorage.getItem('quiz'));
       // this.quizService.userTest.questionList = JSON.parse(localStorage.getItem('questionList'));
@@ -50,6 +54,9 @@ export class ResultComponent implements OnInit {
       // this.test();
       this.quizService.getUserResult(this.finishedQuiz).subscribe(res => {
         this.userResult = res;
+        if (this.lastScoreSubmitted > this.userResult.totalScore) {
+          this.disableButton();
+        }
       });
 
       this.correctAnswerCount = this.userResult.numberOfCorrectAnswers;
@@ -73,6 +80,11 @@ export class ResultComponent implements OnInit {
   //     this.correctAnswerCount = this.userResult.numberOfCorrectAnswers;
   //   });
   // }
+  getLastSubmittedResult() {
+    this.quizService.checkIfScoreIsHigh().subscribe(result => {
+      this.lastScoreSubmitted = result;
+    });
+  }
 
   disableButton() {
     this.isDisabled = true;
