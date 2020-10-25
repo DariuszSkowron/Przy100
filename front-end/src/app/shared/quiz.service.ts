@@ -14,7 +14,6 @@ export class QuizService {
   questionList: Question[];
   startTime: Date;
   totalTime: number;
-  userQuiz: Quiz;
 
   // private BASE_URL = `http://localhost:8080`;
   private BASE_URL = environment.baseUrl;
@@ -60,6 +59,10 @@ export class QuizService {
 
     getHighScores(): Observable<Result[]> {
     return this.http.get<Result[]>(`${this.QUIZ_URL}` + '/highscores');
+    }
+
+    checkIfScoreIsHigh(): Observable<number> {
+    return this.http.get<number>(`${this.QUIZ_URL}` + '/isHighScore');
     }
 
 

@@ -51,8 +51,7 @@ public class QuizController {
 
     @PostMapping("/result")
     public Result postResult(@RequestBody Result result) {
-        result.setTotalScore(this.resultService.totalScore(result));
-//        this.resultRepository.save(result);
+//        result.setTotalScore(this.resultService.totalScore(result));
         this.resultService.submitResult(result);
         return result;
 
@@ -74,5 +73,16 @@ public class QuizController {
     public String test(){
         return String.valueOf(this.resultRepository.findFirstByOrderByTotalScoreAsc().getTotalScore());
     }
+
+    @GetMapping("/test2")
+    public void delete(){
+        this.resultService.deleteResult(resultRepository.findFirstByOrderByTotalScoreAsc().getId());
+    }
+
+    @GetMapping("/test3")
+    public String count(){
+        return String.valueOf(this.resultRepository.count());
+    }
+
 
 }
