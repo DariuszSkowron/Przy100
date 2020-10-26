@@ -1,37 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import {QuizService} from "../../shared/quiz.service";
-import {interval, Observable} from "rxjs";
-import {Quiz} from "../quiz";
-import {Router} from "@angular/router";
-import {take, timeInterval} from "rxjs/operators";
+import {QuizService} from '../../shared/quiz.service';
+import {Quiz} from '../quiz';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'quiz',
+  selector: 'app-quiz',
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss']
 })
-export class QuizComponent implements OnInit{
+export class QuizComponent implements OnInit {
 
   quiz: Quiz;
   private _countdown = 5;
   kupa = true;
-  timeLeft: number = 5;
+  timeLeft = 5;
   interval;
   constructor(private router: Router, public quizService: QuizService) {
 
   }
 
   ngOnInit() {
-    if (parseInt(localStorage.getItem('seconds')) > 0){
+    if (parseInt(localStorage.getItem('seconds')) > 0) {
       this.quizService.seconds = parseInt(localStorage.getItem('seconds'));
       this.quizService.quizProgress = parseInt(localStorage.getItem('quizProgress'));
       this.quiz = JSON.parse(localStorage.getItem('quiz'));
-      if (this.quizService.quizProgress == 2)
+      if (this.quizService.quizProgress == 2) {
         this.router.navigate(['/result']);
-      else
+      } else {
         this.startTimer();
-    }
-    else {
+      }
+    } else {
       this.quizService.seconds = 0;
       this.quizService.quizProgress = 0;
       this.getQuiz();
@@ -49,7 +47,7 @@ export class QuizComponent implements OnInit{
       localStorage.setItem('startTime', JSON.stringify(this.quizService.startTime));
       this.startTimer();
 
-    })
+    });
   }
 
   startTimer() {
@@ -61,7 +59,7 @@ export class QuizComponent implements OnInit{
 
 
 
-  Answer(selectedAnswer){
+  Answer(selectedAnswer) {
     this.quiz.questionList[this.quizService.quizProgress].userAnswer = selectedAnswer;
     localStorage.setItem('quiz', JSON.stringify(this.quiz));
     localStorage.setItem('questionList', JSON.stringify(this.quizService.questionList));
@@ -71,7 +69,7 @@ export class QuizComponent implements OnInit{
     this.pauseButtonTimer();
     this.timeLeft = 5;
     localStorage.setItem('quizProgress', this.quizService.quizProgress.toString());
-    if (this.quizService.quizProgress === 2){
+    if (this.quizService.quizProgress === 2) {
       clearTimeout(this.quizService.timer);
       this.quizService.totalTime = (new Date().getTime() - new Date(this.quizService.startTime).getTime()) / 1000;
       localStorage.setItem('totalTime', this.quizService.totalTime.toString());
@@ -109,13 +107,13 @@ export class QuizComponent implements OnInit{
 
   startButtonTimer(player: HTMLAudioElement) {
     this.interval = setInterval(() => {
-      if(this.timeLeft > 0) {
+      if (this.timeLeft > 0) {
         this.timeLeft--;
       } else {
-        this.kupa=false;
+        this.kupa = false;
         player.pause();
       }
-    },1000)
+    }, 1000);
   }
 
   pauseButtonTimer() {

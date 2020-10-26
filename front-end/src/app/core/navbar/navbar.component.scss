@@ -1,3 +1,5 @@
+
+
 //*{
 //  margin: 0;
 //  padding: 0;
@@ -95,7 +97,7 @@
 
 a:link {
   text-decoration: none;
-  color: green;
+  color: rgba(165, 108, 17, 0.67);
 }
 
 a:visited {
@@ -104,7 +106,7 @@ a:visited {
 
 a:hover {
   text-decoration: none;
-  color: darkslategray;
+  color: rgba(36, 28, 33, 0.46);
 }
 
 a:active {
@@ -112,5 +114,9 @@ a:active {
 }
 
 nav{
-  background-color: rgba(93, 87, 255, 0.04);
+  background-color: rgba(255, 54, 249, 0.51);
 }
+
+
+
+
