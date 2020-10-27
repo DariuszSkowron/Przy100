@@ -10,28 +10,49 @@
 <!--  <div>LINE</div>-->
 <!--</nav>-->
 
-<body>
+<!--<body>-->
 
-<nav>
-  <div class="nav-wrapper">
-    <a href="#!" class="brand-logo">Logo</a>
-    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-    <ul class="right hide-on-med-and-down">
-      <li><a [routerLink]="'quiz'"><i class="material-icons left">play_circle_filled</i>Start Quiz</a></li>
-      <li><a [routerLink]="'highscores'"><i class="material-icons right">view_module</i>Highscores</a></li>
+<!--<nav>-->
+<!--  <div class="nav-wrapper">-->
+<!--    <a href="#!" class="brand-logo"><img src="../../assets/img/PRZY1000.png" style="width: 70px;height : 50px;" alt="sentino"></a>-->
+<!--    <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>-->
+<!--    <ul class="right hide-on-med-and-down">-->
+<!--      <li><a [routerLink]="'quiz'"><i class="material-icons left">play_circle_filled</i>Start Quiz</a></li>-->
+<!--      <li><a [routerLink]="'highscores'"><i class="material-icons right">view_module</i>Highscores</a></li>-->
+<!--    </ul>-->
+<!--  </div>-->
+<!--</nav>-->
+
+<!--<ul class="sidenav" id="mobile-demo">-->
+<!--  <li><a [routerLink]="'quiz'"><i class="material-icons left">play_circle_filled</i>Start Quiz</a></li>-->
+<!--  <li><a [routerLink]="'highscores'"><i class="material-icons right">view_module</i>Highscores</a></li>-->
+<!--</ul>-->
+<!--</body>-->
+
+<!--<script type="text/javascript">-->
+<!--  document.addEventListener('DOMContentLoaded', function() {-->
+<!--    var elems = document.querySelectorAll('.sidenav');-->
+<!--    var instances = M.Sidenav.init(elems, options);-->
+<!--  });-->
+<!--</script>-->
+
+<mat-toolbar color="primary">
+  <div fxHide.gt-xs>
+    <button mat-icon-button (click)="onToggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <div>
+    <a routerLink="/home">Przy100</a>
+  </div>
+  <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
+    <ul fxLayout fxLayoutGap="15px" class="navigation-items">
+      <li>
+      <a routerLink="'quiz'">Quiz</a>
+      </li>
+      <li>
+        <a routerLink="'highscores'">Highscores</a>
+      </li>
     </ul>
   </div>
-</nav>
-
-<ul class="sidenav" id="mobile-demo">
-  <li><a [routerLink]="'quiz'"><i class="material-icons left">play_circle_filled</i>Start Quiz</a></li>
-  <li><a [routerLink]="'highscores'"><i class="material-icons right">view_module</i>Highscores</a></li>
-</ul>
-</body>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.sidenav');
-    var instances = M.Sidenav.init(elems, options);
-  });
-</script>
+</mat-toolbar>

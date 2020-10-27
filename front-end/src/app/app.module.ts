@@ -10,6 +10,9 @@ import {QuizService} from './shared/quiz.service';
 import {ResultComponent} from './result/result.component';
 import {HighscoresComponent} from './result/highscores/highscores.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import {HighscoresComponent} from './result/highscores/highscores.component';
     CoreModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+
   ],
+
   providers: [QuizService],
   bootstrap: [AppComponent]
 })
