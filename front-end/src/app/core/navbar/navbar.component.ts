@@ -9,13 +9,18 @@ import {Component, OnInit, Output, EventEmitter, ChangeDetectorRef} from '@angul
 export class NavbarComponent implements OnInit {
 
 
+  @Output() public sidenavToggle = new EventEmitter();
+
+
+  constructor() {
+  }
 
 
 
   ngOnInit(): void {
   }
 
-  // public onToggleSidenav = () => {
-  //   this.sidenavToggle.emit();
-  // }
+  public onToggleSidenav = () => {
+    this.sidenavToggle.emit();
+  }
 }
