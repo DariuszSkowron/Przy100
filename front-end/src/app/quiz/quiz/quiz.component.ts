@@ -11,23 +11,21 @@ import {Router} from '@angular/router';
 export class QuizComponent implements OnInit {
 
   quiz: Quiz;
-  private _countdown = 5;
   kupa = true;
   timeLeft = 5;
   interval;
+  timerStarted = true;
   constructor(private router: Router, public quizService: QuizService) {
 
   }
 
   ngOnInit() {
-    if (parseInt(localStorage.getItem('seconds')) > 0) {
-      this.quizService.seconds = parseInt(localStorage.getItem('seconds'));
-      this.quizService.quizProgress = parseInt(localStorage.getItem('quizProgress'));
+    if (Number(localStorage.getItem('seconds')) > 0) {
+      this.quizService.seconds = Number(localStorage.getItem('seconds'));
+      this.quizService.quizProgress = Number((localStorage.getItem('quizProgress')));
       this.quiz = JSON.parse(localStorage.getItem('quiz'));
-      if (this.quizService.quizProgress == 2) {
+      if (this.quizService.quizProgress === 2) {
         this.router.navigate(['/result']);
-      } else {
-        this.startTimer();
       }
     } else {
       this.quizService.seconds = 0;
@@ -64,7 +62,6 @@ export class QuizComponent implements OnInit {
     localStorage.setItem('quiz', JSON.stringify(this.quiz));
     localStorage.setItem('questionList', JSON.stringify(this.quizService.questionList));
     this.quizService.quizProgress++;
-    this._countdown = 5;
     this.kupa = true;
     this.pauseButtonTimer();
     this.timeLeft = 5;
@@ -78,9 +75,6 @@ export class QuizComponent implements OnInit {
     }
   }
 
-  get countdown(): number {
-    return this._countdown;
-  }
 
   public playSong(player: HTMLAudioElement): void {
 
