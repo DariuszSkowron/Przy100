@@ -31,8 +31,6 @@ export class ResultComponent implements OnInit {
       this.quizService.totalTime = JSON.parse(localStorage.getItem('totalTime'));
       this.getLastSubmittedResult();
 
-      
-
       this.finishedQuiz = JSON.parse(localStorage.getItem('quiz'));
       // this.quizService.userTest.questionList = JSON.parse(localStorage.getItem('questionList'));
 
@@ -96,13 +94,6 @@ export class ResultComponent implements OnInit {
 
 
   onSubmit(nickname: string) {
-    // const newResult: Result = {
-    //   id: null,
-    //   timeSpent: this.quizService.totalTime,
-    //   numberOfCorrectAnswers: this.correctAnswerCount,
-    //   nickname,
-    //   totalScore: 0
-    // };
     this.userResult.nickname = nickname;
     this.disableButton();
     this.quizService.submitScore(this.userResult).subscribe(() => {
@@ -112,7 +103,7 @@ export class ResultComponent implements OnInit {
 
   restart() {
     localStorage.setItem('quizProgress', '0');
-    localStorage.setItem('questions', '');
+    localStorage.setItem('questionList', '');
     localStorage.setItem('seconds', '0');
     // localStorage.setItem('quiz', '');
   }
