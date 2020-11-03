@@ -18,12 +18,13 @@ export class ResultComponent implements OnInit {
   userResult: Result;
   lastScoreSubmitted: number;
   userAnswers: string[] = [];
-  
+
 
   constructor(public quizService: QuizService, private router: Router) { }
 
   ngOnInit() {
-    if ((localStorage.getItem('quizProgress')) === '2') {
+    this.finishedQuiz = JSON.parse(localStorage.getItem('quiz'));
+    if ((localStorage.getItem('quizProgress')) === this.finishedQuiz.questionList.length.toString()) {
       this.quizService.seconds = Number((localStorage.getItem('seconds')));
       this.quizService.quizProgress = Number((localStorage.getItem('quizProgress')));
       this.quizService.questionList = JSON.parse(localStorage.getItem('questionList'));
@@ -31,10 +32,6 @@ export class ResultComponent implements OnInit {
       this.quizService.totalTime = JSON.parse(localStorage.getItem('totalTime'));
       this.getLastSubmittedResult();
 
-      this.finishedQuiz = JSON.parse(localStorage.getItem('quiz'));
-      // this.quizService.userTest.questionList = JSON.parse(localStorage.getItem('questionList'));
-
-      // this.userAnswers = this.quizService.questionList[1].userAnswer;
 
       this.quizService.questionList.forEach((question, i) => {
         this.userAnswers[i] = question.userAnswer;
@@ -72,12 +69,6 @@ export class ResultComponent implements OnInit {
 
   }
 
-  // test(){
-  //   this.quizService.getUserResult(this.finishedQuiz).subscribe(res => {
-  //     this.userResult = res;
-  //     this.correctAnswerCount = this.userResult.numberOfCorrectAnswers;
-  //   });
-  // }
   getLastSubmittedResult() {
     this.quizService.checkIfScoreIsHigh().subscribe(result => {
       this.lastScoreSubmitted = result;
@@ -105,7 +96,6 @@ export class ResultComponent implements OnInit {
     localStorage.setItem('quizProgress', '0');
     localStorage.setItem('questionList', '');
     localStorage.setItem('seconds', '0');
-    // localStorage.setItem('quiz', '');
   }
 
   quizRepeat() {

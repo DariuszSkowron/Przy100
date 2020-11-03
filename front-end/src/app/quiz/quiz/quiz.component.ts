@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {QuizService} from '../../shared/quiz.service';
 import {Quiz} from '../quiz';
 import {Router} from '@angular/router';
@@ -11,10 +11,10 @@ import {Router} from '@angular/router';
 export class QuizComponent implements OnInit {
 
   quiz: Quiz;
-  kupa = true;
+  songListenAvailable = true;
   timeLeft = 5;
   interval;
-  timerStarted = true;
+
   constructor(private router: Router, public quizService: QuizService) {
 
   }
@@ -24,7 +24,7 @@ export class QuizComponent implements OnInit {
       this.quizService.seconds = Number(localStorage.getItem('seconds'));
       this.quizService.quizProgress = Number((localStorage.getItem('quizProgress')));
       this.quiz = JSON.parse(localStorage.getItem('quiz'));
-      if (this.quizService.quizProgress === 2) {
+      if (this.quizService.quizProgress === this.quiz.questionList.length) {
         this.router.navigate(['/result']);
       }
     } else {
@@ -33,7 +33,6 @@ export class QuizComponent implements OnInit {
       this.getQuiz();
     }
   }
-
 
 
   getQuiz() {
@@ -57,13 +56,11 @@ export class QuizComponent implements OnInit {
   }
 
 
-
   Answer(selectedAnswer) {
     this.quiz.questionList[this.quizService.quizProgress].userAnswer = selectedAnswer;
-    // localStorage.setItem('quiz', JSON.stringify(this.quiz));
     localStorage.setItem('questionList', JSON.stringify(this.quizService.questionList));
     this.quizService.quizProgress++;
-    this.kupa = true;
+    this.songListenAvailable = true;
     this.pauseButtonTimer();
     this.timeLeft = 5;
     localStorage.setItem('quizProgress', this.quizService.quizProgress.toString());
@@ -80,7 +77,7 @@ export class QuizComponent implements OnInit {
   public playSong(player: HTMLAudioElement): void {
     this.startButtonTimer(player);
     player.play();
-    this.kupa = false;
+    this.songListenAvailable = false;
   }
 
   startButtonTimer(player: HTMLAudioElement) {
@@ -88,7 +85,7 @@ export class QuizComponent implements OnInit {
       if (this.timeLeft > 0) {
         this.timeLeft--;
       } else {
-        this.kupa = false;
+        this.songListenAvailable = false;
         player.pause();
       }
     }, 1000);

@@ -15,7 +15,7 @@
           <audio #player id="audio{{quiz.questionList[this.quizService.quizProgress].correctSongUrl}}" src="{{quiz.questionList[this.quizService.quizProgress].correctSongUrl}}" preload="auto">
             <p>Sorry, your browser does not support the <code>audio</code> element.</p>
           </audio>
-          <button #button (click)="playSong(player)" [disabled]="!kupa" class="btn waves-effect waves-light" type="submit" name="action">
+          <button #button (click)="playSong(player)" [disabled]="!songListenAvailable" class="btn waves-effect waves-light" type="submit" name="action">
             Play ({{timeLeft}} seconds)
           </button>
         </div>
@@ -33,7 +33,7 @@
           <audio #player id="audio{{quiz.questionList[this.quizService.quizProgress].correctSongUrl}}" src="{{quiz.questionList[this.quizService.quizProgress].correctSongUrl}}" preload="auto">
             <p>Sorry, your browser does not support the <code>audio</code> element.</p>
           </audio>
-          <button #button (click)="playSong(player)" [disabled]="!kupa" class="btn waves-effect waves-light" type="submit" name="action">
+          <button #button (click)="playSong(player)" [disabled]="!songListenAvailable" class="btn waves-effect waves-light" type="submit" name="action">
             Play ({{timeLeft}} seconds)
           </button>
         </div>
@@ -43,7 +43,7 @@
     <audio #player id="audio{{quiz.questionList[this.quizService.quizProgress].correctSongUrl}}" src="{{quiz.questionList[this.quizService.quizProgress].correctSongUrl}}" preload="auto">
       <p>Sorry, your browser does not support the <code>audio</code> element.</p>
     </audio>
-    <button #button (click)="playSong(player)" [disabled]="!kupa" class="btn waves-effect waves-light" type="submit" name="action">
+    <button #button (click)="playSong(player)" [disabled]="!songListenAvailable" class="btn waves-effect waves-light" type="submit" name="action">
     Play ({{timeLeft}} seconds)
   </button>
     </div>
