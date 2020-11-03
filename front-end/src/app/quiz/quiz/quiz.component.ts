@@ -43,6 +43,7 @@ export class QuizComponent implements OnInit {
       this.quizService.startTime = this.quiz.startTime;
       localStorage.setItem('questionList', JSON.stringify(this.quizService.questionList));
       localStorage.setItem('startTime', JSON.stringify(this.quizService.startTime));
+      localStorage.setItem('quiz', JSON.stringify(this.quiz));
       this.startTimer();
 
     });
@@ -59,7 +60,7 @@ export class QuizComponent implements OnInit {
 
   Answer(selectedAnswer) {
     this.quiz.questionList[this.quizService.quizProgress].userAnswer = selectedAnswer;
-    localStorage.setItem('quiz', JSON.stringify(this.quiz));
+    // localStorage.setItem('quiz', JSON.stringify(this.quiz));
     localStorage.setItem('questionList', JSON.stringify(this.quizService.questionList));
     this.quizService.quizProgress++;
     this.kupa = true;
@@ -77,23 +78,6 @@ export class QuizComponent implements OnInit {
 
 
   public playSong(player: HTMLAudioElement): void {
-
-
-    // let countdown = this._countdown -1;
-    //
-    // interval(1000)
-    //   .pipe(
-    //     timeInterval(),
-    //     take(this._countdown)
-    //   )
-    //   .subscribe((next) => {
-    //     this._countdown = countdown - next.value;
-    //   }, (error) => {
-    //
-    //   }, () => {
-    //     this._countdown = 0;
-    //     player.pause();
-    //   });
     this.startButtonTimer(player);
     player.play();
     this.kupa = false;
