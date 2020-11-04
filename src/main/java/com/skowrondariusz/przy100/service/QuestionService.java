@@ -22,14 +22,14 @@ public class QuestionService {
 
     List<Question> collectQuestionsForQuiz(int quizSize){
         List<Question> questionList = new ArrayList<>();
-        int[] drawedQuestionsNumbers = drawQuestions(quizSize);
+        int[] drawnQuestionsNumbers = drawQuestions(quizSize);
         for (int i = 0; i < quizSize; i++) {
-            questionList.add(questionRepository.getQuestionById(drawedQuestionsNumbers[i]));
+            questionList.add(questionRepository.getQuestionById(drawnQuestionsNumbers[i]));
         }
         return questionList;
     }
 
-    public int[] drawQuestions(int quizSize){
+    private int[] drawQuestions(int quizSize){
         return new Random().ints(1,Math.toIntExact(questionRepository.count()) +1)
                 .distinct()
                 .limit(quizSize)

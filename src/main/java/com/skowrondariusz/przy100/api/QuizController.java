@@ -32,7 +32,7 @@ public class QuizController {
 
     @GetMapping("/start")
     public Quiz startQuiz() {
-        return quizService.startNewQuiz();
+        return quizService.startNewQuiz(20);
     }
 
     @PostMapping("/correctAnswers")
@@ -51,7 +51,6 @@ public class QuizController {
 
     @PostMapping("/result")
     public Result postResult(@RequestBody Result result) {
-//        result.setTotalScore(this.resultService.totalScore(result));
         this.resultService.submitResult(result);
         return result;
 

@@ -1,7 +1,5 @@
 package com.skowrondariusz.przy100.service;
 
-import com.skowrondariusz.przy100.dto.QuestionDto;
-import com.skowrondariusz.przy100.model.Question;
 import com.skowrondariusz.przy100.model.Quiz;
 import com.skowrondariusz.przy100.repository.QuestionRepository;
 import com.skowrondariusz.przy100.utility.Mapper;
@@ -9,10 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,9 +24,9 @@ public class QuizService {
         this.mapper = mapper;
     }
 
-    public Quiz startNewQuiz(){
+    public Quiz startNewQuiz(int numberOfQuestions){
         Quiz quiz = new Quiz();
-        quiz.setQuestionList(        questionService.collectQuestionsForQuiz(2).stream()
+        quiz.setQuestionList(        questionService.collectQuestionsForQuiz(numberOfQuestions).stream()
                 .map(question -> this.mapper.convertToQuestionDto(question))
                 .collect(Collectors.toList()));
         Date x = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
@@ -40,7 +36,7 @@ public class QuizService {
         return quiz;
     }
 
-    public int correctAnswersCount(Quiz userQuiz){
+    int correctAnswersCount(Quiz userQuiz){
         var result = 0;
         var questionList = userQuiz.getQuestionList().stream()
                 .map(questionDto -> this.mapper.convertToQuestionEntity(questionDto))

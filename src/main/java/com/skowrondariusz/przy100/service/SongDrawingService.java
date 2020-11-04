@@ -25,7 +25,7 @@ public class SongDrawingService {
         for (Song song : songList) {
             var songQuestion = new SongQuestion();
             if (song.getPreviewUrl() != null) {
-                songQuestion.setDescription("Guess the song");
+                songQuestion.setDescription("Guess the song title");
                 songQuestion.setCorrectSongUrl(song.getPreviewUrl());
                 songQuestion.setCorrectAnswer(song.getName());
                 songQuestion.setListOfWrongAnswers(randomSongsNames(String.valueOf(song.getId())));
@@ -42,15 +42,15 @@ public class SongDrawingService {
                 .limit(3)
                 .toArray();
 
-        List<String> drawedSongsNames = new ArrayList<>();
+        List<String> drawnSongsNames = new ArrayList<>();
 
         for (int songId : songIds) {
-            drawedSongsNames.add(songRepository.findById(songId).getName());
+            drawnSongsNames.add(songRepository.findById(songId).getName());
 
 
         }
-        System.out.println(drawedSongsNames.toString());
-        return drawedSongsNames;
+        System.out.println(drawnSongsNames.toString());
+        return drawnSongsNames;
 
 
     }
