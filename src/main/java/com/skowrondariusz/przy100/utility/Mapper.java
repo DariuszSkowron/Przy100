@@ -6,6 +6,8 @@ import com.skowrondariusz.przy100.service.QuestionService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
+
 @Component
 public class Mapper {
 
@@ -22,6 +24,7 @@ public class Mapper {
         var viewModel = modelMapper.map(entity, QuestionDto.class);
         var answerList = entity.getListOfWrongAnswers();
         answerList.add(entity.getCorrectAnswer());
+        Collections.shuffle(answerList);
         viewModel.setAnswersList(answerList);
         return viewModel;
     }
