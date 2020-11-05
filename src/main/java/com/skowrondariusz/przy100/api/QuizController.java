@@ -66,22 +66,4 @@ public class QuizController {
     public int scoreAbleToSubmit(){
         return resultService.checkLastSubmittedScore();
     }
-
-
-    @GetMapping("/test")
-    public String test(){
-        return String.valueOf(this.resultRepository.findFirstByOrderByTotalScoreAsc().getTotalScore());
-    }
-
-    @GetMapping("/test2")
-    public void delete(){
-        this.resultService.deleteResult(resultRepository.findFirstByOrderByTotalScoreAsc().getId());
-    }
-
-    @GetMapping("/test3")
-    public String count(){
-        return String.valueOf(this.resultRepository.count());
-    }
-
-
 }

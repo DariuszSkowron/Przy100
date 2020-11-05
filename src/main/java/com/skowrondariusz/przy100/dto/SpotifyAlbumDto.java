@@ -5,9 +5,6 @@ public class SpotifyAlbumDto {
     private String albumName;
     private String albumId;
 
-
-
-
     public String getAlbumName() {
         return albumName;
     }
