@@ -38,6 +38,7 @@ public class DatabaseInitializer implements CommandLineRunner {
         questionService.saveQuestion(question3);
 
         getArtistsAlbums_Sync();
+        spotifyService.test();
         songDrawingService.musicQuestionGenerate();
         System.out.println("DATABASE INITIALISED");
     }

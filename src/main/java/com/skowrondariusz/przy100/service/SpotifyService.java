@@ -105,4 +105,14 @@ public class SpotifyService {
             System.out.println("Error: " + e.getMessage());
         }
     }
+
+    public  void test(){
+        List<SpotifyAlbumDto> albums = getArtistsAlbums_Sync();
+        for (SpotifyAlbumDto albumDto : albums) {
+            System.out.println("kupa2");
+            getAlbumsTracks_Sync(albumDto.getAlbumId());
+        }
+    }
+
+
 }
