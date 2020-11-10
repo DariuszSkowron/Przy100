@@ -63,7 +63,7 @@ public class QuizController {
     }
 
     @GetMapping("/isHighScore")
-    public int scoreAbleToSubmit(){
+    public double scoreAbleToSubmit(){
         return resultService.checkLastSubmittedScore();
     }
 }

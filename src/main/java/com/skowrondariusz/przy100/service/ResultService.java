@@ -5,6 +5,9 @@ import com.skowrondariusz.przy100.model.Result;
 import com.skowrondariusz.przy100.repository.ResultRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Date;
 
 @Service
@@ -21,8 +24,12 @@ public class ResultService {
     }
 
     public double totalScore(Result result){
-
-        return (result.getNumberOfCorrectAnswers() * 500) / result.getTimeSpent();
+//        DecimalFormat df = new DecimalFormat("###.##");
+       double score = (double) result.getNumberOfCorrectAnswers() * 500 / result.getTimeSpent();
+        BigDecimal bd = new BigDecimal(score).setScale(2, RoundingMode.HALF_UP);
+        System.out.println(score);
+        System.out.println(bd);
+       return bd.doubleValue();
     }
 
     public Result getUserResult(Quiz userQuiz){
@@ -42,7 +49,12 @@ public class ResultService {
         this.resultRepository.deleteById(id);
     }
 
-    public int checkLastSubmittedScore(){
+    public double checkLastSubmittedScore(){
+
+        if (resultRepository.count() == 0){
+            return 0;
+        }
+        
         return resultRepository.lowestScore();
     }
 

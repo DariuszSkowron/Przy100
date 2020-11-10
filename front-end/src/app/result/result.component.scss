@@ -47,7 +47,17 @@
 
 }
   //.input-field.active  label {
-  //  transform: translate(10px, 5px) scale(.75);
+  //  transform: translate(40px, 5px) scale(.75);
+  //}
+
+  .input-field input[type=text]:focus + label {
+    //color: red;
+    transform: translate(0px, 5px) scale(.75);
+
+  }
+
+  //.input-field .prefix.active {
+  //  color: red;
   //}
 
   .input-field label{
