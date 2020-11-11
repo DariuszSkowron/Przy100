@@ -41,5 +41,6 @@ public class DatabaseInitializer implements CommandLineRunner {
         spotifyService.test();
         songDrawingService.musicQuestionGenerate();
         System.out.println("DATABASE INITIALISED");
+        spotifyService.totalCharacters();
     }
 }

@@ -1,7 +1,6 @@
 package com.skowrondariusz.przy100.service;
 
 import com.skowrondariusz.przy100.model.Quiz;
-import com.skowrondariusz.przy100.repository.QuestionRepository;
 import com.skowrondariusz.przy100.utility.Mapper;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +13,10 @@ import java.util.stream.Collectors;
 @Service
 public class QuizService {
 
-    private QuestionRepository questionRepository;
     private QuestionService questionService;
     private Mapper mapper;
 
-    public QuizService(QuestionRepository questionRepository, QuestionService questionService, Mapper mapper) {
-        this.questionRepository = questionRepository;
+    public QuizService(QuestionService questionService, Mapper mapper) {
         this.questionService = questionService;
         this.mapper = mapper;
     }
