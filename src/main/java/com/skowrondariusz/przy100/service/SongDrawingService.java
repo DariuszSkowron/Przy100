@@ -50,7 +50,7 @@ public class SongDrawingService {
         }
     }
 
-    public List<String> randomSongsNames(String id) {
+    private List<String> randomSongsNames(String id) {
         List<Song> songList = songRepository.findAll();
         int[] songIds = new Random().ints(1, Math.toIntExact(songList.size()))
                 .skip(Long.parseLong(id))
