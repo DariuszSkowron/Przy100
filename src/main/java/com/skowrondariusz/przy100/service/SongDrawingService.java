@@ -1,15 +1,29 @@
 package com.skowrondariusz.przy100.service;
 
+//import com.google.cloud.translate.*;
 
+import com.google.auth.oauth2.ServiceAccountCredentials;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
+import com.google.cloud.translate.Detection;
+import com.google.cloud.translate.Translate;
+import com.google.cloud.translate.TranslateOptions;
 import com.skowrondariusz.przy100.model.Song;
 import com.skowrondariusz.przy100.model.SongQuestion;
 import com.skowrondariusz.przy100.repository.SongRepository;
 import org.springframework.stereotype.Service;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.*;
 
 @Service
 public class SongDrawingService {
+
+
+//    Storage storage = StorageOptions.getDefaultInstance().getService();
+//    Translate translate = TranslateOptions.getDefaultInstance().getService()
+//Translate translate = TranslateOptions.getDefaultInstance().getService();
 
 
     public SongRepository songRepository;
@@ -28,6 +42,8 @@ public class SongDrawingService {
                 songQuestion.setDescription("Guess the song title");
                 songQuestion.setCorrectSongUrl(song.getPreviewUrl());
                 songQuestion.setCorrectAnswer(song.getName());
+//                Detection detection = translate.detect(song.getName());
+//                System.out.println(detection.toString());
                 songQuestion.setListOfWrongAnswers(randomSongsNames(String.valueOf(song.getId())));
                 questionService.saveQuestion(songQuestion);
             }
@@ -51,7 +67,7 @@ public class SongDrawingService {
         }
         System.out.println(drawnSongsNames.toString());
         return drawnSongsNames;
-
-
     }
+
+
 }

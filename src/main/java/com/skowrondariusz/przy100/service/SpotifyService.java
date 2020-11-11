@@ -114,5 +114,14 @@ public class SpotifyService {
         }
     }
 
+    public void totalCharacters(){
+        int totalChars = 0;
+        for (Song song : songRepository.findAll()) {
+            totalChars += song.getName().length();
+        }
+
+        System.out.println(totalChars);
+    }
+
 
 }

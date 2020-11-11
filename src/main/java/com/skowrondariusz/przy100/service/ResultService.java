@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.Date;
 
 @Service
@@ -54,7 +53,7 @@ public class ResultService {
         if (resultRepository.count() == 0){
             return 0;
         }
-        
+
         return resultRepository.lowestScore();
     }
 
