@@ -14,6 +14,7 @@ export class ResultComponent implements OnInit {
 
   correctAnswerCount: number;
   isDisabled = false;
+  tooLowScore = false;
   finishedQuiz: Quiz;
   userResult: Result;
   lastScoreSubmitted: number;
@@ -38,33 +39,21 @@ export class ResultComponent implements OnInit {
       });
 
 
-      this.quizService.questionList.forEach((e,i) => {
+      this.quizService.questionList.forEach((e, i) => {
         this.userAnswers[i] = e.userAnswer;
       });
 
       this.finishedQuiz.userAnswers = this.userAnswers;
 
-      // this.finishedQuiz.userAnswers = this.userAnswers;
-
-      // this.test();
       this.quizService.getUserResult(this.finishedQuiz).subscribe(res => {
         this.userResult = res;
         if (this.lastScoreSubmitted > this.userResult.totalScore) {
+          this.tooLowScore = true;
           this.disableButton();
         }
       });
 
       this.correctAnswerCount = this.userResult.numberOfCorrectAnswers;
-
-      // this.listOfQuestionId = this.quizService.questionList.map(question => question.id);
-      // this.quizService.getCorrectAnswers(this.listOfQuestionId).subscribe((data: any) => {
-      //   this.quizService.questionList.forEach((e, i) => {
-      //     if (e.userAnswer === data[i]) {
-      //       this.correctAnswerCount++;
-      //     }
-      //   });
-      // }
-      // );
     }
 
   }

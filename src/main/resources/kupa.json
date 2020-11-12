@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "cosmic-descent-295315",
+  "private_key_id": "81869d1761dc1ac2627a64dfebd59a099942b412",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDFxRVlQLw5dyAk\nKYXFqy9FAPQPPFSAp1D/wbk1ItaTXumMyp+Igh+a7d2OYuegpR1tDvywcMhv9rIs\n0i+rKT8Tm+oX3+a9ZuMl1Dh1iK44/qNF5JMJJ/CfnnQu7FrvKe0umWsP52FsQmq2\npdz3jR9ZIVHJQATkaRuPpTVtV+wztBJHqLFD9Klz6NpuHDzqvuSCbRgXyh3oiIom\n8Ep5v5E2RzrojOUMf0m+7Lz4SIMRtVvxkhKuh6ghHm5k/tl+e1Q7iJ9NHWXGncN5\n/hBNTUFGRuI7TQTD/jMnTUH1kIZ/ylDjf0Jtqy9hUDlkwkf757Irx5bF8VmGDuhj\nibn5wp4bAgMBAAECgf8l2pM9ziY42ZRNV6VDMIDbtFMCl4mVFnFqgqnwgbqQepo5\nWI8wkbd68Ax4NHYhSXlYZoX3P58dzxpLee+l0z8/gZhM+Y4wsoDHvNcRqBew0Qxv\nVFDQb9SeuLWERbkiDeRYBwV3BdKf5haG3zhsKZbWeIou+xH0pimgVP7k7u9G9dn4\nOcZjtEv7H4LDC1klMcOG7MtdeFiuh06OpN1z7ab6SGVwOh31mOKfNgldLZZUlfVK\nvPuSV6wNZirV0h9tsw/lDitLCDARmfGJra4c2SX+c4SFmafG4bYQ8U4limSjSQmN\nlKzSY/bB2u++/WC5tksr+9vvpkPzxZSXi7ReYwkCgYEA+LgGAHSEV6V2JhtFeRK3\nvIgOAH+LJG4MXFv8WwpjqUgjDuJZ56NhCg4JdCMpG1UWVQLJKBrEr3TOUQP2n3ay\nuvLZ2Ek0fJg+2PQ/8u+ruhEEb/jyfjJsW6CB7dsnPs4aV7e+Dyww2BR0S4dkPJ4J\nGwClLFoNNiLRGdSdrwbLKGcCgYEAy487iQZngnipms1Tk9UxbVoJ0ikmW/NNN8s1\npclBPANg6ZABEVW2kiNSyHC8ZRSInxTxRv/G7ClUMQ2Am/5DbGIxDlZzdbdPLba8\n+eK1D96I6pAa590hk+FrWNyFzpk+u1JSS0ZcHQ8cORc402KfzAUdB5MHqBSt9nQj\n9n+M3C0CgYAiUaoqV+mG+oLSAUNV0Hpf3looQXEepry35c1tdoKH8jc8L4l+R/H0\n5DjzuIJMjjIVqtu81+y51SE+1pAqMsO4vhfHG1rNsmhBoXpNeDq24vA8zxoOxcBj\n6ELlYi8JIIFMB0OHbm6S8keVwGnZX2kcO7uO4iIejTFTIh5b71ELEwKBgQCDjKgL\n8JCaN8Jb4U+e3QsZQTPRlnhMuhpv8SpVXo+C6igKKN8Xxc27+Yn5MSn/JNr5+73F\nhWyXmEnpfXFc3l/SPk63llT9gR5xS4Qq9UDP5Z+T/tb0eurFN8t43OK4Vj69LgEy\n1mCXAvnZR1GZAkaEwdU13OX40IxwFjRbi6iLbQKBgQCi2i+rkYN89DarvM6yzE6N\nk6jqNh7ffL7qSJT777NSv5/jQfmH/s2pS4CkOWFDMksrp8AdKkQGpH+3/hhImOQP\n26h5g5HUYm8kbMxiSFjxm3WDCVmWu2FDZ7b/SJ0QFF/O2MOEZcK3yOtDLLCe+Gex\n2mUncAe81JsbWMc6lYVfiA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "przy100@cosmic-descent-295315.iam.gserviceaccount.com",
+  "client_id": "109246335072561673014",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/przy100%40cosmic-descent-295315.iam.gserviceaccount.com"
+}

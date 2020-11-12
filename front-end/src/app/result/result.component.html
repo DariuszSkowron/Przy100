@@ -25,7 +25,10 @@
             <div class="row">
               <div class="input-field">
                 <button type="submit" class="btn" onclick="M.toast({html: 'Score sent'})" [disabled]="!registerForm.valid || this.isDisabled">
-                  <span *ngIf="this.isDisabled == true" >Score is too low</span><span *ngIf="this.isDisabled == false">Submit score</span></button>
+                  <span *ngIf="this.tooLowScore == true" >Score is too low</span>
+                  <span *ngIf="this.isDisabled == false && this.tooLowScore == false">Submit score</span>
+                  <span *ngIf="this.isDisabled == true && this.tooLowScore == false">Score already submitted</span>
+                </button>
               </div>
             </div>
           </form>
