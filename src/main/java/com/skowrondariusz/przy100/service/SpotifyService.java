@@ -22,6 +22,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 
 import static com.skowrondariusz.przy100.utility.SpotifyClientCredentials.getClientAccessToken;
+
 @Service
 public class SpotifyService {
 
@@ -36,6 +37,8 @@ public class SpotifyService {
     private static final SpotifyApi spotifysApi = new SpotifyApi.Builder()
             .setAccessToken(getClientAccessToken())
             .build();
+
+
 
 
     private static final GetArtistsAlbumsRequest getArtistsAlbumsRequest = spotifysApi.getArtistsAlbums(id)

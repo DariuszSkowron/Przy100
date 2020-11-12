@@ -5,27 +5,44 @@ import com.skowrondariusz.przy100.model.SongQuestion;
 import com.skowrondariusz.przy100.service.QuestionService;
 import com.skowrondariusz.przy100.service.SongDrawingService;
 import com.skowrondariusz.przy100.service.SpotifyService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
 import static com.skowrondariusz.przy100.service.SpotifyService.*;
+import static com.skowrondariusz.przy100.utility.Test.getClientId;
 
 @Component
 @ConditionalOnProperty(name = "database.startup", havingValue = "true")
 public class DatabaseInitializer implements CommandLineRunner {
 
 
+    @Autowired
+    Environment environment;
+
+
+
     private QuestionService questionService;
     private SpotifyService spotifyService;
     private SongDrawingService songDrawingService;
+    private SpotifyClientCredentials spotifyClientCredentials;
 
-    public DatabaseInitializer(QuestionService questionService, SpotifyService spotifyService, SongDrawingService songDrawingService) {
+//    public DatabaseInitializer(QuestionService questionService, SpotifyService spotifyService, SongDrawingService songDrawingService) {
+//        this.questionService = questionService;
+//        this.spotifyService = spotifyService;
+//        this.songDrawingService = songDrawingService;
+//    }
+
+
+    public DatabaseInitializer(QuestionService questionService, SpotifyService spotifyService, SongDrawingService songDrawingService, SpotifyClientCredentials spotifyClientCredentials) {
         this.questionService = questionService;
         this.spotifyService = spotifyService;
         this.songDrawingService = songDrawingService;
+        this.spotifyClientCredentials = spotifyClientCredentials;
     }
 
     @Override
@@ -42,5 +59,10 @@ public class DatabaseInitializer implements CommandLineRunner {
         songDrawingService.musicQuestionGenerate();
         System.out.println("DATABASE INITIALISED");
         spotifyService.totalCharacters();
+//        System.out.println(environment.getProperty("spotify.clientId"));
+        System.out.println(SpotifyCredentials.getProperty("spotify.clientId"));
+        SpotifyClientCredentials.test2();
+        System.out.println(Test.getClientId());
+        System.out.println(Test.getClientSecret());
     }
 }

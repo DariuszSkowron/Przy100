@@ -3,24 +3,39 @@ package com.skowrondariusz.przy100.utility;
 import com.wrapper.spotify.SpotifyApi;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import com.wrapper.spotify.model_objects.credentials.ClientCredentials;
-import com.wrapper.spotify.model_objects.specification.AlbumSimplified;
-import com.wrapper.spotify.model_objects.specification.Paging;
 import com.wrapper.spotify.requests.authorization.client_credentials.ClientCredentialsRequest;
-import com.wrapper.spotify.requests.data.artists.GetArtistsAlbumsRequest;
 import org.apache.hc.core5.http.ParseException;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 
-import java.io.IOException;
+@Component
 public class SpotifyClientCredentials {
 
     private static final String clientId = "765ae1d3c8d44d9bbcd2a691a095cbc6";
     private static final String clientSecret = "1b5e3868efbe42b6941250954a0c7442";
+
+
+//    private static final String test = SpotifyCredentials.getProperty("spotify.clientId");
+
+
+
+//    public SpotifyClientCredentials(SpotifyCredentials spotifyCredentials) {
+//        this.spotifyCredentials = spotifyCredentials;
+//    }
+
+//    private SpotifyCredentials spotifyCredentials;
+//
+//    public SpotifyClientCredentials(SpotifyCredentials spotifyCredentials) {
+//        this.spotifyCredentials = spotifyCredentials;
+//    }
+//    private static final String clientTest = spotifyCredentials.kupa();
+
 
     private static final SpotifyApi spotifyApi = new SpotifyApi.Builder()
             .setClientId(clientId)
@@ -68,6 +83,10 @@ public class SpotifyClientCredentials {
             clientCredentials_Sync();
         }
         return spotifyApi.getAccessToken().toString();
+    }
+
+    public static void test2(){
+        System.out.println(SpotifyCredentials.getProperty("spotify.clientId"));
     }
 
 }
