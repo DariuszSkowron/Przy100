@@ -13,17 +13,12 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
-import static com.skowrondariusz.przy100.service.SpotifyService.*;
-import static com.skowrondariusz.przy100.utility.Test.getClientId;
+import static com.skowrondariusz.przy100.service.SpotifyService.getArtistsAlbums_Sync;
+
 
 @Component
 @ConditionalOnProperty(name = "database.startup", havingValue = "true")
 public class DatabaseInitializer implements CommandLineRunner {
-
-
-    @Autowired
-    Environment environment;
-
 
 
     private QuestionService questionService;
