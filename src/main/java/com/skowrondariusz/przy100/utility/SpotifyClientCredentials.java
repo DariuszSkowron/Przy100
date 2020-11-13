@@ -20,23 +20,6 @@ public class SpotifyClientCredentials {
     private static final String clientId = "765ae1d3c8d44d9bbcd2a691a095cbc6";
     private static final String clientSecret = "1b5e3868efbe42b6941250954a0c7442";
 
-
-//    private static final String test = SpotifyCredentials.getProperty("spotify.clientId");
-
-
-
-//    public SpotifyClientCredentials(SpotifyCredentials spotifyCredentials) {
-//        this.spotifyCredentials = spotifyCredentials;
-//    }
-
-//    private SpotifyCredentials spotifyCredentials;
-//
-//    public SpotifyClientCredentials(SpotifyCredentials spotifyCredentials) {
-//        this.spotifyCredentials = spotifyCredentials;
-//    }
-//    private static final String clientTest = spotifyCredentials.kupa();
-
-
     private static final SpotifyApi spotifyApi = new SpotifyApi.Builder()
             .setClientId(clientId)
             .setClientSecret(clientSecret)
