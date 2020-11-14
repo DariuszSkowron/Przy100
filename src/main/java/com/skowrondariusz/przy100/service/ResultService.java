@@ -22,7 +22,7 @@ public class ResultService {
 
     public double totalScore(Result result){
        double score = (double) result.getNumberOfCorrectAnswers() * 500 / result.getTimeSpent();
-        BigDecimal bd = new BigDecimal(score).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal bd = new BigDecimal(score).setScale(4, RoundingMode.HALF_UP);
         System.out.println(score);
         System.out.println(bd);
        return bd.doubleValue();
@@ -32,7 +32,9 @@ public class ResultService {
         var userResult = new Result();
         userResult.setNumberOfCorrectAnswers(quizService.correctAnswersCount(userQuiz));
         var currentDate = new Date();
-        userResult.setTimeSpent((currentDate.getTime() - userQuiz.getStartTime().getTime())/1000);
+        var timeSpent = (currentDate.getTime() - userQuiz.getStartTime().getTime())/1000;
+        BigDecimal bd = new BigDecimal(timeSpent).setScale(4, RoundingMode.HALF_UP);
+        userResult.setTimeSpent(bd.doubleValue());
         userResult.setTotalScore(totalScore(userResult));
         return userResult;
     }

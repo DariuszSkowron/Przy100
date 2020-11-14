@@ -8,7 +8,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
-//@EnableConfigurationProperties(SpotifyCredentials.class)
 public class DevCorsConfiguration implements WebMvcConfigurer {
 
 
