@@ -31,29 +31,18 @@ public class SpotifyService {
 
     private static final String id = "6DAQjwwMGZ9QgqHhIkU7H0";
 
-    public SongRepository songRepository;
-
-//    @Autowired
-    SpotifyCredentials spotifyCredentials;
-//    @Autowired
-//    SpotifyClientCredentials spotifyClientCredentials;
+    private SongRepository songRepository;
+    private SpotifyCredentials spotifyCredentials;
 
     public SpotifyService(SongRepository songRepository, SpotifyCredentials spotifyCredentials) {
         this.songRepository = songRepository;
         this.spotifyCredentials = spotifyCredentials;
     }
 
-//    public SpotifyService(SongRepository songRepository, SpotifyClientCredentials spotifyClientCredentials) {
-//        this.songRepository = songRepository;
-//        this.spotifyClientCredentials = spotifyClientCredentials;
-//    }
-
 
     private static final SpotifyApi spotifysApi = new SpotifyApi.Builder()
             .setAccessToken(getClientAccessToken())
             .build();
-
-
 
 
     private static final GetArtistsAlbumsRequest getArtistsAlbumsRequest = spotifysApi.getArtistsAlbums(id)

@@ -23,36 +23,9 @@ import java.util.concurrent.CompletionException;
 @Component
 public class SpotifyClientCredentials {
 
-    @Autowired
-    SpotifyCredentials spotifyCredentials;
-//    @Autowired
-//    SpotifyService spotifyService;
-
-//    @Autowired
-//    Environment envirnoment;
-
-    private  static  String clientId = "765ae1d3c8d44d9bbcd2a691a095cbc6";
-//    @Value("${spotify.clientId}")
-//    private String CLIENT_ID;
-//    @Value("${CLIENT_ID}")
-    private static String CLIENT_ID_STATIC;
-    private static String clientSecret = "1b5e3868efbe42b6941250954a0c7442";
-    private static String testing;
-
-//    @Value("${spotify.clientId}")
-//     void test(){
-//        CLIENT_ID_STATIC = CLIENT_ID;
-//        System.out.println("CHUJ W DUPE" + CLIENT_ID);
-//        System.out.println("CHUJ W DUPE" + CLIENT_ID_STATIC);
-//    }
-//
-//    static {
-//            testing = CLIENT_ID_STATIC;
-//    }
-
     private static final SpotifyApi spotifyApi = new SpotifyApi.Builder()
             .setClientId(SpotifyCredentials.CLIENT_ID)
-            .setClientSecret(clientSecret)
+            .setClientSecret(SpotifyCredentials.CLIENT_SECRET)
             .build();
     private static final ClientCredentialsRequest clientCredentialsRequest = spotifyApi.clientCredentials()
             .build();
@@ -97,9 +70,5 @@ public class SpotifyClientCredentials {
         }
         return spotifyApi.getAccessToken().toString();
     }
-
-//    public static void test2(){
-//        System.out.println(SpotifyCredentials.getProperty("spotify.clientId"));
-//    }
 
 }
