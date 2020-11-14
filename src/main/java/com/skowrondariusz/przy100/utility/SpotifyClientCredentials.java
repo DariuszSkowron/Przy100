@@ -1,5 +1,7 @@
 package com.skowrondariusz.przy100.utility;
 
+import com.skowrondariusz.przy100.Przy100Application;
+import com.skowrondariusz.przy100.service.SpotifyService;
 import com.wrapper.spotify.SpotifyApi;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import com.wrapper.spotify.model_objects.credentials.ClientCredentials;
@@ -7,6 +9,8 @@ import com.wrapper.spotify.requests.authorization.client_credentials.ClientCrede
 import org.apache.hc.core5.http.ParseException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -14,15 +18,14 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 
+
+
 @Component
 public class SpotifyClientCredentials {
 
-    private static final String clientId = "765ae1d3c8d44d9bbcd2a691a095cbc6";
-    private static final String clientSecret = "1b5e3868efbe42b6941250954a0c7442";
-
     private static final SpotifyApi spotifyApi = new SpotifyApi.Builder()
-            .setClientId(clientId)
-            .setClientSecret(clientSecret)
+            .setClientId(SpotifyCredentials.CLIENT_ID)
+            .setClientSecret(SpotifyCredentials.CLIENT_SECRET)
             .build();
     private static final ClientCredentialsRequest clientCredentialsRequest = spotifyApi.clientCredentials()
             .build();
@@ -66,10 +69,6 @@ public class SpotifyClientCredentials {
             clientCredentials_Sync();
         }
         return spotifyApi.getAccessToken().toString();
-    }
-
-    public static void test2(){
-        System.out.println(SpotifyCredentials.getProperty("spotify.clientId"));
     }
 
 }

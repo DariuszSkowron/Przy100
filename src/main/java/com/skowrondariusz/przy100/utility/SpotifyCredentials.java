@@ -1,39 +1,22 @@
 package com.skowrondariusz.przy100.utility;
 
-
-
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.EnvironmentAware;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.URL;
-import java.util.Properties;
+@Component
+public class SpotifyCredentials{
 
-//@Configuration
-//@ConfigurationProperties(prefix = "spotify")
-@Configuration
-@PropertySource(value = { "classpath:application.properties" }, ignoreResourceNotFound = false)
-public class SpotifyCredentials implements EnvironmentAware {
+    static String CLIENT_ID;
+    static String CLIENT_SECRET;
 
-    private static Environment env;
 
-    public static String getProperty(String key) {
-        return env.getProperty(key);
+    @Value("${spotify.clientId}")
+    public void setClientId(String clientId){
+        CLIENT_ID = clientId;
     }
 
-    @Override
-    public void setEnvironment(Environment env) {
-        SpotifyCredentials.env = env;
-    }
-
-    public static String kupa(){
-        return SpotifyCredentials.getProperty("clientId");
+    @Value("${spotify.client-secret}")
+    public void setClientSecret(String clientSecret){
+        CLIENT_SECRET = clientSecret;
     }
 }
