@@ -13,17 +13,14 @@ import java.util.Date;
 public class ResultService {
 
     private ResultRepository resultRepository;
-    private QuestionService questionService;
     private QuizService quizService;
 
-    public ResultService(ResultRepository resultRepository, QuestionService questionService, QuizService quizService) {
+    public ResultService(ResultRepository resultRepository, QuizService quizService) {
         this.resultRepository = resultRepository;
-        this.questionService = questionService;
         this.quizService = quizService;
     }
 
     public double totalScore(Result result){
-//        DecimalFormat df = new DecimalFormat("###.##");
        double score = (double) result.getNumberOfCorrectAnswers() * 500 / result.getTimeSpent();
         BigDecimal bd = new BigDecimal(score).setScale(2, RoundingMode.HALF_UP);
         System.out.println(score);
