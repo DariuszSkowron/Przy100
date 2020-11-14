@@ -4,6 +4,8 @@ import com.neovisionaries.i18n.CountryCode;
 import com.skowrondariusz.przy100.dto.SpotifyAlbumDto;
 import com.skowrondariusz.przy100.model.Song;
 import com.skowrondariusz.przy100.repository.SongRepository;
+import com.skowrondariusz.przy100.utility.SpotifyClientCredentials;
+import com.skowrondariusz.przy100.utility.SpotifyCredentials;
 import com.wrapper.spotify.SpotifyApi;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import com.wrapper.spotify.model_objects.specification.AlbumSimplified;
@@ -12,6 +14,7 @@ import com.wrapper.spotify.model_objects.specification.TrackSimplified;
 import com.wrapper.spotify.requests.data.albums.GetAlbumsTracksRequest;
 import com.wrapper.spotify.requests.data.artists.GetArtistsAlbumsRequest;
 import org.apache.hc.core5.http.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -30,9 +33,21 @@ public class SpotifyService {
 
     public SongRepository songRepository;
 
-    public SpotifyService(SongRepository songRepository) {
+//    @Autowired
+    SpotifyCredentials spotifyCredentials;
+//    @Autowired
+//    SpotifyClientCredentials spotifyClientCredentials;
+
+    public SpotifyService(SongRepository songRepository, SpotifyCredentials spotifyCredentials) {
         this.songRepository = songRepository;
+        this.spotifyCredentials = spotifyCredentials;
     }
+
+//    public SpotifyService(SongRepository songRepository, SpotifyClientCredentials spotifyClientCredentials) {
+//        this.songRepository = songRepository;
+//        this.spotifyClientCredentials = spotifyClientCredentials;
+//    }
+
 
     private static final SpotifyApi spotifysApi = new SpotifyApi.Builder()
             .setAccessToken(getClientAccessToken())
