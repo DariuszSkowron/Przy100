@@ -1,33 +1,17 @@
 package com.skowrondariusz.przy100.service;
 
-//import com.google.cloud.translate.*;
-
-import com.google.auth.oauth2.ServiceAccountCredentials;
-import com.google.cloud.storage.Storage;
-import com.google.cloud.storage.StorageOptions;
-import com.google.cloud.translate.Detection;
-import com.google.cloud.translate.Translate;
-import com.google.cloud.translate.TranslateOptions;
 import com.skowrondariusz.przy100.model.Song;
 import com.skowrondariusz.przy100.model.SongQuestion;
 import com.skowrondariusz.przy100.repository.SongRepository;
 import org.springframework.stereotype.Service;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.*;
 
 @Service
 public class SongDrawingService {
 
-
-//    Storage storage = StorageOptions.getDefaultInstance().getService();
-//    Translate translate = TranslateOptions.getDefaultInstance().getService()
-//Translate translate = TranslateOptions.getDefaultInstance().getService();
-
-
-    public SongRepository songRepository;
-    public QuestionService questionService;
+    private SongRepository songRepository;
+    private QuestionService questionService;
 
     public SongDrawingService(SongRepository songRepository, QuestionService questionService) {
         this.songRepository = songRepository;

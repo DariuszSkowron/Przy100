@@ -62,8 +62,15 @@ public class QuizController {
         return new ArrayList<>(topResults);
     }
 
-    @GetMapping("/isHighScore")
-    public double scoreAbleToSubmit(){
-        return resultService.checkLastSubmittedScore();
+//    @GetMapping("/isHighScore")
+//    public double scoreAbleToSubmit(){
+//        return resultService.checkLastSubmittedScore();
+//    }
+//
+    @PostMapping("/isHighScore")
+    public boolean scoreAbleToSubmit(@RequestBody Result result){
+        return resultService.checkIfAbleToSubmitScore(result);
     }
+
+
 }

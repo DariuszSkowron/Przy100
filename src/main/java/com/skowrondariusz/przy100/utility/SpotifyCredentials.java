@@ -8,6 +8,7 @@ public class SpotifyCredentials{
 
     static String CLIENT_ID;
     static String CLIENT_SECRET;
+    private static String ARTIST_ID;
 
 
     @Value("${spotify.clientId}")
@@ -18,5 +19,15 @@ public class SpotifyCredentials{
     @Value("${spotify.client-secret}")
     public void setClientSecret(String clientSecret){
         CLIENT_SECRET = clientSecret;
+    }
+
+    @Value("${spotify.ArtistId}")
+    public void setArtistId(String artistId){
+        ARTIST_ID = artistId;
+    }
+
+
+    public static String getArtistId() {
+        return ARTIST_ID;
     }
 }

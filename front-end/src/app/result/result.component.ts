@@ -17,6 +17,7 @@ export class ResultComponent implements OnInit {
   tooLowScore = false;
   finishedQuiz: Quiz;
   userResult: Result;
+  isAbleToSubmit = false;
   lastScoreSubmitted: number;
   userAnswers: string[] = [];
 
@@ -31,7 +32,7 @@ export class ResultComponent implements OnInit {
       this.quizService.questionList = JSON.parse(localStorage.getItem('questionList'));
       this.quizService.startTime = JSON.parse(localStorage.getItem('startTime'));
       this.quizService.totalTime = JSON.parse(localStorage.getItem('totalTime'));
-      this.getLastSubmittedResult();
+      // this.getLastSubmittedResult();
 
 
       this.quizService.questionList.forEach((question, i) => {
@@ -47,10 +48,10 @@ export class ResultComponent implements OnInit {
 
       this.quizService.getUserResult(this.finishedQuiz).subscribe(res => {
         this.userResult = res;
-        if (this.lastScoreSubmitted > this.userResult.totalScore) {
-          this.tooLowScore = true;
-          this.disableButton();
-        }
+        this.getLastSubmittedResult(this.userResult);
+        // if (this.isAbleToSubmit === false) {
+        //   this.disableButton();
+        // }
       });
 
       this.correctAnswerCount = this.userResult.numberOfCorrectAnswers;
@@ -58,9 +59,9 @@ export class ResultComponent implements OnInit {
 
   }
 
-  getLastSubmittedResult() {
-    this.quizService.checkIfScoreIsHigh().subscribe(result => {
-      this.lastScoreSubmitted = result;
+  getLastSubmittedResult(kupa: Result) {
+    this.quizService.checkIfScoreIsHigh(kupa).subscribe(result => {
+      this.isAbleToSubmit = result;
     });
   }
 
