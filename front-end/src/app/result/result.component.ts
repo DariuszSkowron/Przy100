@@ -11,8 +11,8 @@ import {Quiz} from '../quiz/quiz';
   styleUrls: ['./result.component.scss']
 })
 export class ResultComponent implements OnInit {
-
-  correctAnswerCount: number;
+  
+  
   isDisabled = false;
   finishedQuiz: Quiz;
   userResult: Result;
@@ -25,24 +25,17 @@ export class ResultComponent implements OnInit {
 
   ngOnInit() {
       this.finishedQuiz = JSON.parse(localStorage.getItem('quiz'));
+
       if ((localStorage.getItem('quizProgress')) === this.finishedQuiz.questionList.length.toString()) {
-        // this.quizService.seconds = Number((localStorage.getItem('seconds')));
-        // this.quizService.quizProgress = Number((localStorage.getItem('quizProgress')));
         this.quizService.questionList = JSON.parse(localStorage.getItem('questionList'));
-        // this.userResult = JSON.parse(localStorage.getItem('userResult'));
-        // this.quizService.startTime = JSON.parse(localStorage.getItem('startTime'));
-        // this.quizService.totalTime = JSON.parse(localStorage.getItem('totalTime'));
+        this.userResult = JSON.parse(localStorage.getItem('userResult'));
 
 
-      if (localStorage.getItem('userResult') === null) {
+        if (localStorage.getItem('userResult') === null) {
+
       this.quizService.questionList.forEach((question, i) => {
         this.userAnswers[i] = question.userAnswer;
       });
-
-
-      // this.quizService.questionList.forEach((e, i) => {
-      //   this.userAnswers[i] = e.userAnswer;
-      // });
 
       this.finishedQuiz.userAnswers = this.userAnswers;
 
@@ -51,12 +44,8 @@ export class ResultComponent implements OnInit {
         this.getLastSubmittedResult(this.userResult);
         this.scoreTest = true;
         localStorage.setItem('userResult', JSON.stringify(this.userResult));
-        // if (this.isAbleToSubmit === false) {
-        //   this.disableButton();
-        // }
       });
 
-      this.correctAnswerCount = this.userResult.numberOfCorrectAnswers;
     } else {
         this.userResult = JSON.parse(localStorage.getItem('userResult'));
       }
