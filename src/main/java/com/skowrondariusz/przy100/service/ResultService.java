@@ -5,8 +5,6 @@ import com.skowrondariusz.przy100.model.Result;
 import com.skowrondariusz.przy100.repository.ResultRepository;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Date;
 
 @Service
@@ -21,7 +19,7 @@ public class ResultService {
     }
 
     private double totalScore(Result result){
-        return Math.round(((double) result.getNumberOfCorrectAnswers() * 500 / result.getTimeSpent())*100.0) /100.0;
+        return Math.round((((double) result.getNumberOfCorrectAnswers() * 500) * 1/result.getTimeSpent())*100.0) /100.0;
     }
 
     public Result getUserResult(Quiz userQuiz){
@@ -42,7 +40,7 @@ public class ResultService {
         this.resultRepository.deleteById(id);
     }
 
-    public double checkLastSubmittedScore(){
+    private double checkLastSubmittedScore(){
 
         if (resultRepository.count() == 0){
             return 0;
