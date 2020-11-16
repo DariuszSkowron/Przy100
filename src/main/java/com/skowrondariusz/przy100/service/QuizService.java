@@ -61,12 +61,13 @@ public class QuizService {
                 .map(questionDto -> this.mapper.convertToQuestionEntity(questionDto))
                 .collect(Collectors.toList());
         var timeSpentOnQuestion = 0d;
-        var timerFlag = userQuiz.getStartTime().getTime();
+        var timerFlag = userQuiz.getStartTime().getTime() / 1000;
 
         for (int i = 0; i < userQuiz.getUserAnswers().size(); i++){
             try {
                 if (userQuiz.getUserAnswers().get(i).getAnswer().equals(questionService.getCorrectAnswerForQuestion(userQuiz.getUserAnswers().get(i).getQuestionId()))){
-                    result = result + 1 /  ((double) userQuiz.getUserAnswers().get(i).getAnswerTime().getTime() - (double) timerFlag);
+                    timeSpentOnQuestion = ((double) userQuiz.getUserAnswers().get(i).getAnswerTime().getTime() - (double) timerFlag) / 1000;
+                    result = result + (100 /  ((double) userQuiz.getUserAnswers().get(i).getAnswerTime().getTime() - (double) timerFlag));
                     timerFlag = (userQuiz.getUserAnswers().get(i).getAnswerTime().getTime());
 
                 }
@@ -80,7 +81,9 @@ public class QuizService {
                 }
             }
         }
-        return result;
+        System.out.println(result);
+        System.out.println(Math.round(result * 100) / 100);
+        return Math.round(result * 100) / 100;
     }
 
 }
