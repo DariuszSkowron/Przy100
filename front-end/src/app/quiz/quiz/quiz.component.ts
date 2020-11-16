@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {QuizService} from '../../shared/quiz.service';
 import {Quiz} from '../quiz';
 import {Router} from '@angular/router';
+import {UserAnswer} from '../user-answer';
 
 @Component({
   selector: 'app-quiz',
@@ -14,16 +15,22 @@ export class QuizComponent implements OnInit {
   songListenAvailable = true;
   timeLeft = 5;
   interval;
+  userAnswer: UserAnswer;
+  userAnswers: UserAnswer[] = [];
 
   constructor(private router: Router, public quizService: QuizService) {
 
   }
 
   ngOnInit() {
-    if (Number(localStorage.getItem('seconds')) > 0) {
+    this.quiz = JSON.parse(localStorage.getItem('quiz'));
+    // if (Number(localStorage.getItem('seconds')) > 0) {
+    if (Number(localStorage.getItem('quiz') != null)) {
       this.quizService.seconds = Number(localStorage.getItem('seconds'));
       this.quizService.quizProgress = Number((localStorage.getItem('quizProgress')));
+      this.quizService.questionList = JSON.parse(localStorage.getItem('questionList'));
       this.quiz = JSON.parse(localStorage.getItem('quiz'));
+      this.startTimer();
       if (this.quizService.quizProgress === this.quiz.questionList.length) {
         this.router.navigate(['/result']);
       }
@@ -57,8 +64,17 @@ export class QuizComponent implements OnInit {
 
 
   Answer(selectedAnswer) {
-    this.quiz.questionList[this.quizService.quizProgress].userAnswer = selectedAnswer;
+    this.userAnswer = {
+      questionId: this.quiz.questionList[this.quizService.quizProgress].id,
+      answer: selectedAnswer,
+      answerTime: new Date()
+    };
+    this.userAnswers[this.quizService.quizProgress] = this.userAnswer;
+    // this.quiz.userAnswers[this.quizService.quizProgress] = this.userAnswer;
+    // this.quiz.userAnswers[this.quizService.quizProgress].answerTime = new Date();
+    // this.quiz.userAnswers[this.quizService.quizProgress].questionId = this.quiz.questionList[this.quizService.quizProgress].id;
     localStorage.setItem('questionList', JSON.stringify(this.quizService.questionList));
+    localStorage.setItem('quiz', JSON.stringify(this.quiz));
     this.quizService.quizProgress++;
     this.songListenAvailable = true;
     this.pauseButtonTimer();

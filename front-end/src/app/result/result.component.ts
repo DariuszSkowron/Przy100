@@ -33,11 +33,11 @@ export class ResultComponent implements OnInit {
 
         if (localStorage.getItem('userResult') === null) {
 
-      this.quizService.questionList.forEach((question, i) => {
-        this.userAnswers[i] = question.userAnswer;
-      });
-
-      this.finishedQuiz.userAnswers = this.userAnswers;
+      // this.quizService.questionList.forEach((question, i) => {
+      //   this.userAnswers[i] = question.userAnswer;
+      // });
+      //
+      // this.finishedQuiz.userAnswers = this.userAnswers;
 
       this.quizService.getUserResult(this.finishedQuiz).subscribe(res => {
         this.userResult = res;
@@ -79,7 +79,8 @@ export class ResultComponent implements OnInit {
     localStorage.setItem('quizProgress', '0');
     localStorage.setItem('questionList', '');
     localStorage.setItem('seconds', '0');
-    localStorage.removeItem('userResult');
+    localStorage.removeItem('userResult')
+    localStorage.removeItem('quiz');
   }
 
   quizRepeat() {
