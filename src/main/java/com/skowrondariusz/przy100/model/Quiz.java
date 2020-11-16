@@ -1,9 +1,11 @@
 package com.skowrondariusz.przy100.model;
 
 import com.skowrondariusz.przy100.dto.QuestionDto;
+import com.skowrondariusz.przy100.dto.UserAnswerDto;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class Quiz {
 
@@ -11,7 +13,8 @@ public class Quiz {
     private Date endTime;
     private double score;
     private List<QuestionDto> questionList;
-    private List<String> userAnswers;
+//    private List<> userAnswers;
+    private List<UserAnswerDto> userAnswers;
 
     public Quiz() {
     }
@@ -21,15 +24,22 @@ public class Quiz {
         this.questionList = questionList;
     }
 
-    public Quiz(Date startTime, Date endTime, double score, List<QuestionDto> questionList, List<String> userAnswers) {
+//    public Quiz(Date startTime, Date endTime, double score, List<QuestionDto> questionList, List<String> userAnswers) {
+//        this.startTime = startTime;
+//        this.endTime = endTime;
+//        this.score = score;
+//        this.questionList = questionList;
+//        this.userAnswers = userAnswers;
+//    }
+
+
+    public Quiz(Date startTime, Date endTime, double score, List<QuestionDto> questionList, List<UserAnswerDto> userAnswers) {
         this.startTime = startTime;
         this.endTime = endTime;
         this.score = score;
         this.questionList = questionList;
         this.userAnswers = userAnswers;
     }
-
-
 
     public Date getStartTime() {
         return startTime;
@@ -63,11 +73,20 @@ public class Quiz {
         this.questionList = questionList;
     }
 
-    public List<String> getUserAnswers() {
+//    public List<String> getUserAnswers() {
+//        return userAnswers;
+//    }
+//
+//    public void setUserAnswers(List<String> userAnswers) {
+//        this.userAnswers = userAnswers;
+//    }
+
+
+    public List<UserAnswerDto> getUserAnswers() {
         return userAnswers;
     }
 
-    public void setUserAnswers(List<String> userAnswers) {
+    public void setUserAnswers(List<UserAnswerDto> userAnswers) {
         this.userAnswers = userAnswers;
     }
 

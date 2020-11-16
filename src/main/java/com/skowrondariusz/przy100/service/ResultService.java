@@ -24,11 +24,12 @@ public class ResultService {
 
     public Result getUserResult(Quiz userQuiz){
         var userResult = new Result();
-        userResult.setNumberOfCorrectAnswers(quizService.correctAnswersCount(userQuiz));
+//        userResult.setNumberOfCorrectAnswers(quizService.correctAnswersCount(userQuiz));
+        userResult.setNumberOfCorrectAnswers(5);
         var currentDate = new Date();
         var timeSpent =Math.round((((double) currentDate.getTime() - (double) userQuiz.getStartTime().getTime())/1000) *100.0) / 100.0;
         userResult.setTimeSpent(timeSpent);
-        userResult.setTotalScore(totalScore(userResult));
+        userResult.setTotalScore(quizService.userResult(userQuiz));
         return userResult;
     }
 
