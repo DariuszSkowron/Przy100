@@ -81,6 +81,8 @@ export class QuizComponent implements OnInit {
     this.timeLeft = 5;
     localStorage.setItem('quizProgress', this.quizService.quizProgress.toString());
     if (this.quizService.quizProgress === this.quiz.questionList.length) {
+      this.quiz.userAnswers = this.userAnswers;
+      localStorage.setItem('quiz', JSON.stringify(this.quiz));
       clearTimeout(this.quizService.timer);
       this.quizService.totalTime = (new Date().getTime() - new Date(this.quizService.startTime).getTime()) / 1000;
       localStorage.setItem('totalTime', this.quizService.totalTime.toString());

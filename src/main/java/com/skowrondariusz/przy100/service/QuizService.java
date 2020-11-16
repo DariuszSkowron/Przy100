@@ -33,16 +33,45 @@ public class QuizService {
         return quiz;
     }
 
-    int correctAnswersCount(Quiz userQuiz){
-        var result = 0;
+//    int correctAnswersCount(Quiz userQuiz){
+//        var result = 0;
+//        var questionList = userQuiz.getQuestionList().stream()
+//                .map(questionDto -> this.mapper.convertToQuestionEntity(questionDto))
+//                .collect(Collectors.toList());
+//
+//        for (int i = 0; i < userQuiz.getUserAnswers().size(); i++){
+//            try {
+//                if (userQuiz.getUserAnswers().get(i).equals(questionService.getCorrectAnswerForQuestion(questionList.get(i).getId()))) {
+//                    result++;
+//                }
+//            }
+//            catch (NullPointerException e){
+//                {
+//                    System.out.print("Caught NullPointerException");
+//                }
+//            }
+//        }
+//        return result;
+//    }
+
+
+    double userResult(Quiz userQuiz){
+        double result = 0;
         var questionList = userQuiz.getQuestionList().stream()
                 .map(questionDto -> this.mapper.convertToQuestionEntity(questionDto))
                 .collect(Collectors.toList());
+        var timeSpentOnQuestion = 0d;
+        var timerFlag = userQuiz.getStartTime().getTime();
 
         for (int i = 0; i < userQuiz.getUserAnswers().size(); i++){
             try {
-                if (userQuiz.getUserAnswers().get(i).equals(questionService.getCorrectAnswerForQuestion(questionList.get(i).getId()))) {
-                    result++;
+                if (userQuiz.getUserAnswers().get(i).getAnswer().equals(questionService.getCorrectAnswerForQuestion(userQuiz.getUserAnswers().get(i).getQuestionId()))){
+                    result = result + 1 /  ((double) userQuiz.getUserAnswers().get(i).getAnswerTime().getTime() - (double) timerFlag);
+                    timerFlag = (userQuiz.getUserAnswers().get(i).getAnswerTime().getTime());
+
+                }
+                else{
+                    timerFlag = (userQuiz.getUserAnswers().get(i).getAnswerTime().getTime());
                 }
             }
             catch (NullPointerException e){
