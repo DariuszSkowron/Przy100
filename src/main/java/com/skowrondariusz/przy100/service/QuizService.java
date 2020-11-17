@@ -33,40 +33,32 @@ public class QuizService {
         return quiz;
     }
 
-//    int correctAnswersCount(Quiz userQuiz){
-//        var result = 0;
-//        var questionList = userQuiz.getQuestionList().stream()
-//                .map(questionDto -> this.mapper.convertToQuestionEntity(questionDto))
-//                .collect(Collectors.toList());
-//
-//        for (int i = 0; i < userQuiz.getUserAnswers().size(); i++){
-//            try {
-//                if (userQuiz.getUserAnswers().get(i).equals(questionService.getCorrectAnswerForQuestion(questionList.get(i).getId()))) {
-//                    result++;
-//                }
-//            }
-//            catch (NullPointerException e){
-//                {
-//                    System.out.print("Caught NullPointerException");
-//                }
-//            }
-//        }
-//        return result;
-//    }
+    int numberOfUserCorrectAnswers(Quiz userQuiz) {
+        var result = 0;
+
+        for (int i = 0; i < userQuiz.getUserAnswers().size(); i++) {
+            try {
+                if (userQuiz.getUserAnswers().get(i).getAnswer().equals(questionService.getCorrectAnswerForQuestion(userQuiz.getUserAnswers().get(i).getQuestionId()))) {
+                    result ++;
+                }
+            } catch (NullPointerException e) {
+                {
+                    System.out.print("Caught NullPointerException");
+                }
+            }
+
+        }
+        return result;
+    }
 
 
-    double userResult(Quiz userQuiz){
-        double result = 0d;
-        var questionList = userQuiz.getQuestionList().stream()
-                .map(questionDto -> this.mapper.convertToQuestionEntity(questionDto))
-                .collect(Collectors.toList());
-        var timeSpentOnQuestion = 0d;
+    double userPoints(Quiz userQuiz){
+        double result = 0d;;
         var timerFlag = userQuiz.getStartTime().getTime() / 1000;
 
         for (int i = 0; i < userQuiz.getUserAnswers().size(); i++){
             try {
                 if (userQuiz.getUserAnswers().get(i).getAnswer().equals(questionService.getCorrectAnswerForQuestion(userQuiz.getUserAnswers().get(i).getQuestionId()))){
-                    timeSpentOnQuestion = ((double) userQuiz.getUserAnswers().get(i).getAnswerTime().getTime() - (double) timerFlag) / 1000;
                     result = result + (100 /  (((double) userQuiz.getUserAnswers().get(i).getAnswerTime().getTime() / 1000) - (double) timerFlag));
                     timerFlag = (userQuiz.getUserAnswers().get(i).getAnswerTime().getTime() / 1000);
 
