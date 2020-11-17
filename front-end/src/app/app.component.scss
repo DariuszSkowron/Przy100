@@ -10,3 +10,37 @@ main {
   padding: 10px;
   margin-bottom: 40px;
 }
+
+
+.ss {
+  background: url("/../assets/img/Sentino_background.png");
+  background-size: cover;
+  background-position:50% 50%;
+  width: auto;
+}
+.ss:after {
+  content: '';
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  min-height: 100vh;
+  z-index: -1;
+  background: #0B0904;
+  opacity: 0.9;}
+
+
+  //.ll {
+  //  background: url(../assets/img/Sentino_background.png);
+  //  background-size: cover; }
+  ////main:after {
+  ////  content: '';
+  ////  position: fixed;
+  ////  top: 0;
+  ////  right: 0;
+  ////  width: 100%;
+  ////  min-height: 100vh;
+  ////  z-index: -1;
+  ////  background: #0B0904;
+  ////  opacity: 0.9;}
+  //
