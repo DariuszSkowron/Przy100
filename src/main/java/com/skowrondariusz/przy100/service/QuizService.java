@@ -56,7 +56,7 @@ public class QuizService {
 
 
     double userResult(Quiz userQuiz){
-        double result = 0;
+        double result = 0d;
         var questionList = userQuiz.getQuestionList().stream()
                 .map(questionDto -> this.mapper.convertToQuestionEntity(questionDto))
                 .collect(Collectors.toList());
@@ -67,12 +67,12 @@ public class QuizService {
             try {
                 if (userQuiz.getUserAnswers().get(i).getAnswer().equals(questionService.getCorrectAnswerForQuestion(userQuiz.getUserAnswers().get(i).getQuestionId()))){
                     timeSpentOnQuestion = ((double) userQuiz.getUserAnswers().get(i).getAnswerTime().getTime() - (double) timerFlag) / 1000;
-                    result = result + (100 /  ((double) userQuiz.getUserAnswers().get(i).getAnswerTime().getTime() - (double) timerFlag));
-                    timerFlag = (userQuiz.getUserAnswers().get(i).getAnswerTime().getTime());
+                    result = result + (100 /  (((double) userQuiz.getUserAnswers().get(i).getAnswerTime().getTime() / 1000) - (double) timerFlag));
+                    timerFlag = (userQuiz.getUserAnswers().get(i).getAnswerTime().getTime() / 1000);
 
                 }
                 else{
-                    timerFlag = (userQuiz.getUserAnswers().get(i).getAnswerTime().getTime());
+                    timerFlag = (userQuiz.getUserAnswers().get(i).getAnswerTime().getTime() / 1000);
                 }
             }
             catch (NullPointerException e){
@@ -81,9 +81,7 @@ public class QuizService {
                 }
             }
         }
-        System.out.println(result);
-        System.out.println(Math.round(result * 100) / 100);
-        return Math.round(result * 100) / 100;
+        return (double)Math.round(result * 100) / 100;
     }
 
 }

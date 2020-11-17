@@ -24,13 +24,14 @@ export class QuizComponent implements OnInit {
 
   ngOnInit() {
     this.quiz = JSON.parse(localStorage.getItem('quiz'));
-    // if (Number(localStorage.getItem('seconds')) > 0) {
+    this.quizService.seconds = JSON.parse(localStorage.getItem('seconds'))
+
+
     if (Number(localStorage.getItem('quiz') != null)) {
       this.quizService.seconds = Number(localStorage.getItem('seconds'));
       this.quizService.quizProgress = Number((localStorage.getItem('quizProgress')));
       this.quizService.questionList = JSON.parse(localStorage.getItem('questionList'));
       this.quiz = JSON.parse(localStorage.getItem('quiz'));
-      this.startTimer();
       if (this.quizService.quizProgress === this.quiz.questionList.length) {
         this.router.navigate(['/result']);
       }
