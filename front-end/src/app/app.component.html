@@ -1,3 +1,4 @@
+
 <mat-sidenav-container>
   <mat-sidenav #sidenav role="navigation">
     <app-sidenav-list (sidenavClose)="sidenav.close()"></app-sidenav-list>
@@ -5,8 +6,11 @@
   <mat-sidenav-content>
     <app-navbar (sidenavToggle)="sidenav.toggle()"></app-navbar>
     <main>
+<!--      <div class="ss">-->
     <router-outlet></router-outlet>
+<!--        </div>-->
     </main>
     <app-footer></app-footer>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
