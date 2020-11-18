@@ -3,31 +3,33 @@ mat-sidenav-container, mat-sidenav-content, mat-sidenav {
 }
 
 mat-sidenav{
-  width: 250px;
+  width: 200px;
 }
+
+
 
 main {
-  padding: 10px;
-  margin-bottom: 40px;
+  //padding: 90px;
+  //margin-bottom: 40px;
 }
 
 
-.ss {
-  background: url("/../assets/img/Sentino_background.png");
-  background-size: cover;
-  background-position:50% 50%;
-  width: auto;
-}
-.ss:after {
-  content: '';
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100%;
-  min-height: 100vh;
-  z-index: -1;
-  background: #0B0904;
-  opacity: 0.9;}
+//body {
+//  background: url("/../assets/img/Sentino_background.png") !important;
+//  background-size: cover;
+//  background-position:50% 50%;
+//  width: auto;
+//}
+//body:after {
+//  content: '';
+//  position: fixed;
+//  top: 0;
+//  right: 0;
+//  width: 100%;
+//  min-height: 100vh;
+//  z-index: -1;
+//  background: #0B0904;
+//  opacity: 0.9;}
 
 
   //.ll {
