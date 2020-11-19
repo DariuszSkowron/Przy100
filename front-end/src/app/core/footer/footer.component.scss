@@ -3,11 +3,14 @@ $line-height: 40px;
 footer {
   position: fixed;
   width: 100%;
+  margin-bottom: 0;
   bottom: 0;
   height: $line-height;
   line-height: $line-height;
   background: rgba((lighten(grey, 10)), 0.2);
   z-index: 5;
+  //position: relative;
+  //height: 200px;
 
 
   //border-top: 1px solid red ;
