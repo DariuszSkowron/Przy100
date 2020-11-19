@@ -73,6 +73,11 @@
 
 }
 
-//h2{
-//  text-align: center;
-//}
+@media(max-width: 700px) {
+.card-image{
+
+  img{
+  max-width: 150px !important;
+  }
+}
+}
