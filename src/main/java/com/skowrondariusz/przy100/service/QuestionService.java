@@ -45,13 +45,6 @@ public class QuestionService {
        return questionRepository.getQuestionById(id);
     }
 
-
-    @Transactional
-    public void setCorrectAnswer (long questionId, String answer){
-        questionRepository.getQuestionById(questionId).setCorrectAnswer(answer);
-
-    }
-
     public String getCorrectAnswerForQuestion(long questionId){
         return questionRepository.getQuestionById(questionId).getCorrectAnswer();
     }
@@ -59,6 +52,8 @@ public class QuestionService {
     public long count(){
         return questionRepository.count();
     }
+
+
 
 
 }

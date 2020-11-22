@@ -36,7 +36,23 @@ public class QuestionRepositoryIT {
 
         assertThat(foundQuestion.getId())
                 .isEqualTo(firstQuestion.getId());
+    }
+
+    @Test
+    public void whenCount_thenReturnSize(){
+        Question firstQuestion = new Question("question 1 test","aq1", Arrays.asList("q1", "q2", "a3") );
+        entityManager.persist(firstQuestion);
+        entityManager.flush();
+
+
+
+        assertThat(questionRepository.count())
+                .isEqualTo(1);
+
 
     }
+
+
+
 
 }
