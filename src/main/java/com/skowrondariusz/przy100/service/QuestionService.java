@@ -2,6 +2,7 @@ package com.skowrondariusz.przy100.service;
 
 import com.skowrondariusz.przy100.model.Question;
 import com.skowrondariusz.przy100.repository.QuestionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ public class QuestionService {
 
     private QuestionRepository questionRepository;
 
+
     public QuestionService(QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
     }
@@ -29,7 +31,7 @@ public class QuestionService {
         return questionList;
     }
 
-    private int[] drawQuestions(int quizSize){
+    public int[] drawQuestions(int quizSize){
         return new Random().ints(1,Math.toIntExact(questionRepository.count()) +1)
                 .distinct()
                 .limit(quizSize)
@@ -37,19 +39,12 @@ public class QuestionService {
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public void saveQuestion (Question question){
-        questionRepository.save(question);
+    public Question saveQuestion (Question question){
+       return questionRepository.save(question);
     }
 
     public Question getQuestionById(int id){
        return questionRepository.getQuestionById(id);
-    }
-
-
-    @Transactional
-    public void setCorrectAnswer (long questionId, String answer){
-        questionRepository.getQuestionById(questionId).setCorrectAnswer(answer);
-
     }
 
     public String getCorrectAnswerForQuestion(long questionId){
@@ -59,6 +54,8 @@ public class QuestionService {
     public long count(){
         return questionRepository.count();
     }
+
+
 
 
 }
