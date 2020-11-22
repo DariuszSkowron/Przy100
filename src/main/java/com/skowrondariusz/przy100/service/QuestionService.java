@@ -31,7 +31,7 @@ public class QuestionService {
         return questionList;
     }
 
-    private int[] drawQuestions(int quizSize){
+    public int[] drawQuestions(int quizSize){
         return new Random().ints(1,Math.toIntExact(questionRepository.count()) +1)
                 .distinct()
                 .limit(quizSize)
@@ -39,8 +39,8 @@ public class QuestionService {
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public void saveQuestion (Question question){
-        questionRepository.save(question);
+    public Question saveQuestion (Question question){
+       return questionRepository.save(question);
     }
 
     public Question getQuestionById(int id){
