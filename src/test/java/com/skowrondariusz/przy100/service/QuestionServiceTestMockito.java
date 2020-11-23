@@ -4,38 +4,52 @@ import com.skowrondariusz.przy100.model.Question;
 import com.skowrondariusz.przy100.repository.QuestionRepository;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.when;
 
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+//@ExtendWith(MockitoExtension.class)
+//@SpringBootTest
 
-//@RunWith(MockitoJUnitRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 //@DataJpaTest
 //@RunWith(SpringRunner.class)
 //@TestPropertySource("classpath:application.properties")
 
-public class QuestionServiceTest {
+public class QuestionServiceTestMockito {
 
 
-    @Autowired
+    @Mock
+    private QuestionRepository questionRepository;
+
+
+    @InjectMocks
     private QuestionService questionService;
+
+
+//@Before
+//public void setUp() throws Exception{
+//    questionService = new QuestionService(questionRepository);
+//}
+
 
 
 //    @Autowired
@@ -48,6 +62,14 @@ public class QuestionServiceTest {
 //    private QuestionService questionService;
 //
 //
+
+    @Test
+    public void savedQuestionHasId(){
+        Question question1 = new Question("question 1 test","aq1", Arrays.asList("q1", "q2", "a3") );
+        when(questionRepository.save(Mockito.any(Question.class))).then(returnsFirstArg());
+        Question savedQuestion = questionService.saveQuestion(question1);
+        assertThat(savedQuestion.getDescription()).isEqualTo("question 1 test");
+    }
 
     @Test
     public void shouldCollectQuestionsForQuiz(){
