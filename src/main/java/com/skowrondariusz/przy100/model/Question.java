@@ -25,10 +25,10 @@ public class Question {
         this.description = description;
     }
 
-    public Question(String description, String correctAnswerId, List<String> listOfAnswers) {
+    public Question(String description, String correctAnswer, List<String> listOfWrongAnswers) {
         this.description = description;
-        this.correctAnswer = correctAnswerId;
-        this.listOfWrongAnswers = listOfAnswers;
+        this.correctAnswer = correctAnswer;
+        this.listOfWrongAnswers = listOfWrongAnswers;
     }
 
     public long getId() {
