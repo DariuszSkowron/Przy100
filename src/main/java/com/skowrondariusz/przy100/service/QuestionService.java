@@ -32,7 +32,7 @@ public class QuestionService {
         return questionList;
     }
 
-    public int[] drawQuestions(int quizSize){
+    int[] drawQuestions(int quizSize){
         return new Random().ints(1,Math.toIntExact(questionRepository.count()) +1)
                 .distinct()
                 .limit(quizSize)
@@ -52,7 +52,7 @@ public class QuestionService {
         return questionRepository.getQuestionById(questionId).getCorrectAnswer();
     }
 
-    public long count(){
+    long count(){
         return questionRepository.count();
     }
 
