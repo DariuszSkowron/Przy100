@@ -40,7 +40,7 @@ public class ResultService {
         this.resultRepository.deleteById(id);
     }
 
-    private double checkLastSubmittedScore(){
+    double checkLastSubmittedScore(){
 
         if (resultRepository.count() == 0){
             return 0;
