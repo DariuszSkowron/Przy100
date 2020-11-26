@@ -52,8 +52,10 @@ public class ResultService {
         if (checkIfAbleToSubmitScore(result)){
             if (resultRepository.count() >= 2) {
                 resultRepository.deleteById(resultRepository.findFirstByOrderByTotalScoreAsc().getId());
+                System.out.println("test2");
             }
             resultRepository.save(result);
+            System.out.println("test");
         }
         else{
             System.out.println("Something went wrong, score submitted cant be saved in the list");
