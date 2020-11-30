@@ -27,6 +27,13 @@ public class Result {
         this.nickname = nickname;
     }
 
+    public Result(double timeSpent, int numberOfCorrectAnswers, String nickname, double totalScore) {
+        this.timeSpent = timeSpent;
+        this.numberOfCorrectAnswers = numberOfCorrectAnswers;
+        this.nickname = nickname;
+        this.totalScore = totalScore;
+    }
+
     public double getTotalScore() {
         return totalScore;
     }
@@ -73,6 +80,8 @@ public class Result {
                 "id=" + id +
                 ", timeSpent=" + timeSpent +
                 ", numberOfCorrectAnswers=" + numberOfCorrectAnswers +
+                ", nickname='" + nickname + '\'' +
+                ", totalScore=" + totalScore +
                 '}';
     }
 }
