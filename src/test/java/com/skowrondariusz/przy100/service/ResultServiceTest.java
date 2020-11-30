@@ -34,19 +34,19 @@ public class ResultServiceTest {
     @Before
     public void setUp(){
 
-        Result result1 = new Result(20d,5,"test1");
+        Result result1 = new Result(20d,5,"test1", 555d);
         result1.setId(1);
-        result1.setTotalScore(555);
-        Result result2 = new Result(31d,10,"test2");
+        Result result2 = new Result(31d,10,"test2", 111d);
         result2.setId(2);
-        result2.setTotalScore(111);
 
         List<Result> allResults = Arrays.asList(result1,result2);
 
-        when(resultRepository.count()).thenReturn(5L);
+        when(resultRepository.count()).thenReturn(2L);
         when(resultRepository.findFirstByOrderByTotalScoreAsc()).thenReturn(result2);
-        when(resultRepository.lowestScore()).thenReturn(2d);
+        when(resultRepository.lowestScore()).thenReturn(1122d);
         when(resultRepository.findAll()).thenReturn(allResults);
+        when(resultRepository.getOne(1L)).thenReturn(result1);
+        when(resultRepository.getOne(2L)).thenReturn(result2);
 //        when(resultRepository.save(Mockito.any(Result.class))).thenCallRealMethod(returnsFirstArg());
 //        when(resultRepository.findById(2L)).thenReturn(java.util.Optional.of(result2)).thenReturn(null);
 //        when(resultRepository.deleteById(2L)).then(allResults.remove(2));
@@ -68,13 +68,29 @@ public class ResultServiceTest {
     }
 
     @Test
-    public void shouldSubmitResult(){
-        Result resultTest = new Result(31d,10,"test2");
+    public void shouldSaveResultWhenRepositoryIsNotFull(){
+        Result resultTest = new Result(31d,10,"test2", 130d);
         resultTest.setId(3);
-        resultTest.setTotalScore(130);
+        System.out.println(resultTest.toString());
+        System.out.println(resultRepository.findAll().toString());
+        when(resultRepository.count()).thenReturn(1L);
         when(resultRepository.save(Mockito.any(Result.class))).then(returnsFirstArg());
-        resultService.submitResult(resultTest);
-        Result test = resultRepository.save(resultTest);
-        assertThat(test.getId()).isEqualTo(3);
+        Result test = resultService.submitResult(resultTest);
+        assertThat(test.getNumberOfCorrectAnswers()).isEqualTo(10);
+        System.out.println(resultRepository.findAll().toString());
     }
+
+    @Test
+    public void shouldUpdateResult(){
+        Result resultTest = new Result(31d,10,"test2", 130d);
+        resultTest.setId(1);
+        Result resultUpdated = new Result(31d,10,"test2", 555d);
+        resultTest.setId(2);
+        when(resultRepository.getOne(2L)).thenReturn(resultUpdated);
+        when(resultRepository.save(Mockito.any(Result.class))).then(returnsFirstArg());
+        resultService.updateResult(2L, resultTest);
+
+        assertThat(resultUpdated.getTotalScore()).isEqualTo(130d);
+    }
+
 }

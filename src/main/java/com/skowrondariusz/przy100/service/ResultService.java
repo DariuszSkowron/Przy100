@@ -48,18 +48,38 @@ public class ResultService {
         return resultRepository.lowestScore();
     }
 
-    public void submitResult(Result result){
-        if (checkIfAbleToSubmitScore(result)){
+    public Result submitResult(Result result){
+//        if (checkIfAbleToSubmitScore(result)){
             if (resultRepository.count() >= 2) {
-                resultRepository.deleteById(resultRepository.findFirstByOrderByTotalScoreAsc().getId());
-                System.out.println("test2");
+//                resultRepository.deleteById(resultRepository.findFirstByOrderByTotalScoreAsc().getId());
+//                Result resultToUpdate = resultRepository.getOne(resultRepository.findFirstByOrderByTotalScoreAsc().getId());
+//                resultToUpdate.setTotalScore(result.getTotalScore());
+//                resultToUpdate.setTimeSpent(result.getTimeSpent());
+//                resultToUpdate.setNumberOfCorrectAnswers(result.getNumberOfCorrectAnswers());
+//                resultToUpdate.setNickname(result.getNickname());
+//                System.out.println("test2");
+//                return resultRepository.save(resultToUpdate);
+                updateResult(resultRepository.findFirstByOrderByTotalScoreAsc().getId(), result);
             }
-            resultRepository.save(result);
-            System.out.println("test");
-        }
-        else{
-            System.out.println("Something went wrong, score submitted cant be saved in the list");
-        }
+
+//        }
+        System.out.println("test");
+        return resultRepository.save(result);
+
+//        else{
+//            System.out.println("Something went wrong, score submitted cant be saved in the list");
+//        }
+    }
+
+    public Result updateResult(Long updatedResultId, Result result){
+        Result resultToUpdate = resultRepository.getOne(updatedResultId);
+        resultToUpdate.setTotalScore(result.getTotalScore());
+        resultToUpdate.setTimeSpent(result.getTimeSpent());
+        resultToUpdate.setNumberOfCorrectAnswers(result.getNumberOfCorrectAnswers());
+        resultToUpdate.setNickname(result.getNickname());
+        System.out.println("test2");
+        resultRepository.save(resultToUpdate);
+        return resultToUpdate;
     }
 
 }
