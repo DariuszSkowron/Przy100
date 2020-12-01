@@ -93,4 +93,11 @@ public class ResultServiceTest {
         assertThat(resultUpdated.getTotalScore()).isEqualTo(130d);
     }
 
+    @Test
+    public void shouldCheckIfScoreIsAbleToSubmit(){
+        Result resultTest = new Result(31d, 10, "test2", 130d);
+
+        assertThat(resultService.checkIfAbleToSubmitScore(resultTest)).isEqualTo(false);
+    }
+
 }
