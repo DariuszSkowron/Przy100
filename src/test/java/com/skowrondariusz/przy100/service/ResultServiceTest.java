@@ -8,6 +8,7 @@ import com.skowrondariusz.przy100.repository.ResultRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -18,8 +19,8 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ResultServiceTest {
@@ -103,6 +104,13 @@ public class ResultServiceTest {
         assertThat(resultService.checkIfAbleToSubmitScore(resultTest)).isEqualTo(false);
         resultTest.setTotalScore(1123d);
         assertThat(resultService.checkIfAbleToSubmitScore(resultTest)).isEqualTo(true);
+    }
+
+    @Test
+    public void shouldDeleteScore(){
+        Result testedResult = resultRepository.getOne(1L);
+        resultService.deleteResult(1L);
+        verify(resultRepository, times(1)).deleteById(eq(testedResult.getId()));
     }
 
 
