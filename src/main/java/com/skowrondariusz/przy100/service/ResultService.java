@@ -18,10 +18,6 @@ public class ResultService {
         this.quizService = quizService;
     }
 
-    private double totalScore(Result result){
-        return Math.round((((double) result.getNumberOfCorrectAnswers() * 500) * 1/result.getTimeSpent())*100.0) /100.0;
-    }
-
     public Result getUserResult(Quiz userQuiz){
         var userResult = new Result();
         userResult.setNumberOfCorrectAnswers(quizService.numberOfUserCorrectAnswers(userQuiz));

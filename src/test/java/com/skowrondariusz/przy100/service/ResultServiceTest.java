@@ -8,6 +8,7 @@ import com.skowrondariusz.przy100.repository.ResultRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -18,8 +19,8 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ResultServiceTest {
@@ -47,6 +48,7 @@ public class ResultServiceTest {
         when(resultRepository.findAll()).thenReturn(allResults);
         when(resultRepository.getOne(1L)).thenReturn(result1);
         when(resultRepository.getOne(2L)).thenReturn(result2);
+        when(resultRepository.findAll()).thenReturn(allResults);
 //        when(resultRepository.save(Mockito.any(Result.class))).thenCallRealMethod(returnsFirstArg());
 //        when(resultRepository.findById(2L)).thenReturn(java.util.Optional.of(result2)).thenReturn(null);
 //        when(resultRepository.deleteById(2L)).then(allResults.remove(2));
@@ -58,12 +60,15 @@ public class ResultServiceTest {
     }
 
     @Test
-    public void shouldReturnZeroWhenRepositoryIsEmpty(){
+    public void shouldReturnZeroWhenRepositoryIsEmptyAndLowestScoreWhenItsNot(){
         when(resultRepository.count()).thenReturn(0L);
 
         double result = resultService.checkLastSubmittedScore();
-
         assertThat(result).isEqualTo(0);
+
+        when(resultRepository.count()).thenReturn(3L);
+        double resultWithScore = resultService.checkLastSubmittedScore();
+        assertThat(resultWithScore).isEqualTo(1122d);
 
     }
 
@@ -96,8 +101,18 @@ public class ResultServiceTest {
     @Test
     public void shouldCheckIfScoreIsAbleToSubmit(){
         Result resultTest = new Result(31d, 10, "test2", 130d);
-
         assertThat(resultService.checkIfAbleToSubmitScore(resultTest)).isEqualTo(false);
+        resultTest.setTotalScore(1123d);
+        assertThat(resultService.checkIfAbleToSubmitScore(resultTest)).isEqualTo(true);
     }
+
+    @Test
+    public void shouldDeleteScore(){
+        Result testedResult = resultRepository.getOne(1L);
+        resultService.deleteResult(1L);
+        verify(resultRepository, times(1)).deleteById(eq(testedResult.getId()));
+    }
+
+
 
 }
