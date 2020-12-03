@@ -45,26 +45,22 @@ public class ResultService {
     }
 
     public Result submitResult(Result result){
-//        if (checkIfAbleToSubmitScore(result)){
+        if (checkIfAbleToSubmitScore(result)){
             if (resultRepository.count() >= 2) {
-//                resultRepository.deleteById(resultRepository.findFirstByOrderByTotalScoreAsc().getId());
-//                Result resultToUpdate = resultRepository.getOne(resultRepository.findFirstByOrderByTotalScoreAsc().getId());
-//                resultToUpdate.setTotalScore(result.getTotalScore());
-//                resultToUpdate.setTimeSpent(result.getTimeSpent());
-//                resultToUpdate.setNumberOfCorrectAnswers(result.getNumberOfCorrectAnswers());
-//                resultToUpdate.setNickname(result.getNickname());
-//                System.out.println("test2");
-//                return resultRepository.save(resultToUpdate);
-                updateResult(resultRepository.findFirstByOrderByTotalScoreAsc().getId(), result);
+                System.out.println("Last result has been overwritten");
+                return updateResult(resultRepository.findFirstByOrderByTotalScoreAsc().getId(), result);
             }
+            System.out.println("Result has been saved");
+            return resultRepository.save(result);
+        }
+        else{
+            System.out.println("Something went wrong, submitted score can't be saved in the list");
+            return null;
+        }
+    }
 
-//        }
-        System.out.println("test");
+    public Result saveResult(Result result){
         return resultRepository.save(result);
-
-//        else{
-//            System.out.println("Something went wrong, score submitted cant be saved in the list");
-//        }
     }
 
     public Result updateResult(Long updatedResultId, Result result){

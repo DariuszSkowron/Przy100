@@ -43,7 +43,7 @@ public class ResultServiceTest {
         List<Result> allResults = Arrays.asList(result1,result2);
 
         when(resultRepository.count()).thenReturn(2L);
-        when(resultRepository.findFirstByOrderByTotalScoreAsc()).thenReturn(result2);
+//        when(resultRepository.findFirstByOrderByTotalScoreAsc()).thenReturn(result2);
         when(resultRepository.lowestScore()).thenReturn(1122d);
         when(resultRepository.findAll()).thenReturn(allResults);
         when(resultRepository.getOne(1L)).thenReturn(result1);
@@ -73,17 +73,33 @@ public class ResultServiceTest {
     }
 
     @Test
-    public void shouldSaveResultWhenRepositoryIsNotFull(){
+    public void shouldSubmitResult(){
         Result resultTest = new Result(31d,10,"test2", 130d);
         resultTest.setId(3);
-        System.out.println(resultTest.toString());
-        System.out.println(resultRepository.findAll().toString());
-        when(resultRepository.count()).thenReturn(1L);
+        Result overwrittenTest = new Result(12d, 5,"test1", 110d);
+        overwrittenTest.setId(4);
+        when(resultRepository.getOne(4L)).thenReturn(overwrittenTest);
+        when(resultRepository.count()).thenReturn(2L);
+        when(resultRepository.findFirstByOrderByTotalScoreAsc()).thenReturn(overwrittenTest);
+        when(resultRepository.lowestScore()).thenReturn(overwrittenTest.getTotalScore());
         when(resultRepository.save(Mockito.any(Result.class))).then(returnsFirstArg());
-        Result test = resultService.submitResult(resultTest);
-        assertThat(test.getNumberOfCorrectAnswers()).isEqualTo(10);
-        System.out.println(resultRepository.findAll().toString());
+        resultService.submitResult(resultTest);
+        assertThat(overwrittenTest.getTotalScore()).isEqualTo(130);
+
+        
+
+
     }
+
+
+    @Test
+    public void shouldSaveResult(){
+        List<Result> resultList = resultRepository.findAll();
+        when (resultRepository.save(Mockito.any(Result.class))).then(returnsFirstArg());
+
+
+    }
+
 
     @Test
     public void shouldUpdateResult(){
