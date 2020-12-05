@@ -1,20 +1,21 @@
 package com.skowrondariusz.przy100.service;
 
 
+import com.skowrondariusz.przy100.dto.UserAnswerDto;
 import com.skowrondariusz.przy100.model.Question;
+import com.skowrondariusz.przy100.model.Quiz;
 import com.skowrondariusz.przy100.model.Result;
 import com.skowrondariusz.przy100.repository.QuestionRepository;
 import com.skowrondariusz.przy100.repository.ResultRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentCaptor;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,6 +32,11 @@ public class ResultServiceTest {
 
     @InjectMocks
     private ResultService resultService;
+
+//    @Spy
+//    @InjectMocks
+    @Mock
+    private QuizService quizService;
 
     @Before
     public void setUp(){
@@ -86,7 +92,7 @@ public class ResultServiceTest {
         resultService.submitResult(resultTest);
         assertThat(overwrittenTest.getTotalScore()).isEqualTo(130);
 
-        
+
 
 
     }
@@ -129,6 +135,18 @@ public class ResultServiceTest {
         verify(resultRepository, times(1)).deleteById(eq(testedResult.getId()));
     }
 
+
+    @Test
+    public void shouldGenerateResultFromQuiz(){
+        Quiz quiz = new Quiz(java.util.Calendar.getInstance().getTime());
+        List<UserAnswerDto> userAnswers = new ArrayList<>();
+        quiz.setUserAnswers(userAnswers);
+        when(quizService.numberOfUserCorrectAnswers(quiz)).thenReturn(25);
+        when(quizService.userPoints(quiz)).thenReturn(150d);
+        Result xxx = resultService.getUserResult(quiz);
+        assertThat(xxx.getTotalScore()).isEqualTo(150d);
+
+    }
 
 
 }

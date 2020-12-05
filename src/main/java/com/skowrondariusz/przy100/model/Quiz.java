@@ -33,6 +33,10 @@ public class Quiz {
 //    }
 
 
+    public Quiz(Date startTime) {
+        this.startTime = startTime;
+    }
+
     public Quiz(Date startTime, Date endTime, double score, List<QuestionDto> questionList, List<UserAnswerDto> userAnswers) {
         this.startTime = startTime;
         this.endTime = endTime;
