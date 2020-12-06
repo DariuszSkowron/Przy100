@@ -49,15 +49,11 @@ public class ResultServiceTest {
         List<Result> allResults = Arrays.asList(result1,result2);
 
         when(resultRepository.count()).thenReturn(2L);
-//        when(resultRepository.findFirstByOrderByTotalScoreAsc()).thenReturn(result2);
         when(resultRepository.lowestScore()).thenReturn(1122d);
         when(resultRepository.findAll()).thenReturn(allResults);
         when(resultRepository.getOne(1L)).thenReturn(result1);
         when(resultRepository.getOne(2L)).thenReturn(result2);
         when(resultRepository.findAll()).thenReturn(allResults);
-//        when(resultRepository.save(Mockito.any(Result.class))).thenCallRealMethod(returnsFirstArg());
-//        when(resultRepository.findById(2L)).thenReturn(java.util.Optional.of(result2)).thenReturn(null);
-//        when(resultRepository.deleteById(2L)).then(allResults.remove(2));
     }
 
     @Test
@@ -139,12 +135,10 @@ public class ResultServiceTest {
     @Test
     public void shouldGenerateResultFromQuiz(){
         Quiz quiz = new Quiz(java.util.Calendar.getInstance().getTime());
-        List<UserAnswerDto> userAnswers = new ArrayList<>();
-        quiz.setUserAnswers(userAnswers);
         when(quizService.numberOfUserCorrectAnswers(quiz)).thenReturn(25);
         when(quizService.userPoints(quiz)).thenReturn(150d);
         Result xxx = resultService.getUserResult(quiz);
-        assertThat(xxx.getTotalScore()).isEqualTo(150d);
+        assertThat(resultService.getUserResult(quiz).getTotalScore()).isEqualTo(150d);
 
     }
 
