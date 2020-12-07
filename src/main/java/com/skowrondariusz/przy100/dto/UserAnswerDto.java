@@ -18,6 +18,11 @@ public class UserAnswerDto {
 //    }
 
 
+    public UserAnswerDto(long questionId, String answer) {
+        this.questionId = questionId;
+        this.answer = answer;
+    }
+
     public UserAnswerDto(long questionId, Date answerTime, String answer) {
         this.questionId = questionId;
         this.answerTime = answerTime;
@@ -55,5 +60,14 @@ public class UserAnswerDto {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    @Override
+    public String toString() {
+        return "UserAnswerDto{" +
+                "questionId=" + questionId +
+                ", answerTime=" + answerTime +
+                ", answer='" + answer + '\'' +
+                '}';
     }
 }
