@@ -1,6 +1,5 @@
 package com.skowrondariusz.przy100.service;
 
-import com.skowrondariusz.przy100.dto.QuestionDto;
 import com.skowrondariusz.przy100.dto.UserAnswerDto;
 import com.skowrondariusz.przy100.model.Question;
 import com.skowrondariusz.przy100.model.Quiz;
@@ -28,7 +27,7 @@ public class QuizServiceTest {
     @InjectMocks
     QuizService quizService;
 
-    List<UserAnswerDto> userAnswerList = new ArrayList<>();
+    private List<UserAnswerDto> userAnswerList = new ArrayList<>();
 
 
     @Before
