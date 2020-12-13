@@ -46,7 +46,7 @@ public class QuizController {
     //
 
     @PostMapping("/userResult")
-    public Result userResult(@RequestBody Quiz userQuiz) {
+    public  @ResponseBody Result userResult(@RequestBody Quiz userQuiz) {
         return resultService.getUserResult(userQuiz);
     }
 
