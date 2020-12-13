@@ -36,6 +36,10 @@ public class QuizService {
     int numberOfUserCorrectAnswers(Quiz userQuiz) {
         var result = 0;
 
+        if (userQuiz.getUserAnswers() == null){
+            return 0;
+        }
+
         for (int i = 0; i < userQuiz.getUserAnswers().size(); i++) {
             try {
                 if (userQuiz.getUserAnswers().get(i).getAnswer().equals(questionService.getCorrectAnswerForQuestion(userQuiz.getUserAnswers().get(i).getQuestionId()))) {
@@ -55,6 +59,10 @@ public class QuizService {
     double userPoints(Quiz userQuiz){
         double result = 0d;;
         var timerFlag = userQuiz.getStartTime().getTime() / 1000;
+
+        if (userQuiz.getUserAnswers() == null){
+            return 0;
+        }
 
         for (int i = 0; i < userQuiz.getUserAnswers().size(); i++){
             try {

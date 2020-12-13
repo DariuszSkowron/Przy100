@@ -35,14 +35,15 @@ public class QuizController {
         return quizService.startNewQuiz(20);
     }
 
-    @PostMapping("/correctAnswers")
-    public String[] result(@RequestBody int[] answerIdList) {
-        var result = new String[answerIdList.length];
-        for (int i = 0; i < answerIdList.length; i++) {
-            result[i] = questionService.getCorrectAnswerForQuestion(answerIdList[i]);
-        }
-        return result;
-    }
+//    @PostMapping("/correctAnswers")
+//    public String[] result(@RequestBody int[] answerIdList) {
+//        var result = new String[answerIdList.length];
+//        for (int i = 0; i < answerIdList.length; i++) {
+//            result[i] = questionService.getCorrectAnswerForQuestion(answerIdList[i]);
+//        }
+//        return result;
+//    }
+    //
 
     @PostMapping("/userResult")
     public Result userResult(@RequestBody Quiz userQuiz) {
@@ -53,7 +54,6 @@ public class QuizController {
     public Result postResult(@RequestBody Result result) {
         this.resultService.submitResult(result);
         return result;
-
     }
 
     @GetMapping("/highscores")
@@ -62,11 +62,7 @@ public class QuizController {
         return new ArrayList<>(topResults);
     }
 
-//    @GetMapping("/isHighScore")
-//    public double scoreAbleToSubmit(){
-//        return resultService.checkLastSubmittedScore();
-//    }
-//
+
     @PostMapping("/isHighScore")
     public boolean scoreAbleToSubmit(@RequestBody Result result){
         return resultService.checkIfAbleToSubmitScore(result);
