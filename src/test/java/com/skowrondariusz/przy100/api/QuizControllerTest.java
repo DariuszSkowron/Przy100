@@ -33,8 +33,7 @@ import static org.mockito.BDDMockito.given;
 //import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 //import static org.springframework.test.web.client.match.MockMvcResultMatchers.jsonPath;
 
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -77,6 +76,29 @@ public class QuizControllerTest {
         Result testResult = new Result(22d, 10, "test");
 
 //        given(resultService.getUserResult(newQuiz)).willReturn(testResult);
+//        doReturn(testResult).when(resultService).getUserResult(newQuiz);
+        when(resultService.getUserResult(any())).thenReturn(testResult);
+
+        mockMvc.perform(post("/quiz/userResult")
+                .contentType(MediaType.APPLICATION_JSON)
+//                .content(asJsonString(newQuiz)))
+
+                .content(asJsonString(newQuiz)))
+                .andExpect(status().isOk())
+
+//                .andExpect(content().contentTypeCompatibleWith("application/json"))
+                .andDo(print())
+
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk()).andExpect(content().contentTypeCompatibleWith("application/json"))
+                .andExpect(jsonPath("$.timeSpent", is(testResult.getTimeSpent())));
+//            .andExpect(content().json("kupa"));
+
+
+
+
+
+//        given(resultService.getUserResult(newQuiz)).willReturn(testResult);
         doReturn(testResult).when(resultService).getUserResult(newQuiz);
 
         mockMvc.perform(post("/quiz/userResult")
@@ -85,11 +107,6 @@ public class QuizControllerTest {
                 .content(asJsonString(testResult)))
                 .andExpect(status().isOk())
                 .andDo(print());
-
-//                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isOk()).andExpect(content().contentTypeCompatibleWith("application/json"))
-//                .andExpect(jsonPath("$.timeSpent", is(testResult.getTimeSpent())));
-//            .andExpect(content().json("kupa"));
     }
 
 
