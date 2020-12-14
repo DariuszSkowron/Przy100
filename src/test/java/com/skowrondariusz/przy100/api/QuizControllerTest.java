@@ -71,7 +71,7 @@ public class QuizControllerTest {
     }
 
     @Test
-    public void shouldSubmitResult() throws Exception{
+    public void shouldGetUserResult() throws Exception{
         Quiz newQuiz = new Quiz(new Date());
         Result testResult = new Result(22d, 10, "test");
 
@@ -81,32 +81,37 @@ public class QuizControllerTest {
 
         mockMvc.perform(post("/quiz/userResult")
                 .contentType(MediaType.APPLICATION_JSON)
-//                .content(asJsonString(newQuiz)))
-
                 .content(asJsonString(newQuiz)))
                 .andExpect(status().isOk())
-
-//                .andExpect(content().contentTypeCompatibleWith("application/json"))
                 .andDo(print())
-
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isOk()).andExpect(content().contentTypeCompatibleWith("application/json"))
                 .andExpect(jsonPath("$.timeSpent", is(testResult.getTimeSpent())));
-//            .andExpect(content().json("kupa"));
+
+    }
 
 
+    @Test
+    public void shouldSubmitUserResult() throws Exception{
+        Result testResult = new Result(22d, 10, "test", 1230d);
 
+        when(resultService.submitResult(any())).thenReturn(testResult);
 
-
-//        given(resultService.getUserResult(newQuiz)).willReturn(testResult);
-        doReturn(testResult).when(resultService).getUserResult(newQuiz);
-
-        mockMvc.perform(post("/quiz/userResult")
+        mockMvc.perform(post("/quiz/result")
                 .contentType(MediaType.APPLICATION_JSON)
-//                .content(asJsonString(newQuiz)))
                 .content(asJsonString(testResult)))
                 .andExpect(status().isOk())
-                .andDo(print());
+                .andDo(print())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.totalScore", is(testResult.getTotalScore())));
+    }
+
+    @Test
+    public void shouldNotSubmitUserResult() throws Exception{
+        when(resultService.submitResult(any())).thenReturn(null);
+
+        mockMvc.perform(post("/quiz/result")
+                .content(""))
+                .andExpect(status().isBadRequest());
     }
 
 
