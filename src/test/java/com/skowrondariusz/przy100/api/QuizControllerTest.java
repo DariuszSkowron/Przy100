@@ -9,20 +9,26 @@ import com.skowrondariusz.przy100.service.QuizService;
 import com.skowrondariusz.przy100.service.ResultService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultMatcher;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
-import static org.mockito.ArgumentMatchers.eq;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 //import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
 //import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
@@ -32,13 +38,6 @@ import static org.mockito.BDDMockito.given;
 //import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 //import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 //import static org.springframework.test.web.client.match.MockMvcResultMatchers.jsonPath;
-
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.hamcrest.Matchers.*;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(QuizController.class)
@@ -57,9 +56,16 @@ public class QuizControllerTest {
     @MockBean
     private ResultService resultService;
 
+    private static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Test
-    public void shouldStartNewQuiz() throws Exception{
+    public void shouldStartNewQuiz() throws Exception {
         Quiz newQuiz = new Quiz(new Date());
 
         given(quizService.startNewQuiz(20)).willReturn(newQuiz);
@@ -71,7 +77,7 @@ public class QuizControllerTest {
     }
 
     @Test
-    public void shouldGetUserResult() throws Exception{
+    public void shouldGetUserResult() throws Exception {
         Quiz newQuiz = new Quiz(new Date());
         Result testResult = new Result(22d, 10, "test");
 
@@ -89,9 +95,8 @@ public class QuizControllerTest {
 
     }
 
-
     @Test
-    public void shouldSubmitUserResult() throws Exception{
+    public void shouldSubmitUserResult() throws Exception {
         Result testResult = new Result(22d, 10, "test", 1230d);
 
         when(resultService.submitResult(any())).thenReturn(testResult);
@@ -106,7 +111,7 @@ public class QuizControllerTest {
     }
 
     @Test
-    public void shouldNotSubmitUserResult() throws Exception{
+    public void shouldNotSubmitUserResult() throws Exception {
         when(resultService.submitResult(any())).thenReturn(null);
 
         mockMvc.perform(post("/quiz/result")
@@ -114,14 +119,36 @@ public class QuizControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    @Test
+    public void shouldGetHighScoresList() throws Exception {
+        List<Result> resultList = Arrays.asList(
+                new Result(22d, 10, "test", 1230d),
+                new Result(22d, 10, "test", 1230d),
+                new Result(22d, 10, "test", 1230d)
+        );
+
+        when(resultRepository.findAll()).thenReturn(resultList);
+
+        mockMvc.perform(get("/quiz/highscores"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$[0].totalScore", is(resultList.get(0).getTotalScore())));
+    }
+
+    @Test
+    public void shouldCheckIfScoreIsAbleToBeSubmitted() throws Exception{
+        Result testResult = new Result(22d, 10, "test", 1230d);
+
+        when(resultService.checkIfAbleToSubmitScore(any())).thenReturn(true);
 
 
-    private static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        mockMvc.perform(post("/quiz/isHighScore")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(testResult)))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().string("true"));
     }
 
 
