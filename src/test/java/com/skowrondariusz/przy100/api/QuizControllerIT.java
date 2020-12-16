@@ -21,7 +21,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import static com.skowrondariusz.przy100.api.QuizControllerTest.asJsonString;
 import static org.hamcrest.Matchers.hasSize;
@@ -79,8 +81,68 @@ public class QuizControllerIT {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.numberOfCorrectAnswers", is(0)))
                 .andExpect(jsonPath("$.totalScore", is(0.0)));
-
     }
+
+
+    @Test
+    public void shouldSubmitUserResult() throws Exception {
+        Result testResult = new Result(22d, 10, "test", 1230d);
+
+
+        mockMvc.perform(post("/quiz/result")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(testResult)))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.totalScore", is(testResult.getTotalScore())))
+                .andExpect(jsonPath("$.numberOfCorrectAnswers", is(testResult.getNumberOfCorrectAnswers())))
+                .andExpect(jsonPath("$.nickname", is(testResult.getNickname())))
+                .andExpect(jsonPath("$.timeSpent", is(testResult.getTimeSpent())));
+    }
+
+    @Test
+    public void shouldNotSubmitUserResult() throws Exception {
+
+
+        mockMvc.perform(post("/quiz/result")
+                .content(""))
+                .andExpect(status().isBadRequest());
+    }
+
+
+    @Test
+    public void shouldGetHighScoresList() throws Exception {
+        List<Result> resultList = Arrays.asList(
+                new Result(22d, 10, "test1", 1230d),
+                new Result(22d, 10, "test2", 12312d)
+        );
+        resultRepository.save(resultList.get(0));
+        resultRepository.save(resultList.get(1));
+
+        mockMvc.perform(get("/quiz/highscores"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$[0].nickname", is(resultList.get(0).getNickname())))
+                .andExpect(jsonPath("$[0].totalScore", is(resultList.get(0).getTotalScore())))
+                .andExpect(jsonPath("$[1].nickname", is(resultList.get(1).getNickname())))
+                .andExpect(jsonPath("$[1].totalScore", is(resultList.get(1).getTotalScore())));
+    }
+
+    @Test
+    public void shouldCheckIfScoreIsAbleToBeSubmitted() throws Exception{
+        Result testResult = new Result(22d, 10, "test", 1230d);
+        
+        mockMvc.perform(post("/quiz/isHighScore")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(testResult)))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().string("true"));
+    }
+
+
 
 
 }
