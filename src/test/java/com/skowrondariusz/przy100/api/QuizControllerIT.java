@@ -3,6 +3,7 @@ package com.skowrondariusz.przy100.api;
 
 import com.skowrondariusz.przy100.Przy100Application;
 import com.skowrondariusz.przy100.model.Quiz;
+import com.skowrondariusz.przy100.model.Result;
 import com.skowrondariusz.przy100.repository.ResultRepository;
 import com.skowrondariusz.przy100.service.QuestionService;
 import com.skowrondariusz.przy100.service.QuizService;
@@ -22,10 +23,15 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Date;
 
+import static com.skowrondariusz.przy100.api.QuizControllerTest.asJsonString;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
@@ -59,6 +65,22 @@ public class QuizControllerIT {
                 .andExpect(jsonPath("$.questionList", hasSize(20)));
     }
 
+
+    @Test
+    public void shouldGetUserResult() throws Exception {
+        Quiz newQuiz = new Quiz(new Date() );
+
+
+        mockMvc.perform(post("/quiz/userResult")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(newQuiz)))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.numberOfCorrectAnswers", is(0)))
+                .andExpect(jsonPath("$.totalScore", is(0.0)));
+
+    }
 
 
 }

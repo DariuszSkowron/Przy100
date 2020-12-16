@@ -56,7 +56,7 @@ public class QuizControllerTest {
     @MockBean
     private ResultService resultService;
 
-    private static String asJsonString(final Object obj) {
+     static String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);
         } catch (Exception e) {
