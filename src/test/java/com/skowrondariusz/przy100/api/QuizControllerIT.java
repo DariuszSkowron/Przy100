@@ -132,7 +132,7 @@ public class QuizControllerIT {
     @Test
     public void shouldCheckIfScoreIsAbleToBeSubmitted() throws Exception{
         Result testResult = new Result(22d, 10, "test", 1230d);
-        
+
         mockMvc.perform(post("/quiz/isHighScore")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(testResult)))
