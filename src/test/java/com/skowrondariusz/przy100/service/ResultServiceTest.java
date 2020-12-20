@@ -96,9 +96,13 @@ public class ResultServiceTest {
 
     @Test
     public void shouldSaveResult(){
-        List<Result> resultList = resultRepository.findAll();
+        Result resultTest = new Result(31d,10,"test2", 130d);
+        resultTest.setId(1);
         when (resultRepository.save(Mockito.any(Result.class))).then(returnsFirstArg());
 
+        Result savedResult = resultRepository.save(resultTest);
+
+        assertThat(savedResult.getId()).isEqualTo(1);
 
     }
 

@@ -18,6 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
 
 import org.springframework.http.MediaType;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -42,6 +43,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         classes = Przy100Application.class)
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase
+//@TestPropertySource("classpath:application-testing.properties")
 public class QuizControllerIT {
 
     @Autowired
