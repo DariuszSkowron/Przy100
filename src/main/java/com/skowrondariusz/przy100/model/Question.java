@@ -1,7 +1,9 @@
 package com.skowrondariusz.przy100.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Entity
@@ -13,8 +15,11 @@ public class Question {
     private String description;
     private String correctAnswer;
 
-    @JsonManagedReference
-    @ElementCollection
+//    @JsonManagedReference
+
+//    @ElementCollection(fetch = FetchType.LAZY)
+//    @Transactional
+@ElementCollection
     private List<String> listOfWrongAnswers;
 
 

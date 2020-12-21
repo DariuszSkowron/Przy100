@@ -3,6 +3,8 @@ package com.skowrondariusz.przy100.model;
 import com.skowrondariusz.przy100.dto.QuestionDto;
 import com.skowrondariusz.przy100.dto.UserAnswerDto;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.FetchType;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +14,7 @@ public class Quiz {
     private Date startTime;
     private Date endTime;
     private double score;
+
     private List<QuestionDto> questionList;
 //    private List<> userAnswers;
     private List<UserAnswerDto> userAnswers;

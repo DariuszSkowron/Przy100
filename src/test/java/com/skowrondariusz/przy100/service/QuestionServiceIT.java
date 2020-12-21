@@ -30,7 +30,7 @@ import static org.mockito.Mockito.doReturn;
 //@RunWith(MockitoJUnitRunner.class)
 //@DataJpaTest
 //@RunWith(SpringRunner.class)
-@TestPropertySource("classpath:application-testing.properties")
+@TestPropertySource("classpath:application-service.properties")
 //@ActiveProfiles("testing")
 public class QuestionServiceIT {
 
@@ -43,12 +43,6 @@ public class QuestionServiceIT {
    private QuestionRepository questionRepository;
 
 
-
-
-    // @Autowired
-//    private QuestionService questionService;
-//
-//
     private Question question1 = new Question("question 1 test","aq1", Arrays.asList("q1", "q2", "a3") );
     private Question question2 = new Question("question 1 test","aq1", Arrays.asList("q1", "q2", "a3") );
     private Question question3 = new Question("question 1 test","aq1", Arrays.asList("q1", "q2", "a3") );
@@ -64,12 +58,6 @@ public class QuestionServiceIT {
         questionService.saveQuestion(question4);
     }
 
-    @BeforeAll
-
-//    @After
-//    public void dbShutDown(){
-//        questionRepository.deleteAll();
-//    }
 
 
     @Test

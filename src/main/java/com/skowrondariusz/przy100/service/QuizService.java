@@ -3,6 +3,7 @@ package com.skowrondariusz.przy100.service;
 import com.skowrondariusz.przy100.model.Quiz;
 import com.skowrondariusz.przy100.utility.Mapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -21,6 +22,7 @@ public class QuizService {
         this.mapper = mapper;
     }
 
+    @Transactional
     public Quiz startNewQuiz(int numberOfQuestions){
         Quiz quiz = new Quiz();
         quiz.setQuestionList(questionService.collectQuestionsForQuiz(numberOfQuestions).stream()
