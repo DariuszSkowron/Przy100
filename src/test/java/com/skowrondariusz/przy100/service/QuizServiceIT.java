@@ -29,9 +29,15 @@ public class QuizServiceIT {
 
 
 
+
+
     @Test
     public void shouldStartNewQuiz(){
-        assertThat(quizService.startNewQuiz(5).getStartTime()).isNotNull();
+
+        var testQuiz = quizService.startNewQuiz(5);
+
+        assertThat(testQuiz.getStartTime()).isNotNull();
+        assertThat(testQuiz.getQuestionList().size()).isEqualTo(5);
     }
 
     @Test
@@ -49,6 +55,20 @@ public class QuizServiceIT {
 
     }
 
-    
+    @Test
+    public void shouldCountPoints(){
+        Quiz userQuiz = quizService.startNewQuiz(2);
+        UserAnswerDto userAnswerDto1 = new UserAnswerDto(Long.parseLong(userQuiz.getQuestionList().get(0).getId()), new Date(),userQuiz.getQuestionList().get(0).getCorrectAnswer());
+        UserAnswerDto userAnswerDto2 = new UserAnswerDto(Long.parseLong(userQuiz.getQuestionList().get(1).getId()), new Date(),userQuiz.getQuestionList().get(1).getCorrectAnswer());
+
+        var userAnswers = Arrays.asList(userAnswerDto1, userAnswerDto2);
+
+        userQuiz.setUserAnswers(userAnswers);
+
+        assertThat(quizService.userPoints(userQuiz)).isNotNull();
+        assertThat(quizService.userPoints(userQuiz)).isNotEqualTo(0);
+    }
+
+
 
 }
