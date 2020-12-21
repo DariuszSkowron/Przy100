@@ -61,10 +61,13 @@ public class ResultService {
         }
     }
 
+
     public Result saveResult(Result result){
         return resultRepository.save(result);
     }
 
+
+    @Transactional
     public Result updateResult(Long updatedResultId, Result result){
         Result resultToUpdate = resultRepository.getOne(updatedResultId);
         resultToUpdate.setTotalScore(result.getTotalScore());
