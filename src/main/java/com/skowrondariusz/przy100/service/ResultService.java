@@ -4,6 +4,7 @@ import com.skowrondariusz.przy100.model.Quiz;
 import com.skowrondariusz.przy100.model.Result;
 import com.skowrondariusz.przy100.repository.ResultRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -44,6 +45,7 @@ public class ResultService {
         return resultRepository.lowestScore();
     }
 
+    @Transactional
     public Result submitResult(Result result){
         if (checkIfAbleToSubmitScore(result)){
             if (resultRepository.count() >= 2) {

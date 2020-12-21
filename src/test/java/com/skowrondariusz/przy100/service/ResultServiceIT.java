@@ -39,4 +39,24 @@ public class ResultServiceIT {
     public void shouldReturnZeroWhenRepositoryIsEmptyAndLowestScoreWhenItsNot(){
         assertThat(resultService.checkLastSubmittedScore()).isEqualTo(0d);
     }
+
+    @Test
+    public void shouldSubmitResult(){
+        Result result1 = new Result(20d,5,"test1", 555d);
+
+        resultService.submitResult(result1);
+        assertThat(resultService.checkLastSubmittedScore()).isEqualTo(555d);
+
+        Result result2 = new Result(31d,10,"test2", 111d);
+        resultService.submitResult(result2);
+
+        assertThat(resultService.checkLastSubmittedScore()).isEqualTo(111d);
+        assertThat(resultRepository.count()).isEqualTo(2);
+
+        Result result3 = new Result(31d,10,"test2", 225d);
+
+        resultService.submitResult(result3);
+        assertThat(resultService.checkLastSubmittedScore()).isEqualTo(225d);
+        assertThat(resultRepository.count()).isEqualTo(2);
+    }
 }
