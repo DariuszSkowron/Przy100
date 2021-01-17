@@ -33,12 +33,12 @@ public class DatabaseInitializer implements CommandLineRunner {
     public void run(String... args) {
         System.out.println(SpotifyCredentials.CLIENT_ID);
         System.out.println(SpotifyCredentials.CLIENT_SECRET);
-        var question1 = new Question("question 1 test","aq1", Arrays.asList("q1", "q2", "a3") );
-        var question2 = new Question("question 2 test", "aq1", Arrays.asList("a1", "a2", "a3"));
-        var question3 = new SongQuestion("song question test", "22", Arrays.asList("teest1", "test2", "test2"), "ssa");
-        questionService.saveQuestion(question1);
-        questionService.saveQuestion(question2);
-        questionService.saveQuestion(question3);
+//        var question1 = new Question("question 1 test","aq1", Arrays.asList("q1", "q2", "a3") );
+//        var question2 = new Question("question 2 test", "aq1", Arrays.asList("a1", "a2", "a3"));
+//        var question3 = new SongQuestion("song question test", "22", Arrays.asList("teest1", "test2", "test2"), "ssa");
+//        questionService.saveQuestion(question1);
+//        questionService.saveQuestion(question2);
+//        questionService.saveQuestion(question3);
 
         getArtistsAlbums_Sync();
         spotifyService.test();

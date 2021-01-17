@@ -24,20 +24,22 @@ export class QuizComponent implements OnInit {
 
   ngOnInit() {
     this.quiz = JSON.parse(localStorage.getItem('quiz'));
-    this.quizService.seconds = JSON.parse(localStorage.getItem('seconds'))
+    // this.quizService.seconds = JSON.parse(localStorage.getItem('seconds'))
+    // this.quizService.timer = localStorage.getItem('timer');
+    this.quizService.quizProgress = Number((localStorage.getItem('quizProgress')));
 
-
-    if (Number(localStorage.getItem('quiz') != null)) {
-      this.quizService.seconds = Number(localStorage.getItem('seconds'));
-      this.quizService.quizProgress = Number((localStorage.getItem('quizProgress')));
-      this.quizService.questionList = JSON.parse(localStorage.getItem('questionList'));
-      this.quiz = JSON.parse(localStorage.getItem('quiz'));
-      if (this.quizService.quizProgress === this.quiz.questionList.length) {
+    if (Number(localStorage.getItem('quiz') != null) && this.quizService.quizProgress === this.quiz.questionList.length ) {
+      // this.quizService.seconds = Number(localStorage.getItem('seconds'));
+      // this.quizService.quizProgress = Number((localStorage.getItem('quizProgress')));
+      // this.quizService.questionList = JSON.parse(localStorage.getItem('questionList'));
+      // this.quiz = JSON.parse(localStorage.getItem('quiz'));
+      // if (this.quizService.quizProgress === this.quiz.questionList.length) {
         this.router.navigate(['/result']);
-      }
+      // }
     } else {
       this.quizService.seconds = 0;
       this.quizService.quizProgress = 0;
+      clearTimeout(this.quizService.timer);
       this.getQuiz();
     }
   }
@@ -61,6 +63,7 @@ export class QuizComponent implements OnInit {
       this.quizService.seconds++;
       localStorage.setItem('seconds', this.quizService.seconds.toString());
     }, 1000);
+    localStorage.setItem('timer', this.quizService.timer);
   }
 
 

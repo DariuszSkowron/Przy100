@@ -22,6 +22,8 @@ export class QuizService {
 
   constructor(private http: HttpClient) {
   }
+
+
   displayTimeElapsed() {
     const minutes: number = Math.floor(this.seconds / 60);
     const seconds: number = Math.floor(this.seconds % 60);
