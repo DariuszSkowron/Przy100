@@ -23,7 +23,7 @@ export class HighscoresComponent implements OnInit {
     this.quizService.getHighScores().subscribe(
       res => {
         this.highScores = res;
-        this.highScores.sort((a, b) => a.totalScore > b.totalScore ? -1 : 1);
+        this.highScores.sort((a, b) => a.numberOfCorrectAnswers > b.numberOfCorrectAnswers ? -1 : (a.timeSpent === b.timeSpent) ? -1 : 1);
       }
     );
   }
