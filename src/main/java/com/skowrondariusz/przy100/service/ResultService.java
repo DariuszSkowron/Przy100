@@ -30,7 +30,7 @@ public class ResultService {
     }
 
     public boolean checkIfAbleToSubmitScore(Result userResult){
-        return ((resultRepository.count() >= 2 && checkLastSubmittedScore() < userResult.getTotalScore()) || resultRepository.count() < 2);
+        return ((resultRepository.count() >= 30 && checkLastSubmittedScore() < userResult.getTotalScore()) || resultRepository.count() < 30);
     }
 
     public void deleteResult(long id){
@@ -48,7 +48,7 @@ public class ResultService {
     @Transactional
     public Result submitResult(Result result){
         if (checkIfAbleToSubmitScore(result)){
-            if (resultRepository.count() >= 2) {
+            if (resultRepository.count() >= 30) {
                 System.out.println("Last result has been overwritten");
                 return updateResult(resultRepository.findFirstByOrderByTotalScoreAsc().getId(), result);
             }
