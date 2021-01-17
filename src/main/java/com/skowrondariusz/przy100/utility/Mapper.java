@@ -19,8 +19,8 @@ public class Mapper {
 
     public QuestionDto convertToQuestionDto(Question entity) {
         var viewModel = modelMapper.map(entity, QuestionDto.class);
-        List<String> answerList = new ArrayList<>();
-        answerList.add(entity.getListOfWrongAnswers().toString());
+        List<String> answerList = new ArrayList<>(entity.getListOfWrongAnswers());
+//        answerList.add(entity.getListOfWrongAnswers().toString());
         answerList.add(entity.getCorrectAnswer().toString());
         Collections.shuffle(answerList);
         viewModel.setAnswersList(answerList);
