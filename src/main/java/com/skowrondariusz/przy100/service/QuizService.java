@@ -62,6 +62,7 @@ public class QuizService {
         double result = 0d;;
         var timerFlag = userQuiz.getStartTime().getTime() / 1000;
 
+
         if (userQuiz.getUserAnswers() == null){
             return 0;
         }
@@ -69,7 +70,9 @@ public class QuizService {
         for (int i = 0; i < userQuiz.getUserAnswers().size(); i++){
             try {
                 if (userQuiz.getUserAnswers().get(i).getAnswer().equals(questionService.getCorrectAnswerForQuestion(userQuiz.getUserAnswers().get(i).getQuestionId()))){
+                    double timeTest = ((double) userQuiz.getUserAnswers().get(i).getAnswerTime().getTime() / 1000) - (double) timerFlag;
                     result = result + (100 /  (((double) userQuiz.getUserAnswers().get(i).getAnswerTime().getTime() / 1000) - (double) timerFlag));
+                    result = result + 100 / timeTest;
                     timerFlag = (userQuiz.getUserAnswers().get(i).getAnswerTime().getTime() / 1000);
 
                 }
