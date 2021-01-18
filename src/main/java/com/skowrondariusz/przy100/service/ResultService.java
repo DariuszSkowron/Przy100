@@ -3,10 +3,12 @@ package com.skowrondariusz.przy100.service;
 import com.skowrondariusz.przy100.model.Quiz;
 import com.skowrondariusz.przy100.model.Result;
 import com.skowrondariusz.przy100.repository.ResultRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class ResultService {
@@ -29,13 +31,40 @@ public class ResultService {
         return userResult;
     }
 
+//    public boolean checkIfAbleToSubmitScore(Result userResult){
+//        return ((resultRepository.count() >= 30 && checkLastSubmittedScore() < userResult.getTotalScore()) || resultRepository.count() < 30);
+//    }
     public boolean checkIfAbleToSubmitScore(Result userResult){
-        return ((resultRepository.count() >= 30 && checkLastSubmittedScore() < userResult.getTotalScore()) || resultRepository.count() < 30);
+        return ((resultRepository.count() >= 30 && checkIfUserResultIsBetterThanWeakestOne(userResult)) || resultRepository.count() < 30);
     }
 
     public void deleteResult(long id){
         this.resultRepository.deleteById(id);
     }
+
+//
+    boolean checkIfUserResultIsBetterThanWeakestOne(Result userResult){
+
+        if (resultRepository.count() == 0){
+            return true;
+        }
+
+
+        if (sorting().get(0).getNumberOfCorrectAnswers() <= userResult.getNumberOfCorrectAnswers() && sorting().get(0).getTimeSpent() > userResult.getTimeSpent() ) return true;
+        return false;
+    }
+
+    public List<Result> sorting(){
+
+        Sort sort = Sort.by(
+                Sort.Order.asc("numberOfCorrectAnswers"),
+                Sort.Order.desc("timeSpent"));
+
+        List<Result> resultList = resultRepository.findAll(sort);
+        return resultList;
+
+    }
+
 
     double checkLastSubmittedScore(){
 

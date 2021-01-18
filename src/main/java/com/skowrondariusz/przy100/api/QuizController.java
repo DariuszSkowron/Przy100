@@ -68,5 +68,10 @@ public class QuizController {
         return resultService.checkIfAbleToSubmitScore(result);
     }
 
+    @GetMapping("/test")
+    public List<Result> weakest(){
+        return resultService.sorting();
+    }
+
 
 }
