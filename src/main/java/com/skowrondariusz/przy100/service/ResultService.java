@@ -79,7 +79,8 @@ public class ResultService {
         if (checkIfAbleToSubmitScore(result)){
             if (resultRepository.count() >= 30) {
                 System.out.println("Last result has been overwritten");
-                return updateResult(resultRepository.findFirstByOrderByTotalScoreAsc().getId(), result);
+//                return updateResult(resultRepository.findFirstByOrderByTotalScoreAsc().getId(), result);
+                return updateResult(sorting().get(0).getId(), result);
             }
             System.out.println("Result has been saved");
             return resultRepository.save(result);
