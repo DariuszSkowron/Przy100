@@ -2,6 +2,8 @@ package com.skowrondariusz.przy100.utility;
 
 import com.skowrondariusz.przy100.model.Question;
 import com.skowrondariusz.przy100.model.SongQuestion;
+import com.skowrondariusz.przy100.repository.QuestionRepository;
+import com.skowrondariusz.przy100.repository.SongRepository;
 import com.skowrondariusz.przy100.service.QuestionService;
 import com.skowrondariusz.przy100.service.SongDrawingService;
 import com.skowrondariusz.przy100.service.SpotifyService;
@@ -22,11 +24,29 @@ public class DatabaseInitializer implements CommandLineRunner {
     private QuestionService questionService;
     private SpotifyService spotifyService;
     private SongDrawingService songDrawingService;
+    private SongRepository songRepository;
+    private QuestionRepository questionRepository;
 
-    public DatabaseInitializer(QuestionService questionService, SpotifyService spotifyService, SongDrawingService songDrawingService) {
+//    public DatabaseInitializer(QuestionService questionService, SpotifyService spotifyService, SongDrawingService songDrawingService) {
+//        this.questionService = questionService;
+//        this.spotifyService = spotifyService;
+//        this.songDrawingService = songDrawingService;
+//    }
+
+
+//    public DatabaseInitializer(QuestionService questionService, SpotifyService spotifyService, SongDrawingService songDrawingService, SongRepository songRepository) {
+//        this.questionService = questionService;
+//        this.spotifyService = spotifyService;
+//        this.songDrawingService = songDrawingService;
+//        this.songRepository = songRepository;
+//    }
+
+    public DatabaseInitializer(QuestionService questionService, SpotifyService spotifyService, SongDrawingService songDrawingService, SongRepository songRepository, QuestionRepository questionRepository) {
         this.questionService = questionService;
         this.spotifyService = spotifyService;
         this.songDrawingService = songDrawingService;
+        this.songRepository = songRepository;
+        this.questionRepository = questionRepository;
     }
 
     @Override
@@ -40,9 +60,16 @@ public class DatabaseInitializer implements CommandLineRunner {
 //        questionService.saveQuestion(question2);
 //        questionService.saveQuestion(question3);
 
+
+        questionRepository.deleteAll();
+        songRepository.deleteAll();
         getArtistsAlbums_Sync();
         spotifyService.test();
-        songDrawingService.musicQuestionGenerate();
+        System.out.println(songRepository.count());
+//        if (songRepository.count() == 0) {
+            songDrawingService.musicQuestionGenerate();
+
+//        }
         System.out.println("DATABASE INITIALISED");
         spotifyService.totalCharacters();
 

@@ -3,9 +3,11 @@ package com.skowrondariusz.przy100.api;
 import com.skowrondariusz.przy100.model.Quiz;
 import com.skowrondariusz.przy100.model.Result;
 import com.skowrondariusz.przy100.repository.ResultRepository;
+import com.skowrondariusz.przy100.repository.SongRepository;
 import com.skowrondariusz.przy100.service.QuestionService;
 import com.skowrondariusz.przy100.service.QuizService;
 import com.skowrondariusz.przy100.service.ResultService;
+import com.skowrondariusz.przy100.service.SongDrawingService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -72,6 +74,13 @@ public class QuizController {
     public List<Result> weakest(){
         return resultService.sorting();
     }
+
+
+    @GetMapping("/clearDatabase")
+    public void clearDatabase(){
+        questionService.deleteQuestions();
+    }
+
 
 
 }

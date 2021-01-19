@@ -56,6 +56,11 @@ public class QuestionService {
         return questionRepository.count();
     }
 
+    public String deleteQuestions(){
+        questionRepository.deleteAll();
+        return "Database cleared out";
+    }
+
 
 
 
