@@ -21,11 +21,8 @@ import static com.skowrondariusz.przy100.service.SpotifyService.getArtistsAlbums
 public class DatabaseInitializer implements CommandLineRunner {
 
 
-    private QuestionService questionService;
     private SpotifyService spotifyService;
     private SongDrawingService songDrawingService;
-    private SongRepository songRepository;
-    private QuestionRepository questionRepository;
 
 //    public DatabaseInitializer(QuestionService questionService, SpotifyService spotifyService, SongDrawingService songDrawingService) {
 //        this.questionService = questionService;
@@ -41,12 +38,10 @@ public class DatabaseInitializer implements CommandLineRunner {
 //        this.songRepository = songRepository;
 //    }
 
-    public DatabaseInitializer(QuestionService questionService, SpotifyService spotifyService, SongDrawingService songDrawingService, SongRepository songRepository, QuestionRepository questionRepository) {
-        this.questionService = questionService;
+
+    public DatabaseInitializer(SpotifyService spotifyService, SongDrawingService songDrawingService) {
         this.spotifyService = spotifyService;
         this.songDrawingService = songDrawingService;
-        this.songRepository = songRepository;
-        this.questionRepository = questionRepository;
     }
 
     @Override
@@ -64,11 +59,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 
         getArtistsAlbums_Sync();
         spotifyService.test();
-        System.out.println(songRepository.count());
-//        if (songRepository.count() == 0) {
             songDrawingService.musicQuestionGenerate();
-
-//        }
         System.out.println("DATABASE INITIALISED");
         spotifyService.totalCharacters();
 

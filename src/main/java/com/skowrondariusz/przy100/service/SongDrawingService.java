@@ -37,8 +37,7 @@ public class SongDrawingService {
 
     private List<String> randomSongsNames(String id) {
         List<Song> songList = songRepository.findAll();
-        var rn = new Random();
-        int[] songIds = rn.ints(1, Math.toIntExact(songList.size()))
+        int[] songIds = new Random().ints(1, Math.toIntExact(songList.size()))
                 .takeWhile(number -> (number != Integer.parseInt(id)))
                 .distinct()
                 .limit(3)
