@@ -6,6 +6,7 @@ import com.skowrondariusz.przy100.repository.SongRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class SongDrawingService {
@@ -36,11 +37,13 @@ public class SongDrawingService {
 
     private List<String> randomSongsNames(String id) {
         List<Song> songList = songRepository.findAll();
-        int[] songIds = new Random().ints(1, Math.toIntExact(songList.size()))
-                .skip(Long.parseLong(id))
+        var rn = new Random();
+        int[] songIds = rn.ints(1, Math.toIntExact(songList.size()))
+                .takeWhile(number -> (number != Integer.parseInt(id)))
                 .distinct()
                 .limit(3)
                 .toArray();
+
 
         List<String> drawnSongsNames = new ArrayList<>();
 
