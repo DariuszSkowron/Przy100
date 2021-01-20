@@ -61,8 +61,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 //        questionService.saveQuestion(question3);
 
 
-        questionRepository.deleteAll();
-        songRepository.deleteAll();
+
         getArtistsAlbums_Sync();
         spotifyService.test();
         System.out.println(songRepository.count());
